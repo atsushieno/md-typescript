@@ -1,0 +1,130 @@
+<Addin  id            = "TypeScriptBinding"  
+        namespace     = "MonoDevelop"  
+        name          = "TypeScript Language Binding"  
+        author        = "Joshua Granick"  
+        copyright     = "MIT X11"  
+        description   = "TypeScript Language Binding"  
+        category      = "Language bindings"  
+        version       = "0.4.0" >
+	
+	
+	<!-- Dependencies -->
+	
+	<Dependencies>
+		<Addin id="Core" version="3.0" />
+		<Addin id="Ide" version="3.0" />
+		<Addin id="SourceEditor2" version="3.0" />
+	</Dependencies>
+	
+	
+	
+	<!-- Icons -->
+	
+	<Extension path="/MonoDevelop/Core/StockIcons">
+		<StockIcon stockid="fd-icon" resource="flashdevelop-icon-16.png" size="Menu" />
+		<StockIcon stockid="fd-icon" resource="flashdevelop-icon-24.png" size="Dnd" />
+		<StockIcon stockid="fd-icon" resource="flashdevelop-icon-32.png" size="Dialog" />
+		<StockIcon stockid="fd-project" icon="md-project|res:flashdevelop-overlay-16.png" size="Menu" />
+		<StockIcon stockid="fd-project" icon="md-project|res:flashdevelop-overlay-32.png" size="Dnd" />
+		<StockIcon stockid="fd-project" icon="md-project|res:flashdevelop-overlay-32.png" size="Dialog" />
+		<StockIcon stockid="fd-file" icon="md-text-file-icon|res:flashdevelop-overlay-16.png" size="Menu" />
+		<StockIcon stockid="fd-file" icon="md-text-file-icon|res:flashdevelop-overlay-32.png" size="Dnd" />
+		<StockIcon stockid="fd-file" icon="md-text-file-icon|res:flashdevelop-overlay-32.png" size="Dialog" />
+	</Extension>
+	
+	
+	
+	<!-- Syntax Modes -->
+	
+	<Extension path="/MonoDevelop/SourceEditor2/SyntaxModes">
+		<Templates resource="TypeScriptSyntaxMode.xml" />
+	</Extension>
+	
+	<Extension path="/MonoDevelop/SourceEditor2/Styles">
+		<Templates resource="FlashDevelopStyle.xml" />
+	</Extension>
+	
+	
+	
+	<!-- Templates -->
+	
+	<Extension path="/MonoDevelop/Ide/FileTemplates">
+		<FileTemplate id="EmptyTypeScriptSourceFile" resource="EmptyTypeScriptSourceFile.xft.xml" />
+	</Extension>
+	
+	<Extension path="/MonoDevelop/Ide/ProjectTemplates">
+		<ProjectTemplate id="EmptyTypeScriptJSProject" resource="EmptyTypeScriptJSProject.xpt.xml" />
+	</Extension>
+	
+	
+	
+	<!-- File Types -->
+	
+	<Extension path="/MonoDevelop/Core/MimeTypes">
+		<MimeType id="text/x-TypeScript" _description="TypeScript source code" icon="fd-file" isText="true"><File pattern="*.hx" /></MimeType>
+		<MimeType id="text/x-hxml" _description="HXML document" icon="fd-file" isText="true"><File pattern="*.hxml" /></MimeType>
+		<MimeType id="text/x-nmml" _description="NMML document" icon="fd-file" isText="true"><File pattern="*.nmml" /></MimeType>
+	</Extension>
+	
+	<Extension path="/MonoDevelop/Ide/FileFilters">
+		<FileFilter id="TypeScript" insertbefore="AllFiles" _label="TypeScript Files" extensions="*.hx" />
+		<FileFilter id="HXML" insertbefore="AllFiles" _label="HXML Files" extensions="*.hxml" />
+		<FileFilter id="NMML" insertbefore="AllFiles" _label="NMML Files" extensions="*.nmml" />
+	</Extension>
+	
+	
+	
+	<!-- Languages -->
+	
+	<Extension path="/MonoDevelop/ProjectModel/LanguageBindings">
+		<LanguageBinding id="TypeScript" supportedextensions=".hx" class="MonoDevelop.TypeScriptBinding.Languages.TypeScriptLanguageBinding" />
+		<LanguageBinding id="HXML" supportedextensions=".hxml" class="MonoDevelop.TypeScriptBinding.Languages.HXMLLanguageBinding" />
+		<LanguageBinding id="NMML" supportedextensions=".nmml" class="MonoDevelop.TypeScriptBinding.Languages.NMMLLanguageBinding" />
+	</Extension>
+	
+	<Extension path="/MonoDevelop/Ide/GlobalOptionsDialog/Other">
+		<Section id="TypeScriptBindingOptions" _label="TypeScript" icon="fd-icon" class="MonoDevelop.TypeScriptBinding.Languages.Gui.TypeScriptOptionsPanel" />
+	</Extension>
+	
+	
+	
+	<!-- Projects -->
+	
+	<Extension path="/MonoDevelop/ProjectModel/ProjectBindings">
+		<ProjectBinding id="TypeScriptProject" class="MonoDevelop.TypeScriptBinding.Projects.TypeScriptProjectBinding" />
+		<ProjectBinding id="NMEProject" class="MonoDevelop.TypeScriptBinding.Projects.NMEProjectBinding" />
+	</Extension>
+	
+	<Extension path="/MonoDevelop/ProjectModel/Gui/ItemOptionPanels/Build">
+		<Condition id="ItemType" value="MonoDevelop.TypeScriptBinding.Projects.TypeScriptProject">
+			<Section id="TypeScriptProjectOptionsPanel" _label="General" icon="fd-icon" class="MonoDevelop.TypeScriptBinding.Projects.Gui.TypeScriptProjectOptionsPanel" />
+			<Section id="TypeScriptOutputOptionsPanel" _label="Output" icon="fd-icon" class="MonoDevelop.TypeScriptBinding.Projects.Gui.TypeScriptOutputOptionsPanel" />
+		</Condition>
+		<Condition id="ItemType" value="MonoDevelop.TypeScriptBinding.Projects.NMEProject">
+			<Section id="NMEProjectOptionsPanel" _label="General" icon="fd-icon" class="MonoDevelop.TypeScriptBinding.Projects.Gui.NMEProjectOptionsPanel"/>
+			<Section id="NMEOutputOptionsPanel" _label="Output" icon="fd-icon" class="MonoDevelop.TypeScriptBinding.Projects.Gui.NMEOutputOptionsPanel"/>
+		</Condition>
+	</Extension>
+	
+	<Extension path="/MonoDevelop/ProjectModel/SerializableClasses">
+		<DataType class="MonoDevelop.TypeScriptBinding.Projects.TypeScriptProject" />
+		<DataType class="MonoDevelop.TypeScriptBinding.Projects.TypeScriptProjectConfiguration" />
+		<DataType class="MonoDevelop.TypeScriptBinding.Projects.NMEProject" />
+		<DataType class="MonoDevelop.TypeScriptBinding.Projects.NMEProjectConfiguration" />
+	</Extension>
+	
+	<Extension path="/MonoDevelop/ProjectModel/MSBuildItemTypes">
+		<SolutionItem type="MonoDevelop.TypeScriptBinding.Projects.TypeScriptProject" extension="hxproj" guid="{73443E56-3503-11DE-B03D-001DBA02A2FC}"/>
+		<SolutionItem type="MonoDevelop.TypeScriptBinding.Projects.NMEProject" extension="nmeproj" guid="{319CB2C6-23BD-43E1-85B5-2AAFA3577041}"/>
+	</Extension>
+	
+	
+	
+	<!-- Code Completion -->
+	
+	<Extension path="/MonoDevelop/Ide/TextEditorExtensions">
+		<Class fileExtensions=".hx" class="MonoDevelop.TypeScriptBinding.Languages.Gui.TypeScriptTextEditorCompletion" />
+	</Extension>
+	
+	
+</Addin>

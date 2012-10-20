@@ -1,0 +1,155 @@
+<SyntaxMode name="TypeScript" mimeTypes="text/x-TypeScript">
+	
+	
+	<Property name="BlockCommentStart">/*</Property>
+	<Property name="BlockCommentEnd">*/</Property>
+	
+	<Span color = "string.double" stopateol = "true" escape='\"'>
+		<Begin>"</Begin>
+		<End>"</End>
+	</Span>
+	
+	<Span color = "string.single" stopateol = "true" escape="\'">
+		<Begin>'</Begin>
+		<End>'</End>
+	</Span>
+	
+	
+	<EolSpan color = "comment.line" rule="Comment" tagColor="comment.tag.line">//</EolSpan>
+	
+	<Span color = "comment.block" rule="Documentation" tagColor="comment.tag.block">
+		<Begin>/**</Begin>
+		<End>*/</End>
+	</Span>
+	
+	<Span color = "comment.block" rule="Comment" tagColor="comment.tag.block">
+		<Begin>/*</Begin>
+		<End>*/</End>
+	</Span>
+	
+	<Span color = "text.preprocessor" rule="text.preprocessor" stopateol="true">
+		<Begin>#</Begin>
+		<End>#end</End>
+	</Span>
+	
+	
+	<Match color = "constant.digit">CSharpNumber</Match>
+	
+	<Keywords color = "keyword.access">
+		<Word>this</Word>
+		<Word>super</Word>
+	</Keywords>
+	
+	<Keywords color = "keyword.operator">
+		<Word>new</Word>
+	</Keywords>
+	
+	<Keywords color = "keyword.selection">
+		<Word>else</Word>
+		<Word>if</Word>
+		<!---
+		<Word>switch</Word>
+		<Word>case</Word>
+		<Word>default</Word>
+		-->
+	</Keywords>
+	
+	<Keywords color = "keyword.iteration">
+		<Word>do</Word>
+		<Word>for</Word>
+		<Word>in</Word>
+		<Word>while</Word>
+	</Keywords>
+	
+	<Keywords color = "keyword.jump">
+		<!---
+		<Word>break</Word>
+		<Word>continue</Word>
+		-->
+		<Word>return</Word>
+	</Keywords>
+	
+	<Keywords color = "keyword.exceptions">
+	<!---
+		<Word>try</Word>
+		<Word>throw</Word>
+		<Word>catch</Word>
+	-->
+	</Keywords>
+	
+	<Keywords color = "constant.language">
+		<Word>true</Word>
+		<Word>false</Word>
+		<Word>null</Word>
+	</Keywords>
+
+	<Keywords color = "constant.language.void">
+		<Word>void</Word>
+	</Keywords>
+		
+	<Keywords color = "keyword.type">
+		<Word>any</Word>
+		<Word>number</Word>
+		<Word>bool</Word>
+		<Word>string</Word>
+	</Keywords>
+	
+	<Keywords color = "keyword.declaration">
+		<Word>function</Word>
+		<Word>class</Word>
+		<Word>interface</Word>
+		<Word>var</Word>
+	</Keywords>
+
+	<Keywords color = "keyword.modifier">
+		<Word>export</Word>
+		<Word>extends</Word>
+		<Word>implements</Word>
+	</Keywords>
+
+	<Keywords color = "keyword.namespace">
+		<Word>module</Word>
+	</Keywords>
+	
+	<Rule name = "text.preprocessor">
+		<Keywords color="text.preprocessor.keyword">
+			<Word>if</Word>
+			<Word>else</Word>
+		</Keywords>
+	</Rule>
+	
+	<Rule name = "Comment">
+		<Keywords color="comment.keyword.todo" ignorecase="True">
+			<Word>TODO</Word>
+			<Word>FIXME</Word>
+			<Word>BUG</Word>
+			<Word>HACK</Word>
+		</Keywords>
+	</Rule>
+	
+	<Rule name = "Documentation">
+		<Keywords color="comment.keyword" ignorecase="True">
+			<!---
+			<Word>@author</Word>
+			<Word>@deprecated</Word>
+			<Word>@version</Word>
+			<Word>@copy</Word>
+			<Word>@default</Word>
+			<Word>@eventType</Word>
+			<Word>@example</Word>
+			<Word>@exampleText</Word>
+			<Word>@includeExample</Word>
+			<Word>@inheritDoc</Word>
+			<Word>@internal</Word>
+			<Word>@param</Word>
+			<Word>@private</Word>
+			<Word>@return</Word>
+			<Word>@see</Word>
+			<Word>@since</Word>
+			<Word>@throws</Word>
+			<Word>@usage</Word>
+			-->
+		</Keywords>
+	</Rule>
+	
+</SyntaxMode>

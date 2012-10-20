@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3B95464D-3CFC-44A3-8FF1-A5BD85E7A8B0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>MonoDevelop.HaxeBinding</RootNamespace>
+    <AssemblyName>MonoDevelop.HaxeBinding</AssemblyName>
+    <ReleaseVersion>0.2</ReleaseVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Mono.Posix" />
+    <Reference Include="MonoDevelop.Core">
+      <HintPath>\Applications\MonoDevelop.app\Contents\MacOS\lib\monodevelop\bin\MonoDevelop.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoDevelop.Core">
+      <HintPath>\Applications\MonoDevelop.app\Contents\MacOS\lib\monodevelop\bin\MonoDevelop.Core.dll</HintPath>
+      <Package>monodevelop</Package>
+    </Reference>
+    <Reference Include="MonoDevelop.Ide">
+      <HintPath>\Applications\MonoDevelop.app\Contents\MacOS\lib\monodevelop\bin\MonoDevelop.Ide.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoDevelop.Ide">
+      <HintPath>\Applications\MonoDevelop.app\Contents\MacOS\lib\monodevelop\bin\MonoDevelop.Ide.dll</HintPath>
+      <Package>monodevelop</Package>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory">
+      <HintPath>\Applications\MonoDevelop.app\Contents\MacOS\lib\monodevelop\bin\ICSharpCode.NRefactory.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory">
+      <HintPath>\Applications\MonoDevelop.app\Contents\MacOS\lib\monodevelop\bin\ICSharpCode.NRefactory.dll</HintPath>
+      <Package>monodevelop</Package>
+    </Reference>
+    <Reference Include="Mono.TextEditor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>\Applications\MonoDevelop.app\Contents\MacOS\lib\monodevelop\bin\Mono.TextEditor.dll</HintPath>
+      <Private>False</Private>
+      <Package>monodevelop</Package>
+    </Reference>
+    <Reference Include="MonoDevelop.DesignerSupport, Version=2.6.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>\Applications\MonoDevelop.app\Contents\MacOS\lib\monodevelop\AddIns\MonoDevelop.DesignerSupport\MonoDevelop.DesignerSupport.dll</HintPath>
+      <Private>False</Private>
+      <Package>monodevelop-core-addins</Package>
+    </Reference>
+    <Reference Include="MonoDevelop.Refactoring, Version=2.6.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>\Applications\MonoDevelop.app\Contents\MacOS\lib\monodevelop\AddIns\MonoDevelop.Refactoring\MonoDevelop.Refactoring.dll</HintPath>
+      <Private>False</Private>
+      <Package>monodevelop-core-addins</Package>
+    </Reference>
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="gtk-gui\generated.cs" />
+    <Compile Include="Helpers\PathHelper.cs" />
+    <Compile Include="Tools\TypeScriptCompilerManager.cs" />
+    <Compile Include="Tools\TscCommandLineToolsManager.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.TypeScriptBinding.Languages.Gui.TypeScriptOptionsWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.TypeScriptBinding.Projects.Gui.TypeScriptOutputOptionsWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.TypeScriptBinding.Projects.Gui.TypeScriptProjectOptionsWidget.cs" />
+    <Compile Include="Languages\Gui\TypeScriptOptionsPanel.cs" />
+    <Compile Include="Languages\Gui\TypeScriptTextEditorCompletion.cs" />
+    <Compile Include="Languages\TypeScriptLanguageBinding.cs" />
+    <Compile Include="Languages\Gui\TypeScriptParameterDataProvider.cs" />
+    <Compile Include="Projects\TypeScriptProject.cs" />
+    <Compile Include="Projects\TypeScriptProjectConfiguration.cs" />
+    <Compile Include="Projects\TypeScriptProjectBinding.cs" />
+    <Compile Include="Projects\Gui\TypeScriptOutputOptionsPanel.cs" />
+    <Compile Include="Projects\Gui\TypeScriptProjectOptionsPanel.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <EmbeddedResource Include="gtk-gui\gui.stetic">
+      <LogicalName>gui.stetic</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Icons\flashdevelop-icon-16.png">
+      <LogicalName>flashdevelop-icon-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Icons\flashdevelop-icon-22.png">
+      <LogicalName>flashdevelop-icon-22.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Icons\flashdevelop-icon-24.png">
+      <LogicalName>flashdevelop-icon-24.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Icons\flashdevelop-icon-32.png">
+      <LogicalName>flashdevelop-icon-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Icons\flashdevelop-overlay-16.png">
+      <LogicalName>flashdevelop-overlay-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Icons\flashdevelop-overlay-32.png">
+      <LogicalName>flashdevelop-overlay-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\SyntaxModes\FlashDevelopStyle.xml">
+      <LogicalName>FlashDevelopStyle.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TypeScriptBinding.addin.xml" />
+    <EmbeddedResource Include="Resources\Templates\EmptyTypeScriptJSProject.xpt.xml">
+      <LogicalName>EmptyHaxeJSProject.xpt.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Templates\EmptyTypeScriptSourceFile.xft.xml">
+      <LogicalName>EmptyHaxeSourceFile.xft.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\SyntaxModes\TypeScriptSyntaxMode.xml">
+      <LogicalName>HaxeSyntaxMode.xml</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Projects\" />
+    <Folder Include="Projects\Gui\" />
+    <Folder Include="Languages\" />
+    <Folder Include="Languages\Gui\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Resources\Icons\" />
+    <Folder Include="Resources\Templates\" />
+    <Folder Include="Resources\SyntaxModes\" />
+    <Folder Include="Tools\" />
+    <Folder Include="Helpers\" />
+  </ItemGroup>
+</Project>
