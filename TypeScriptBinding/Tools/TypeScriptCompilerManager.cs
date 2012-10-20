@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Sockets;
@@ -45,17 +46,17 @@ namespace MonoDevelop.TypeScriptBinding.Tools
 		
 		public static BuildResult Compile (TypeScriptProject project, TypeScriptProjectConfiguration configuration, IProgressMonitor monitor)
 		{
-			string exe = "TypeScript";
+			string exe = "tsc";
 			//string args = project.TargetHTMLFile;
 			
-			string htmlPath = Path.GetFullPath (project.TargetHTMLFile);
+			string htmlPath = !string.IsNullOrWhiteSpace (project.TargetHTMLFile) ? Path.GetFullPath (project.TargetHTMLFile) : null;
 			
 			if (!string.IsNullOrWhiteSpace (htmlPath) && !File.Exists (htmlPath))
 			{
 				htmlPath = Path.Combine (project.BaseDirectory, project.TargetHTMLFile);
 			}
 
-			string html = File.ReadAllText (htmlPath);
+			string html = !string.IsNullOrWhiteSpace (htmlPath) ? File.ReadAllText (htmlPath) : string.Empty;
 			html = html.Replace (Environment.NewLine, " ");
 			string[] htmlArgs = html.Split (' ');
 			
@@ -102,6 +103,9 @@ namespace MonoDevelop.TypeScriptBinding.Tools
 			{
 				args += " " + configuration.AdditionalArguments;
 			}
+			
+			foreach (var fp in project.Files.Where (pf => pf.BuildAction == "Compile"))
+				args += " " + fp.FilePath.FullPath;
 			
 			string error = "";
 			int exitCode = DoCompilation (exe, args, project.BaseDirectory, monitor, ref error);
@@ -187,6 +191,7 @@ namespace MonoDevelop.TypeScriptBinding.Tools
 		
 		private static int DoCompilation (string cmd, string args, string wd, IProgressMonitor monitor, ref string error)
 		{
+		Console.Error.WriteLine ("!!!!! {0} {1}", cmd, args);
 			int exitcode = 0;
 			error = Path.GetTempFileName ();
 			StreamWriter errwr = new StreamWriter (error);

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Template Originator="Joshua Granick">
+<Template Originator="Atsushi Eno">
         
     <TemplateConfiguration>
         <_Name>Empty TypeScript/JS Project</_Name>
@@ -35,17 +35,6 @@ button.onclick = function() {
 
 document.body.appendChild(button)
 ]]></File>
-				<File name="Export/index.html" AddStandardHeader="True">
-<![CDATA[<!doctype html>
-<html>
-<head><title>${ProjectName}</title></head>
-<body>
-	
-	<div id="TypeScript:trace"></div>
-	<script type="text/javascript" src="${ProjectName}.js"></script>
-	
-</body>
-</html>]]></File>				
             </Files>
         </Project>
     </Combine>
