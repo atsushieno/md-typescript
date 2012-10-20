@@ -31,12 +31,12 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 		}
 		
 		
-		[ItemProperty("TargetHXMLFile", DefaultValue="")]
-		string mTargetHXMLFile = string.Empty;
+		[ItemProperty("TargetHTMLFile", DefaultValue="")]
+		string mTargetHTMLFile = string.Empty;
 		
-		public string TargetHXMLFile {
-			get { return mTargetHXMLFile;  }
-			set { mTargetHXMLFile = value; }
+		public string TargetHTMLFile {
+			get { return mTargetHTMLFile;  }
+			set { mTargetHTMLFile = value; }
 		}
 
 
@@ -55,10 +55,10 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 
 		public TypeScriptProject (ProjectCreateInformation info, XmlElement projectOptions) : base()
 		{
-			if (projectOptions.Attributes ["TargetHXMLFile"] != null)
+			if (projectOptions.Attributes ["TargetHTMLFile"] != null)
 			{
 				
-				TargetHXMLFile = GetOptionAttribute (info, projectOptions, "TargetHXMLFile");
+				TargetHTMLFile = GetOptionAttribute (info, projectOptions, "TargetHTMLFile");
 				
 			}
 			
@@ -139,7 +139,7 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 		
 
 		public override string[] SupportedLanguages {
-			get { return new string[] { "", "TypeScript", "HXML" }; }
+			get { return new string[] { "", "TypeScript", "HTML" }; }
 		}
 		
 	}

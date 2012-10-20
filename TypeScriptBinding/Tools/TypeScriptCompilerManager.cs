@@ -25,7 +25,7 @@ namespace MonoDevelop.TypeScriptBinding.Tools
 		
 		private static string cacheArgumentsGlobal;
 		private static string cacheArgumentsPlatform;
-		private static string cacheHXML;
+		private static string cacheHTML;
 		private static string cachePlatform;
 		private static DateTime cacheNMMLTime;
 		
@@ -46,31 +46,31 @@ namespace MonoDevelop.TypeScriptBinding.Tools
 		public static BuildResult Compile (TypeScriptProject project, TypeScriptProjectConfiguration configuration, IProgressMonitor monitor)
 		{
 			string exe = "TypeScript";
-			//string args = project.TargetHXMLFile;
+			//string args = project.TargetHTMLFile;
 			
-			string hxmlPath = Path.GetFullPath (project.TargetHXMLFile);
+			string htmlPath = Path.GetFullPath (project.TargetHTMLFile);
 			
-			if (!File.Exists (hxmlPath))
+			if (!string.IsNullOrWhiteSpace (htmlPath) && !File.Exists (htmlPath))
 			{
-				hxmlPath = Path.Combine (project.BaseDirectory, project.TargetHXMLFile);
+				htmlPath = Path.Combine (project.BaseDirectory, project.TargetHTMLFile);
 			}
 
-			string hxml = File.ReadAllText (hxmlPath);
-			hxml = hxml.Replace (Environment.NewLine, " ");
-			string[] hxmlArgs = hxml.Split (' ');
+			string html = File.ReadAllText (htmlPath);
+			html = html.Replace (Environment.NewLine, " ");
+			string[] htmlArgs = html.Split (' ');
 			
 			bool createNext = false;
 			
-			foreach (string hxmlArg in hxmlArgs)
+			foreach (string htmlArg in htmlArgs)
 			{
 				if (createNext)
 				{
-					if (!hxmlArg.StartsWith ("-"))
+					if (!htmlArg.StartsWith ("-"))
 					{
-						string path = Path.GetFullPath (Path.GetDirectoryName (hxmlArg));
+						string path = Path.GetFullPath (Path.GetDirectoryName (htmlArg));
 						if (!Directory.Exists (path))
 						{
-							path = Path.Combine (project.BaseDirectory, hxmlArg);
+							path = Path.Combine (project.BaseDirectory, htmlArg);
 							if (!Directory.Exists (Path.GetDirectoryName (path)))
 							{
 								Directory.CreateDirectory (Path.GetDirectoryName (path));
@@ -80,13 +80,13 @@ namespace MonoDevelop.TypeScriptBinding.Tools
 					createNext = false;
 				}
 				
-				if (hxmlArg == "-js" || hxmlArg == "-swf" || hxmlArg == "-swf9" || hxmlArg == "-neko")
+				if (htmlArg == "-js" || htmlArg == "-swf" || htmlArg == "-swf9" || htmlArg == "-neko")
 				{
 					createNext = true;
 				}
 			}
 			
-			string args = String.Join (" ", hxmlArgs);
+			string args = String.Join (" ", htmlArgs);
 			
 			if (configuration.DebugMode)
 			{
@@ -220,44 +220,9 @@ namespace MonoDevelop.TypeScriptBinding.Tools
 			string exe = "TypeScript";
 			string args = "";
 			
-			/*
-			if (project is NMEProject) {
-				
-				NMEProjectConfiguration configuration = project.GetConfiguration (MonoDevelop.Ide.IdeApp.Workspace.ActiveConfiguration) as NMEProjectConfiguration;
-				
-				string platform = configuration.Platform.ToLower ();
-				string path = ((NMEProject)project).TargetNMMLFile;
-				
-				if (!File.Exists (path))
-				{
-					path = Path.Combine (project.BaseDirectory, path);
-				}
-				
-				DateTime time = File.GetLastWriteTime (Path.GetFullPath (path));
-				
-				if (!time.Equals (cacheNMMLTime) || platform != cachePlatform || configuration.AdditionalArguments != cacheArgumentsPlatform || ((NMEProject)project).AdditionalArguments != cacheArgumentsGlobal)
-				{
-					cacheHXML = TscCommandLineToolsManager.GetHXMLData ((NMEProject)project, configuration);
-					cacheNMMLTime = time;
-					cachePlatform = platform;
-					cacheArgumentsGlobal = ((NMEProject)project).AdditionalArguments;
-					cacheArgumentsPlatform = configuration.AdditionalArguments;
-				}
-				
-				args = cacheHXML + " -D code_completion";
-				
-			} else if (project is TypeScriptProject) {
-			*/	
-				TypeScriptProjectConfiguration configuration = project.GetConfiguration (MonoDevelop.Ide.IdeApp.Workspace.ActiveConfiguration) as TypeScriptProjectConfiguration;
-				
-				args = "\"" + ((TypeScriptProject)project).TargetHXMLFile + "\" " + ((TypeScriptProject)project).AdditionalArguments + " " + configuration.AdditionalArguments;
-			/*	
-			} else {
-				
-				return "";
-				
-			}
-			*/
+			TypeScriptProjectConfiguration configuration = project.GetConfiguration (MonoDevelop.Ide.IdeApp.Workspace.ActiveConfiguration) as TypeScriptProjectConfiguration;
+			
+			args = "\"" + ((TypeScriptProject)project).TargetHTMLFile + "\" " + ((TypeScriptProject)project).AdditionalArguments + " " + configuration.AdditionalArguments;
 			
 			args += " -cp \"" + classPath + "\" --display \"" + fileName + "\"@" + position + " -D use_rtti_doc";
 			
@@ -360,16 +325,16 @@ namespace MonoDevelop.TypeScriptBinding.Tools
 		
 		private static ExecutionCommand CreateExecutionCommand (TypeScriptProject project, TypeScriptProjectConfiguration configuration)
 		{
-			string hxmlPath = Path.GetFullPath (project.TargetHXMLFile);
+			string htmlPath = !string.IsNullOrWhiteSpace (project.TargetHTMLFile) ? Path.GetFullPath (project.TargetHTMLFile) : null;
 			
-			if (!File.Exists (hxmlPath))
+			if (!string.IsNullOrWhiteSpace (htmlPath) && !File.Exists (htmlPath))
 			{
-				hxmlPath = Path.Combine (project.BaseDirectory, project.TargetHXMLFile);
+				htmlPath = Path.Combine (project.BaseDirectory, project.TargetHTMLFile);
 			}
 			
-			string hxml = File.ReadAllText (hxmlPath);
-			hxml = hxml.Replace (Environment.NewLine, " ");
-			string[] hxmlArgs = hxml.Split (' ');
+			string html = !string.IsNullOrWhiteSpace (htmlPath) ? File.ReadAllText (htmlPath) : string.Empty;
+			html = html.Replace (Environment.NewLine, " ");
+			string[] htmlArgs = html.Split (' ');
 			
 			List<string> platforms = new List<string> ();
 			List<string> platformOutputs = new List<string> ();
@@ -378,20 +343,20 @@ namespace MonoDevelop.TypeScriptBinding.Tools
 			bool nextIsMain = false;
 			string main = "";
 			
-			foreach (string hxmlArg in hxmlArgs)
+			foreach (string htmlArg in htmlArgs)
 			{
 				if (addNext)
 				{
-					if (!hxmlArg.StartsWith ("-"))
+					if (!htmlArg.StartsWith ("-"))
 					{
 						if (nextIsMain)
 						{
-							main = hxmlArg;
+							main = htmlArg;
 							nextIsMain = false;
 						}
 						else
 						{
-							platformOutputs.Add (hxmlArg);
+							platformOutputs.Add (htmlArg);
 						}
 					}
 					else
@@ -405,7 +370,7 @@ namespace MonoDevelop.TypeScriptBinding.Tools
 				
 				addNext = true;
 				
-				switch (hxmlArg)
+				switch (htmlArg)
 				{
 					case "-cpp":
 						platforms.Add ("cpp");
@@ -439,10 +404,11 @@ namespace MonoDevelop.TypeScriptBinding.Tools
 			}
 			
 			
-			int i = 0;
+			// FIXME: I uncommented this loop, but not sure if this makes sense
+			//int i = 0;
 			
-			//for (int i = 0; i < platforms.Count; i++)
-			//{
+			for (int i = 0; i < platforms.Count; i++)
+			{
 				string platform = platforms[i];
 				string output = platformOutputs[i];
 				
@@ -521,7 +487,7 @@ namespace MonoDevelop.TypeScriptBinding.Tools
 					cmd.Command = output;
 					return cmd;
 				}
-			//}
+			}
 			
 			return null;
 		}

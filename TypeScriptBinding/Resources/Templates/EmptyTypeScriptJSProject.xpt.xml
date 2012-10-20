@@ -11,34 +11,30 @@
 
     <Combine name="${ProjectName}" directory=".">
         <Project name="${ProjectName}" directory="." type="TypeScript">
-            <Options TargetHXMLFile="${ProjectName}.hxml" />
+            <!-- Options TargetHTMLFile="dummy.html" / -->
             <Files>
-                <File name="Source/${ProjectName}.hx" AddStandardHeader="True">
-<![CDATA[package;
-
-/**
- * ...
- * @author ${AuthorName}
- */
-class ${SafeProjectName} {
-	
-	public function new () {
-		
-		
-		
+                <File name="Source/${ProjectName}.ts" AddStandardHeader="True">
+<![CDATA[
+class Greeter {
+	greeting: string;
+	constructor (message: string) {
+		this.greeting = message;
 	}
-	
-	static function main () {
-		
-		new ${SafeProjectName} ();
-		
+	greet() {
+		return "Hello, " + this.greeting;
 	}
+}   
 
-}]]></File>
-				<File name="${ProjectName}.hxml" AddStandardHeader="True">
-<![CDATA[-cp Source
--main ${SafeProjectName}
--js Export/${ProjectName}.js]]></File>
+var greeter = new Greeter("world");
+
+var button = document.createElement('button')
+button.innerText = "Say Hello"
+button.onclick = function() {
+	alert(greeter.greet())
+}
+
+document.body.appendChild(button)
+]]></File>
 				<File name="Export/index.html" AddStandardHeader="True">
 <![CDATA[<!doctype html>
 <html>

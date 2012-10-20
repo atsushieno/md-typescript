@@ -22,13 +22,13 @@ namespace MonoDevelop.TypeScriptBinding.Languages
 		
 		public FilePath GetFileName (FilePath baseName)
 		{
-			return new FilePath (baseName.FileNameWithoutExtension + ".hx");
+			return new FilePath (baseName.FileNameWithoutExtension + ".ts");
 		}
 		
 		
 		public bool IsSourceCodeFile (FilePath fileName)
 		{
-			return fileName.Extension == "hx";
+			return fileName.Extension == "ts";
 		}
 		
 		

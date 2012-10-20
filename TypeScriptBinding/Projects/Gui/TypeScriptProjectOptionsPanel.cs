@@ -44,7 +44,7 @@ namespace MonoDevelop.TypeScriptBinding.Projects.Gui
 		{
 			mProject = project;
 			
-			TargetHXMLFileEntry.Text = mProject.TargetHXMLFile;
+			TargetHTMLFileEntry.Text = mProject.TargetHTMLFile;
 			AdditionalArgumentsEntry.Text = mProject.AdditionalArguments;
 		}
 
@@ -54,32 +54,32 @@ namespace MonoDevelop.TypeScriptBinding.Projects.Gui
 			if (mProject == null)
 				return;
 			
-			mProject.TargetHXMLFile = TargetHXMLFileEntry.Text.Trim ();
+			mProject.TargetHTMLFile = TargetHTMLFileEntry.Text.Trim ();
 			mProject.AdditionalArguments = AdditionalArgumentsEntry.Text.Trim ();
 		}
 
 		
-		protected void OnTargetHXMLFileButtonClicked (object sender, System.EventArgs e)
+		protected void OnTargetHTMLFileButtonClicked (object sender, System.EventArgs e)
 		{
 			Gtk.FileChooserDialog fc =
-                new Gtk.FileChooserDialog ("Target HXML file", this.Toplevel as Gtk.Window, FileChooserAction.Open,
+                new Gtk.FileChooserDialog ("Target HTML file", this.Toplevel as Gtk.Window, FileChooserAction.Open,
                     "Cancel", ResponseType.Cancel,
                     "Select", ResponseType.Accept);
 			
-			Gtk.FileFilter filterHXML = new Gtk.FileFilter ();
-			filterHXML.Name = "HXML Files";
-			filterHXML.AddPattern ("*.nmml");
+			Gtk.FileFilter filterHTML = new Gtk.FileFilter ();
+			filterHTML.Name = "HTML Files";
+			filterHTML.AddPattern ("*.nmml");
 			
 			Gtk.FileFilter filterAll = new Gtk.FileFilter ();
 			filterAll.Name = "All Files";
 			filterAll.AddPattern ("*");
 			
-			fc.AddFilter (filterHXML);
+			fc.AddFilter (filterHTML);
 			fc.AddFilter (filterAll);
 			
-			if (mProject.TargetHXMLFile != "")
+			if (mProject.TargetHTMLFile != "")
 			{
-				fc.SetFilename (mProject.TargetHXMLFile);
+				fc.SetFilename (mProject.TargetHTMLFile);
 			}
 			else
 			{
@@ -90,7 +90,7 @@ namespace MonoDevelop.TypeScriptBinding.Projects.Gui
 			{
 				string path = PathHelper.ToRelativePath (fc.Filename, mProject.BaseDirectory);
 				
-				TargetHXMLFileEntry.Text = path;
+				TargetHTMLFileEntry.Text = path;
 			}
 
 			fc.Destroy ();

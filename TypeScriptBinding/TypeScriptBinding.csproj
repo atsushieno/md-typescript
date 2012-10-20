@@ -7,9 +7,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{3B95464D-3CFC-44A3-8FF1-A5BD85E7A8B0}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>MonoDevelop.HaxeBinding</RootNamespace>
-    <AssemblyName>MonoDevelop.HaxeBinding</AssemblyName>
-    <ReleaseVersion>0.2</ReleaseVersion>
+    <RootNamespace>MonoDevelop.TypeScriptBinding</RootNamespace>
+    <AssemblyName>MonoDevelop.TypeScriptBinding</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -87,7 +86,6 @@
     <Compile Include="gtk-gui\generated.cs" />
     <Compile Include="Helpers\PathHelper.cs" />
     <Compile Include="Tools\TypeScriptCompilerManager.cs" />
-    <Compile Include="Tools\TscCommandLineToolsManager.cs" />
     <Compile Include="gtk-gui\MonoDevelop.TypeScriptBinding.Languages.Gui.TypeScriptOptionsWidget.cs" />
     <Compile Include="gtk-gui\MonoDevelop.TypeScriptBinding.Projects.Gui.TypeScriptOutputOptionsWidget.cs" />
     <Compile Include="gtk-gui\MonoDevelop.TypeScriptBinding.Projects.Gui.TypeScriptProjectOptionsWidget.cs" />
@@ -100,6 +98,8 @@
     <Compile Include="Projects\TypeScriptProjectBinding.cs" />
     <Compile Include="Projects\Gui\TypeScriptOutputOptionsPanel.cs" />
     <Compile Include="Projects\Gui\TypeScriptProjectOptionsPanel.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.TypeScriptBinding.Projects.Gui.NMEOutputOptionsWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.TypeScriptBinding.Projects.Gui.NMEProjectOptionsWidget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -129,13 +129,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TypeScriptBinding.addin.xml" />
     <EmbeddedResource Include="Resources\Templates\EmptyTypeScriptJSProject.xpt.xml">
-      <LogicalName>EmptyHaxeJSProject.xpt.xml</LogicalName>
+      <LogicalName>EmptyTypeScriptJSProject.xpt.xml</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Templates\EmptyTypeScriptSourceFile.xft.xml">
-      <LogicalName>EmptyHaxeSourceFile.xft.xml</LogicalName>
+      <LogicalName>EmptyTypeScriptSourceFile.xft.xml</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\SyntaxModes\TypeScriptSyntaxMode.xml">
-      <LogicalName>HaxeSyntaxMode.xml</LogicalName>
+      <LogicalName>TypeScriptSyntaxMode.xml</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

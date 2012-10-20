@@ -13,7 +13,7 @@
     </TemplateConfiguration>
 	
 	<TemplateFiles>
-        <File DefaultExtension=".hx" DefaultName="EmptyTypeScriptSourceFile" AddStandardHeader="True">
+        <File DefaultExtension=".ts" DefaultName="EmptyTypeScriptSourceFile" AddStandardHeader="True">
 <![CDATA[package ;
 
 /**

@@ -15,8 +15,7 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 		
 		public bool CanCreateSingleFileProject (string sourceFile)
 		{
-			return sourceFile.EndsWith (".hx", StringComparison.OrdinalIgnoreCase)
-                || sourceFile.EndsWith (".hxml", StringComparison.OrdinalIgnoreCase);
+			return sourceFile.EndsWith (".ts", StringComparison.OrdinalIgnoreCase);
 		}
 		
 		

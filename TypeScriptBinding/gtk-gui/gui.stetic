@@ -10,7 +10,7 @@
     <widget-library name="Mono.TextEditor, Version=1.0.0.0, Culture=neutral" />
     <widget-library name="MonoDevelop.DesignerSupport, Version=2.6.0.0, Culture=neutral" />
     <widget-library name="MonoDevelop.Refactoring, Version=2.6.0.0, Culture=neutral" />
-    <widget-library name="../bin/Debug/MonoDevelop.HaxeBinding.dll" internal="true" />
+    <widget-library name="../bin/Debug/MonoDevelop.TypeScriptBinding.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="MonoDevelop.TypeScriptBinding.Projects.Gui.NMEOutputOptionsWidget" design-size="467 300">
     <property name="MemberName" />
@@ -431,7 +431,7 @@
                         <property name="MemberName" />
                         <property name="Spacing">6</property>
                         <child>
-                          <widget class="Gtk.Entry" id="TargetHXMLFileEntry">
+                          <widget class="Gtk.Entry" id="TargetHTMLFileEntry">
                             <property name="MemberName" />
                             <property name="CanFocus">True</property>
                             <property name="IsEditable">True</property>
@@ -443,13 +443,13 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="Gtk.Button" id="TargetHXMLFileButton">
+                          <widget class="Gtk.Button" id="TargetHTMLFileButton">
                             <property name="MemberName" />
                             <property name="CanFocus">True</property>
                             <property name="Type">TextAndIcon</property>
                             <property name="Icon">stock:gtk-file Menu</property>
                             <property name="Label" translatable="yes">Choose...</property>
-                            <signal name="Clicked" handler="OnTargetHXMLFileButtonClicked" />
+                            <signal name="Clicked" handler="OnTargetHTMLFileButtonClicked" />
                           </widget>
                           <packing>
                             <property name="Position">1</property>
@@ -473,10 +473,10 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="Gtk.Label" id="TargetHXMLFileLabel">
+                      <widget class="Gtk.Label" id="TargetHTMLFileLabel">
                         <property name="MemberName" />
                         <property name="Xalign">0</property>
-                        <property name="LabelProp" translatable="yes">Target HXML file:</property>
+                        <property name="LabelProp" translatable="yes">Target HTML file:</property>
                       </widget>
                       <packing>
                         <property name="AutoSize">True</property>
