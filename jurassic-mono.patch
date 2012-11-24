@@ -1,0 +1,28 @@
+diff -r 2db8531adca3 Jurassic/Jurassic.csproj
+--- a/Jurassic/Jurassic.csproj	Mon Jun 25 16:57:49 2012 +1200
++++ b/Jurassic/Jurassic.csproj	Sat Nov 24 21:07:56 2012 +0900
+@@ -27,7 +27,7 @@
+     <DebugType>full</DebugType>
+     <Optimize>false</Optimize>
+     <OutputPath>bin\Debug\</OutputPath>
+-    <DefineConstants>TRACE;DEBUG</DefineConstants>
++    <DefineConstants>TRACE;DEBUG;SILVERLIGHT</DefineConstants>
+     <ErrorReport>prompt</ErrorReport>
+     <WarningLevel>4</WarningLevel>
+     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+@@ -38,7 +38,7 @@
+     <DebugType>pdbonly</DebugType>
+     <Optimize>true</Optimize>
+     <OutputPath>bin\Release\</OutputPath>
+-    <DefineConstants>TRACE</DefineConstants>
++    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+     <ErrorReport>prompt</ErrorReport>
+     <WarningLevel>4</WarningLevel>
+     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+@@ -215,4 +215,4 @@
+   <Target Name="AfterBuild">
+   </Target>
+   -->
+-</Project>
+\ No newline at end of file
++</Project>
