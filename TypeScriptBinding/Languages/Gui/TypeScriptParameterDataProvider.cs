@@ -7,7 +7,7 @@ using ICSharpCode.NRefactory.Completion;
 namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 {
 
-	public class TypeScriptParameterDataProvider : ParameterDataProvider
+	public class TypeScriptParameterDataProvider : IParameterDataProvider
 	{
 		
 		/*public int OverloadCount { get { return 1; } }
@@ -22,7 +22,6 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 
 		
 		public TypeScriptParameterDataProvider ()
-			: base (0)
 		{
 			
 		}
@@ -299,7 +298,7 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 			return parameters [paramIndex];
 		}
 
-		public override int GetParameterCount (int overload)
+		public int GetParameterCount (int overload)
 		{
 			/*if (overload >= Count)
 				return -1;
@@ -309,7 +308,7 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 			return parameters.Length - 1;
 		}
 
-		public override bool AllowParameterList (int overload)
+		public bool AllowParameterList (int overload)
 		{
 			/*if (overload >= Count)
 				return false;
@@ -319,7 +318,7 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 			return true;
 		}
 		
-		public override int Count {
+		public int Count {
 			get {
 				//return indexers != null ? indexers.Count : 0;
 				//return 0;

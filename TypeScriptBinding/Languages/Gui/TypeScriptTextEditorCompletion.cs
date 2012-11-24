@@ -419,7 +419,7 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 			return null;
 		}
 		
-		public override ParameterDataProvider HandleParameterCompletion (CodeCompletionContext completionContext, char completionChar)
+		public override IParameterDataProvider HandleParameterCompletion (CodeCompletionContext completionContext, char completionChar)
 		{
 			if (mCanRunCompletion)
 			{

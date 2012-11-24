@@ -5,15 +5,15 @@
         copyright     = "MIT X11"
         description   = "TypeScript Language Binding"  
         category      = "Language bindings"  
-        version       = "0.4.0" >
+        version       = "0.1.0" >
 	
 	
 	<!-- Dependencies -->
 	
 	<Dependencies>
-		<Addin id="Core" version="4.0" />
-		<Addin id="Ide" version="4.0" />
-		<Addin id="SourceEditor2" version="4.0" />
+		<Addin id="Core" version="3.0" />
+		<Addin id="Ide" version="3.0" />
+		<Addin id="SourceEditor2" version="3.0" />
 	</Dependencies>
 	
 	
@@ -21,15 +21,16 @@
 	<!-- Icons -->
 	
 	<Extension path="/MonoDevelop/Core/StockIcons">
-		<StockIcon stockid="fd-icon" resource="flashdevelop-icon-16.png" size="Menu" />
-		<StockIcon stockid="fd-icon" resource="flashdevelop-icon-24.png" size="Dnd" />
-		<StockIcon stockid="fd-icon" resource="flashdevelop-icon-32.png" size="Dialog" />
-		<StockIcon stockid="fd-project" icon="md-project|res:flashdevelop-overlay-16.png" size="Menu" />
-		<StockIcon stockid="fd-project" icon="md-project|res:flashdevelop-overlay-32.png" size="Dnd" />
-		<StockIcon stockid="fd-project" icon="md-project|res:flashdevelop-overlay-32.png" size="Dialog" />
-		<StockIcon stockid="fd-file" icon="md-text-file-icon|res:flashdevelop-overlay-16.png" size="Menu" />
-		<StockIcon stockid="fd-file" icon="md-text-file-icon|res:flashdevelop-overlay-32.png" size="Dnd" />
-		<StockIcon stockid="fd-file" icon="md-text-file-icon|res:flashdevelop-overlay-32.png" size="Dialog" />
+		<StockIcon stockid="fd-icon" resource="typescript-icon-16.png" size="Menu" />
+		<StockIcon stockid="fd-icon" resource="typescript-icon-24.png" size="Dnd" />
+		<StockIcon stockid="fd-icon" resource="typescript-icon-32.png" size="Dialog" />
+		<!-- FIXME: create overlay icon -->
+		<StockIcon stockid="fd-project" icon="md-project|res:typescript-icon-16.png" size="Menu" />
+		<StockIcon stockid="fd-project" icon="md-project|res:typescript-icon-32.png" size="Dnd" />
+		<StockIcon stockid="fd-project" icon="md-project|res:typescript-icon-32.png" size="Dialog" />
+		<StockIcon stockid="fd-file" icon="md-text-file-icon|res:typescript-icon-16.png" size="Menu" />
+		<StockIcon stockid="fd-file" icon="md-text-file-icon|res:typescript-icon-32.png" size="Dnd" />
+		<StockIcon stockid="fd-file" icon="md-text-file-icon|res:typescript-icon-32.png" size="Dialog" />
 	</Extension>
 	
 	
@@ -40,9 +41,11 @@
 		<Templates resource="TypeScriptSyntaxMode.xml" />
 	</Extension>
 	
+	<!--
 	<Extension path="/MonoDevelop/SourceEditor2/Styles">
 		<Templates resource="FlashDevelopStyle.xml" />
 	</Extension>
+	-->
 	
 	
 	
@@ -61,7 +64,7 @@
 	<!-- File Types -->
 	
 	<Extension path="/MonoDevelop/Core/MimeTypes">
-		<MimeType id="text/x-TypeScript" _description="TypeScript source code" icon="fd-file" isText="true"><File pattern="*.ts" /></MimeType>
+		<MimeType id="text/x-typescript" _description="TypeScript source code" icon="fd-file" isText="true"><File pattern="*.ts" /></MimeType>
 	</Extension>
 	
 	<Extension path="/MonoDevelop/Ide/FileFilters">
@@ -77,7 +80,7 @@
 	</Extension>
 	
 	<Extension path="/MonoDevelop/Ide/GlobalOptionsDialog/Other">
-		<Section id="TypeScriptBindingOptions" _label="TypeScript" icon="fd-icon" class="MonoDevelop.TypeScriptBinding.Languages.Gui.TypeScriptOptionsPanel" />
+		<Section id="TypeScriptBindingOptions" _label="TypeScript" icon="ts-icon" class="MonoDevelop.TypeScriptBinding.Languages.Gui.TypeScriptOptionsPanel" />
 	</Extension>
 	
 	

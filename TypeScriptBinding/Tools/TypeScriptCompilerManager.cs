@@ -191,7 +191,6 @@ namespace MonoDevelop.TypeScriptBinding.Tools
 		
 		private static int DoCompilation (string cmd, string args, string wd, IProgressMonitor monitor, ref string error)
 		{
-		Console.Error.WriteLine ("!!!!! {0} {1}", cmd, args);
 			int exitcode = 0;
 			error = Path.GetTempFileName ();
 			StreamWriter errwr = new StreamWriter (error);
@@ -222,7 +221,7 @@ namespace MonoDevelop.TypeScriptBinding.Tools
 	            PropertyService.SaveProperties();
 			}
 			
-			string exe = "TypeScript";
+			string exe = "tsc";
 			string args = "";
 			
 			TypeScriptProjectConfiguration configuration = project.GetConfiguration (MonoDevelop.Ide.IdeApp.Workspace.ActiveConfiguration) as TypeScriptProjectConfiguration;

@@ -14,16 +14,21 @@
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
+    <OutputPath>..\..\monodevelop-master\main\build\AddIns\TypeScriptBinding</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
+    <CustomCommands>
+      <CustomCommands>
+        <Command type="Execute" command="../../monodevelop-master/main/build/bin/MonoDevelop.exe" />
+      </CustomCommands>
+    </CustomCommands>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>bin\Release</OutputPath>
+    <OutputPath>..\..\monodevelop-master\main\build\AddIns\TypeScriptBinding</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
@@ -107,24 +112,6 @@
     <EmbeddedResource Include="gtk-gui\gui.stetic">
       <LogicalName>gui.stetic</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Icons\flashdevelop-icon-16.png">
-      <LogicalName>flashdevelop-icon-16.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Icons\flashdevelop-icon-22.png">
-      <LogicalName>flashdevelop-icon-22.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Icons\flashdevelop-icon-24.png">
-      <LogicalName>flashdevelop-icon-24.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Icons\flashdevelop-icon-32.png">
-      <LogicalName>flashdevelop-icon-32.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Icons\flashdevelop-overlay-16.png">
-      <LogicalName>flashdevelop-overlay-16.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Icons\flashdevelop-overlay-32.png">
-      <LogicalName>flashdevelop-overlay-32.png</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\SyntaxModes\FlashDevelopStyle.xml">
       <LogicalName>FlashDevelopStyle.xml</LogicalName>
     </EmbeddedResource>
@@ -150,5 +137,10 @@
     <Folder Include="Resources\SyntaxModes\" />
     <Folder Include="Tools\" />
     <Folder Include="Helpers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\typescript-icon-24.png" />
+    <None Include="Resources\Icons\typescript-icon-16.png" />
+    <None Include="Resources\Icons\typescript-icon-32.png" />
   </ItemGroup>
 </Project>

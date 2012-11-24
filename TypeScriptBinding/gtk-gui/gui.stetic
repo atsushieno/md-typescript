@@ -10,7 +10,7 @@
     <widget-library name="Mono.TextEditor, Version=1.0.0.0, Culture=neutral" />
     <widget-library name="MonoDevelop.DesignerSupport, Version=2.6.0.0, Culture=neutral" />
     <widget-library name="MonoDevelop.Refactoring, Version=2.6.0.0, Culture=neutral" />
-    <widget-library name="../bin/Debug/MonoDevelop.TypeScriptBinding.dll" internal="true" />
+    <widget-library name="../../../monodevelop-master/main/build/AddIns/TypeScriptBinding/MonoDevelop.TypeScriptBinding.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="MonoDevelop.TypeScriptBinding.Projects.Gui.NMEOutputOptionsWidget" design-size="467 300">
     <property name="MemberName" />
