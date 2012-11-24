@@ -44,7 +44,7 @@ namespace MonoDevelop.TypeScriptBinding.Projects.Gui
 		{
 			mProject = project;
 			
-			TargetHTMLFileEntry.Text = mProject.TargetHTMLFile;
+			TargetJavaScriptFileEntry.Text = mProject.TargetJavaScriptFile;
 			AdditionalArgumentsEntry.Text = mProject.AdditionalArguments;
 		}
 
@@ -54,32 +54,32 @@ namespace MonoDevelop.TypeScriptBinding.Projects.Gui
 			if (mProject == null)
 				return;
 			
-			mProject.TargetHTMLFile = TargetHTMLFileEntry.Text.Trim ();
+			mProject.TargetJavaScriptFile = TargetJavaScriptFileEntry.Text.Trim ();
 			mProject.AdditionalArguments = AdditionalArgumentsEntry.Text.Trim ();
 		}
 
 		
-		protected void OnTargetHTMLFileButtonClicked (object sender, System.EventArgs e)
+		protected void OnTargetJavaScriptFileButtonClicked (object sender, System.EventArgs e)
 		{
 			Gtk.FileChooserDialog fc =
-                new Gtk.FileChooserDialog ("Target HTML file", this.Toplevel as Gtk.Window, FileChooserAction.Open,
+                new Gtk.FileChooserDialog ("Target JavaScript file", this.Toplevel as Gtk.Window, FileChooserAction.Open,
                     "Cancel", ResponseType.Cancel,
                     "Select", ResponseType.Accept);
 			
-			Gtk.FileFilter filterHTML = new Gtk.FileFilter ();
-			filterHTML.Name = "HTML Files";
-			filterHTML.AddPattern ("*.nmml");
+			Gtk.FileFilter filterJS = new Gtk.FileFilter ();
+			filterJS.Name = "JavaScript Files";
+			filterJS.AddPattern ("*.js");
 			
 			Gtk.FileFilter filterAll = new Gtk.FileFilter ();
 			filterAll.Name = "All Files";
 			filterAll.AddPattern ("*");
 			
-			fc.AddFilter (filterHTML);
+			fc.AddFilter (filterJS);
 			fc.AddFilter (filterAll);
 			
-			if (mProject.TargetHTMLFile != "")
+			if (mProject.TargetJavaScriptFile != "")
 			{
-				fc.SetFilename (mProject.TargetHTMLFile);
+				fc.SetFilename (mProject.TargetJavaScriptFile);
 			}
 			else
 			{
@@ -90,7 +90,7 @@ namespace MonoDevelop.TypeScriptBinding.Projects.Gui
 			{
 				string path = PathHelper.ToRelativePath (fc.Filename, mProject.BaseDirectory);
 				
-				TargetHTMLFileEntry.Text = path;
+				TargetJavaScriptFileEntry.Text = path;
 			}
 
 			fc.Destroy ();

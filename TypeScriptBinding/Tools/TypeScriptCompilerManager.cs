@@ -46,19 +46,20 @@ namespace MonoDevelop.TypeScriptBinding.Tools
 		
 		public static BuildResult Compile (TypeScriptProject project, TypeScriptProjectConfiguration configuration, IProgressMonitor monitor)
 		{
-			string exe = "tsc";
-			//string args = project.TargetHTMLFile;
+			string exe = PropertyService.Get<string> ("TypeScriptBinding.TscLocation");
+			exe = String.IsNullOrWhiteSpace (exe) ? "tsc" : exe;
+			//string args = project.TargetJavaScriptFile;
 			
-			string htmlPath = !string.IsNullOrWhiteSpace (project.TargetHTMLFile) ? Path.GetFullPath (project.TargetHTMLFile) : null;
+			string jsPath = !string.IsNullOrWhiteSpace (project.TargetJavaScriptFile) ? Path.GetFullPath (project.TargetJavaScriptFile) : null;
 			
-			if (!string.IsNullOrWhiteSpace (htmlPath) && !File.Exists (htmlPath))
+			if (!string.IsNullOrWhiteSpace (jsPath) && !File.Exists (jsPath))
 			{
-				htmlPath = Path.Combine (project.BaseDirectory, project.TargetHTMLFile);
+				jsPath = Path.Combine (project.BaseDirectory, project.TargetJavaScriptFile);
 			}
 
-			string html = !string.IsNullOrWhiteSpace (htmlPath) ? File.ReadAllText (htmlPath) : string.Empty;
-			html = html.Replace (Environment.NewLine, " ");
-			string[] htmlArgs = html.Split (' ');
+			string js = !string.IsNullOrWhiteSpace (jsPath) ? File.ReadAllText (jsPath) : string.Empty;
+			js = js.Replace (Environment.NewLine, " ");
+			string[] htmlArgs = js.Split (' ');
 			
 			bool createNext = false;
 			
@@ -221,12 +222,13 @@ namespace MonoDevelop.TypeScriptBinding.Tools
 	            PropertyService.SaveProperties();
 			}
 			
-			string exe = "tsc";
+			string exe = PropertyService.Get<string> ("TypeScriptBinding.TscLocation");
+			exe = String.IsNullOrWhiteSpace (exe) ? "tsc" : exe;
 			string args = "";
 			
 			TypeScriptProjectConfiguration configuration = project.GetConfiguration (MonoDevelop.Ide.IdeApp.Workspace.ActiveConfiguration) as TypeScriptProjectConfiguration;
 			
-			args = "\"" + ((TypeScriptProject)project).TargetHTMLFile + "\" " + ((TypeScriptProject)project).AdditionalArguments + " " + configuration.AdditionalArguments;
+			args = "\"" + ((TypeScriptProject)project).TargetJavaScriptFile + "\" " + ((TypeScriptProject)project).AdditionalArguments + " " + configuration.AdditionalArguments;
 			
 			args += " -cp \"" + classPath + "\" --display \"" + fileName + "\"@" + position + " -D use_rtti_doc";
 			
@@ -329,11 +331,11 @@ namespace MonoDevelop.TypeScriptBinding.Tools
 		
 		private static ExecutionCommand CreateExecutionCommand (TypeScriptProject project, TypeScriptProjectConfiguration configuration)
 		{
-			string htmlPath = !string.IsNullOrWhiteSpace (project.TargetHTMLFile) ? Path.GetFullPath (project.TargetHTMLFile) : null;
+			string htmlPath = !string.IsNullOrWhiteSpace (project.TargetJavaScriptFile) ? Path.GetFullPath (project.TargetJavaScriptFile) : null;
 			
 			if (!string.IsNullOrWhiteSpace (htmlPath) && !File.Exists (htmlPath))
 			{
-				htmlPath = Path.Combine (project.BaseDirectory, project.TargetHTMLFile);
+				htmlPath = Path.Combine (project.BaseDirectory, project.TargetJavaScriptFile);
 			}
 			
 			string html = !string.IsNullOrWhiteSpace (htmlPath) ? File.ReadAllText (htmlPath) : string.Empty;

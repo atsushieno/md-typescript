@@ -31,30 +31,15 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
         public TypeScriptOptionsWidget()
         {
             this.Build();
-			
-			if (!PropertyService.HasValue ("TypeScriptBinding.EnableCompilationServer"))
-			{
-				EnableCompilationServerCheckBox.Active = true;
-			}
-			else
-			{
-				EnableCompilationServerCheckBox.Active = PropertyService.Get<bool> ("TypeScriptBinding.EnableCompilationServer");
-			}
-			
-			if (!PropertyService.HasValue ("TypeScriptBinding.CompilationServerPort"))
-			{
-				PortNumberEntry.Text = "6000";
-			}
-			else
-			{
-				PortNumberEntry.Text = PropertyService.Get<int> ("TypeScriptBinding.CompilationServerPort").ToString ();
-			}
+
+			TscLocationEntry.Text = PropertyService.Get<string> ("TypeScriptBinding.TscLocation");
+			NodeLocationEntry.Text = PropertyService.Get<string> ("TypeScriptBinding.NodeLocation");
         }
 
         public bool Store()
         {
-			PropertyService.Set ("TypeScriptBinding.EnableCompilationServer", EnableCompilationServerCheckBox.Active);
-			PropertyService.Set ("TypeScriptBinding.CompilationServerPort", Convert.ToInt32 (PortNumberEntry.Text));
+			PropertyService.Set ("TypeScriptBinding.TscLocation", TscLocationEntry.Text);
+			PropertyService.Set ("TypeScriptBinding.NodeLocation", NodeLocationEntry.Text);
             PropertyService.SaveProperties();
             return true;
         }

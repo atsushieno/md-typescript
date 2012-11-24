@@ -31,12 +31,12 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 		}
 		
 		
-		[ItemProperty("TargetHTMLFile", DefaultValue="")]
-		string mTargetHTMLFile = string.Empty;
+		[ItemProperty("TargetJavaScriptFile", DefaultValue="")]
+		string mTargetJavaScriptFile = string.Empty;
 		
-		public string TargetHTMLFile {
-			get { return mTargetHTMLFile;  }
-			set { mTargetHTMLFile = value; }
+		public string TargetJavaScriptFile {
+			get { return mTargetJavaScriptFile;  }
+			set { mTargetJavaScriptFile = value; }
 		}
 
 
@@ -55,10 +55,10 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 
 		public TypeScriptProject (ProjectCreateInformation info, XmlElement projectOptions) : base()
 		{
-			if (projectOptions.Attributes ["TargetHTMLFile"] != null)
+			if (projectOptions.Attributes ["TargetJavaScriptFile"] != null)
 			{
 				
-				TargetHTMLFile = GetOptionAttribute (info, projectOptions, "TargetHTMLFile");
+				TargetJavaScriptFile = GetOptionAttribute (info, projectOptions, "TargetJavaScriptFile");
 				
 			}
 			

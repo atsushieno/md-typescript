@@ -11,14 +11,14 @@
     <AssemblyName>MonoDevelop.TypeScriptBinding</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>True</DebugSymbols>
+    <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>False</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>..\..\monodevelop-master\main\build\AddIns\TypeScriptBinding</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>False</ConsolePause>
+    <ConsolePause>false</ConsolePause>
     <CustomCommands>
       <CustomCommands>
         <Command type="Execute" command="../../monodevelop-master/main/build/bin/MonoDevelop.exe" />
@@ -27,19 +27,21 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
-    <Optimize>False</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>..\..\monodevelop-master\main\build\AddIns\TypeScriptBinding</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>False</ConsolePause>
+    <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <Private>False</Private>
+      <Package>gtk-sharp-2.0</Package>
     </Reference>
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <Private>False</Private>
+      <Package>gtk-sharp-2.0</Package>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Mono.Posix" />
@@ -81,9 +83,11 @@
     </Reference>
     <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <Private>False</Private>
+      <Package>gtk-sharp-2.0</Package>
     </Reference>
     <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <Private>False</Private>
+      <Package>glib-sharp-2.0</Package>
     </Reference>
     <Reference Include="System.Core" />
   </ItemGroup>
@@ -92,9 +96,6 @@
     <Compile Include="gtk-gui\generated.cs" />
     <Compile Include="Helpers\PathHelper.cs" />
     <Compile Include="Tools\TypeScriptCompilerManager.cs" />
-    <Compile Include="gtk-gui\MonoDevelop.TypeScriptBinding.Languages.Gui.TypeScriptOptionsWidget.cs" />
-    <Compile Include="gtk-gui\MonoDevelop.TypeScriptBinding.Projects.Gui.TypeScriptOutputOptionsWidget.cs" />
-    <Compile Include="gtk-gui\MonoDevelop.TypeScriptBinding.Projects.Gui.TypeScriptProjectOptionsWidget.cs" />
     <Compile Include="Languages\Gui\TypeScriptOptionsPanel.cs" />
     <Compile Include="Languages\Gui\TypeScriptTextEditorCompletion.cs" />
     <Compile Include="Languages\TypeScriptLanguageBinding.cs" />
@@ -102,10 +103,9 @@
     <Compile Include="Projects\TypeScriptProject.cs" />
     <Compile Include="Projects\TypeScriptProjectConfiguration.cs" />
     <Compile Include="Projects\TypeScriptProjectBinding.cs" />
-    <Compile Include="Projects\Gui\TypeScriptOutputOptionsPanel.cs" />
     <Compile Include="Projects\Gui\TypeScriptProjectOptionsPanel.cs" />
-    <Compile Include="gtk-gui\MonoDevelop.TypeScriptBinding.Projects.Gui.NMEOutputOptionsWidget.cs" />
-    <Compile Include="gtk-gui\MonoDevelop.TypeScriptBinding.Projects.Gui.NMEProjectOptionsWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.TypeScriptBinding.Projects.Gui.TypeScriptProjectOptionsWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.TypeScriptBinding.Languages.Gui.TypeScriptOptionsWidget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

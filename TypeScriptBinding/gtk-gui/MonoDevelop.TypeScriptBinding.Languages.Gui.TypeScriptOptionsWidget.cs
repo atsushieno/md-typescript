@@ -7,14 +7,14 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 		private global::Gtk.VBox vbox1;
 		private global::Gtk.Frame frame1;
 		private global::Gtk.Alignment GtkAlignment;
-		private global::Gtk.VBox vbox2;
-		private global::Gtk.CheckButton EnableCompilationServerCheckBox;
 		private global::Gtk.Table table1;
-		private global::Gtk.Entry PortNumberEntry;
-		private global::Gtk.Label PortNumberLabel;
+		private global::Gtk.Entry NodeLocationEntry;
+		private global::Gtk.Button NodeLocationFileChooser;
+		private global::Gtk.Label NodeLocationLabel;
+		private global::Gtk.Entry TscLocationEntry;
+		private global::Gtk.Button TscLocationFileChooser;
+		private global::Gtk.Label TscLocationLabel;
 		private global::Gtk.Label GtkLabel2;
-		private global::Gtk.Frame frame2;
-		private global::Gtk.Alignment GtkAlignment1;
 		
 		protected virtual void Build ()
 		{
@@ -36,72 +36,118 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 			this.GtkAlignment.LeftPadding = ((uint)(12));
 			this.GtkAlignment.TopPadding = ((uint)(12));
 			// Container child GtkAlignment.Gtk.Container+ContainerChild
-			this.vbox2 = new global::Gtk.VBox ();
-			this.vbox2.Name = "vbox2";
-			this.vbox2.Spacing = 6;
-			// Container child vbox2.Gtk.Box+BoxChild
-			this.EnableCompilationServerCheckBox = new global::Gtk.CheckButton ();
-			this.EnableCompilationServerCheckBox.CanFocus = true;
-			this.EnableCompilationServerCheckBox.Name = "EnableCompilationServerCheckBox";
-			this.EnableCompilationServerCheckBox.Label = global::Mono.Unix.Catalog.GetString ("Enable compilation server");
-			this.EnableCompilationServerCheckBox.DrawIndicator = true;
-			this.EnableCompilationServerCheckBox.UseUnderline = true;
-			this.vbox2.Add (this.EnableCompilationServerCheckBox);
-			global::Gtk.Box.BoxChild w1 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.EnableCompilationServerCheckBox]));
-			w1.Position = 0;
-			w1.Expand = false;
-			w1.Fill = false;
-			// Container child vbox2.Gtk.Box+BoxChild
-			this.table1 = new global::Gtk.Table (((uint)(3)), ((uint)(3)), false);
+			this.table1 = new global::Gtk.Table (((uint)(2)), ((uint)(3)), false);
 			this.table1.Name = "table1";
 			this.table1.RowSpacing = ((uint)(6));
-			this.table1.ColumnSpacing = ((uint)(6));
+			this.table1.ColumnSpacing = ((uint)(12));
 			// Container child table1.Gtk.Table+TableChild
-			this.PortNumberEntry = new global::Gtk.Entry ();
-			this.PortNumberEntry.CanFocus = true;
-			this.PortNumberEntry.Name = "PortNumberEntry";
-			this.PortNumberEntry.IsEditable = true;
-			this.PortNumberEntry.InvisibleChar = '•';
-			this.table1.Add (this.PortNumberEntry);
-			global::Gtk.Table.TableChild w2 = ((global::Gtk.Table.TableChild)(this.table1 [this.PortNumberEntry]));
-			w2.LeftAttach = ((uint)(1));
-			w2.RightAttach = ((uint)(2));
-			w2.XOptions = ((global::Gtk.AttachOptions)(4));
-			w2.YOptions = ((global::Gtk.AttachOptions)(4));
+			this.NodeLocationEntry = new global::Gtk.Entry ();
+			this.NodeLocationEntry.CanFocus = true;
+			this.NodeLocationEntry.Name = "NodeLocationEntry";
+			this.NodeLocationEntry.IsEditable = true;
+			this.NodeLocationEntry.InvisibleChar = '•';
+			this.table1.Add (this.NodeLocationEntry);
+			global::Gtk.Table.TableChild w1 = ((global::Gtk.Table.TableChild)(this.table1 [this.NodeLocationEntry]));
+			w1.TopAttach = ((uint)(1));
+			w1.BottomAttach = ((uint)(2));
+			w1.LeftAttach = ((uint)(1));
+			w1.RightAttach = ((uint)(2));
+			w1.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
-			this.PortNumberLabel = new global::Gtk.Label ();
-			this.PortNumberLabel.Name = "PortNumberLabel";
-			this.PortNumberLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("Port number");
-			this.table1.Add (this.PortNumberLabel);
-			global::Gtk.Table.TableChild w3 = ((global::Gtk.Table.TableChild)(this.table1 [this.PortNumberLabel]));
-			w3.XOptions = ((global::Gtk.AttachOptions)(4));
-			w3.YOptions = ((global::Gtk.AttachOptions)(4));
-			this.vbox2.Add (this.table1);
-			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.table1]));
-			w4.Position = 1;
-			this.GtkAlignment.Add (this.vbox2);
+			this.NodeLocationFileChooser = new global::Gtk.Button ();
+			this.NodeLocationFileChooser.CanFocus = true;
+			this.NodeLocationFileChooser.Name = "NodeLocationFileChooser";
+			// Container child NodeLocationFileChooser.Gtk.Container+ContainerChild
+			global::Gtk.Alignment w2 = new global::Gtk.Alignment (0.5F, 0.5F, 0F, 0F);
+			// Container child GtkAlignment.Gtk.Container+ContainerChild
+			global::Gtk.HBox w3 = new global::Gtk.HBox ();
+			w3.Spacing = 2;
+			// Container child GtkHBox.Gtk.Container+ContainerChild
+			global::Gtk.Image w4 = new global::Gtk.Image ();
+			w4.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-file", global::Gtk.IconSize.Menu);
+			w3.Add (w4);
+			// Container child GtkHBox.Gtk.Container+ContainerChild
+			global::Gtk.Label w6 = new global::Gtk.Label ();
+			w6.LabelProp = global::Mono.Unix.Catalog.GetString ("Choose...");
+			w3.Add (w6);
+			w2.Add (w3);
+			this.NodeLocationFileChooser.Add (w2);
+			this.table1.Add (this.NodeLocationFileChooser);
+			global::Gtk.Table.TableChild w10 = ((global::Gtk.Table.TableChild)(this.table1 [this.NodeLocationFileChooser]));
+			w10.TopAttach = ((uint)(1));
+			w10.BottomAttach = ((uint)(2));
+			w10.LeftAttach = ((uint)(2));
+			w10.RightAttach = ((uint)(3));
+			w10.XOptions = ((global::Gtk.AttachOptions)(4));
+			w10.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child table1.Gtk.Table+TableChild
+			this.NodeLocationLabel = new global::Gtk.Label ();
+			this.NodeLocationLabel.Name = "NodeLocationLabel";
+			this.NodeLocationLabel.Xalign = 0F;
+			this.NodeLocationLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("node");
+			this.table1.Add (this.NodeLocationLabel);
+			global::Gtk.Table.TableChild w11 = ((global::Gtk.Table.TableChild)(this.table1 [this.NodeLocationLabel]));
+			w11.TopAttach = ((uint)(1));
+			w11.BottomAttach = ((uint)(2));
+			w11.XOptions = ((global::Gtk.AttachOptions)(4));
+			w11.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child table1.Gtk.Table+TableChild
+			this.TscLocationEntry = new global::Gtk.Entry ();
+			this.TscLocationEntry.CanFocus = true;
+			this.TscLocationEntry.Name = "TscLocationEntry";
+			this.TscLocationEntry.IsEditable = true;
+			this.TscLocationEntry.InvisibleChar = '•';
+			this.table1.Add (this.TscLocationEntry);
+			global::Gtk.Table.TableChild w12 = ((global::Gtk.Table.TableChild)(this.table1 [this.TscLocationEntry]));
+			w12.LeftAttach = ((uint)(1));
+			w12.RightAttach = ((uint)(2));
+			w12.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child table1.Gtk.Table+TableChild
+			this.TscLocationFileChooser = new global::Gtk.Button ();
+			this.TscLocationFileChooser.CanFocus = true;
+			this.TscLocationFileChooser.Name = "TscLocationFileChooser";
+			// Container child TscLocationFileChooser.Gtk.Container+ContainerChild
+			global::Gtk.Alignment w13 = new global::Gtk.Alignment (0.5F, 0.5F, 0F, 0F);
+			// Container child GtkAlignment.Gtk.Container+ContainerChild
+			global::Gtk.HBox w14 = new global::Gtk.HBox ();
+			w14.Spacing = 2;
+			// Container child GtkHBox.Gtk.Container+ContainerChild
+			global::Gtk.Image w15 = new global::Gtk.Image ();
+			w15.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-file", global::Gtk.IconSize.Menu);
+			w14.Add (w15);
+			// Container child GtkHBox.Gtk.Container+ContainerChild
+			global::Gtk.Label w17 = new global::Gtk.Label ();
+			w17.LabelProp = global::Mono.Unix.Catalog.GetString ("Choose...");
+			w14.Add (w17);
+			w13.Add (w14);
+			this.TscLocationFileChooser.Add (w13);
+			this.table1.Add (this.TscLocationFileChooser);
+			global::Gtk.Table.TableChild w21 = ((global::Gtk.Table.TableChild)(this.table1 [this.TscLocationFileChooser]));
+			w21.LeftAttach = ((uint)(2));
+			w21.RightAttach = ((uint)(3));
+			w21.XOptions = ((global::Gtk.AttachOptions)(4));
+			w21.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child table1.Gtk.Table+TableChild
+			this.TscLocationLabel = new global::Gtk.Label ();
+			this.TscLocationLabel.Name = "TscLocationLabel";
+			this.TscLocationLabel.Xalign = 0F;
+			this.TscLocationLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("tsc");
+			this.table1.Add (this.TscLocationLabel);
+			global::Gtk.Table.TableChild w22 = ((global::Gtk.Table.TableChild)(this.table1 [this.TscLocationLabel]));
+			w22.XOptions = ((global::Gtk.AttachOptions)(4));
+			w22.YOptions = ((global::Gtk.AttachOptions)(4));
+			this.GtkAlignment.Add (this.table1);
 			this.frame1.Add (this.GtkAlignment);
 			this.GtkLabel2 = new global::Gtk.Label ();
 			this.GtkLabel2.Name = "GtkLabel2";
-			this.GtkLabel2.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>Compilation Server</b>");
+			this.GtkLabel2.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>Tools</b>");
 			this.GtkLabel2.UseMarkup = true;
 			this.frame1.LabelWidget = this.GtkLabel2;
 			this.vbox1.Add (this.frame1);
-			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.frame1]));
-			w7.Position = 0;
-			// Container child vbox1.Gtk.Box+BoxChild
-			this.frame2 = new global::Gtk.Frame ();
-			this.frame2.Name = "frame2";
-			this.frame2.ShadowType = ((global::Gtk.ShadowType)(0));
-			// Container child frame2.Gtk.Container+ContainerChild
-			this.GtkAlignment1 = new global::Gtk.Alignment (0F, 0F, 1F, 1F);
-			this.GtkAlignment1.Name = "GtkAlignment1";
-			this.GtkAlignment1.LeftPadding = ((uint)(12));
-			this.GtkAlignment1.TopPadding = ((uint)(12));
-			this.frame2.Add (this.GtkAlignment1);
-			this.vbox1.Add (this.frame2);
-			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.frame2]));
-			w9.Position = 1;
+			global::Gtk.Box.BoxChild w25 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.frame1]));
+			w25.Position = 0;
+			w25.Expand = false;
+			w25.Fill = false;
 			this.Add (this.vbox1);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();

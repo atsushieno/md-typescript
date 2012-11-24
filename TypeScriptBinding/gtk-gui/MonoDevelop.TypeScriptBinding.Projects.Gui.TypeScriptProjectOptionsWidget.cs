@@ -9,9 +9,9 @@ namespace MonoDevelop.TypeScriptBinding.Projects.Gui
 		private global::Gtk.Alignment GtkAlignment;
 		private global::Gtk.Table table1;
 		private global::Gtk.HBox hbox1;
-		private global::Gtk.Entry TargetHTMLFileEntry;
-		private global::Gtk.Button TargetHTMLFileButton;
-		private global::Gtk.Label TargetHTMLFileLabel;
+		private global::Gtk.Entry TargetJavaScriptFileEntry;
+		private global::Gtk.Button TargetJavaScriptFileButton;
+		private global::Gtk.Label TargetJavaScriptFileLabel;
 		private global::Gtk.Label GtkLabel1;
 		private global::Gtk.Frame frame2;
 		private global::Gtk.Alignment GtkAlignment2;
@@ -49,19 +49,19 @@ namespace MonoDevelop.TypeScriptBinding.Projects.Gui
 			this.hbox1.Name = "hbox1";
 			this.hbox1.Spacing = 6;
 			// Container child hbox1.Gtk.Box+BoxChild
-			this.TargetHTMLFileEntry = new global::Gtk.Entry ();
-			this.TargetHTMLFileEntry.CanFocus = true;
-			this.TargetHTMLFileEntry.Name = "TargetHTMLFileEntry";
-			this.TargetHTMLFileEntry.IsEditable = true;
-			this.TargetHTMLFileEntry.InvisibleChar = '•';
-			this.hbox1.Add (this.TargetHTMLFileEntry);
-			global::Gtk.Box.BoxChild w1 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.TargetHTMLFileEntry]));
+			this.TargetJavaScriptFileEntry = new global::Gtk.Entry ();
+			this.TargetJavaScriptFileEntry.CanFocus = true;
+			this.TargetJavaScriptFileEntry.Name = "TargetJavaScriptFileEntry";
+			this.TargetJavaScriptFileEntry.IsEditable = true;
+			this.TargetJavaScriptFileEntry.InvisibleChar = '•';
+			this.hbox1.Add (this.TargetJavaScriptFileEntry);
+			global::Gtk.Box.BoxChild w1 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.TargetJavaScriptFileEntry]));
 			w1.Position = 0;
 			// Container child hbox1.Gtk.Box+BoxChild
-			this.TargetHTMLFileButton = new global::Gtk.Button ();
-			this.TargetHTMLFileButton.CanFocus = true;
-			this.TargetHTMLFileButton.Name = "TargetHTMLFileButton";
-			// Container child TargetHTMLFileButton.Gtk.Container+ContainerChild
+			this.TargetJavaScriptFileButton = new global::Gtk.Button ();
+			this.TargetJavaScriptFileButton.CanFocus = true;
+			this.TargetJavaScriptFileButton.Name = "TargetJavaScriptFileButton";
+			// Container child TargetJavaScriptFileButton.Gtk.Container+ContainerChild
 			global::Gtk.Alignment w2 = new global::Gtk.Alignment (0.5F, 0.5F, 0F, 0F);
 			// Container child GtkAlignment.Gtk.Container+ContainerChild
 			global::Gtk.HBox w3 = new global::Gtk.HBox ();
@@ -75,9 +75,9 @@ namespace MonoDevelop.TypeScriptBinding.Projects.Gui
 			w6.LabelProp = global::Mono.Unix.Catalog.GetString ("Choose...");
 			w3.Add (w6);
 			w2.Add (w3);
-			this.TargetHTMLFileButton.Add (w2);
-			this.hbox1.Add (this.TargetHTMLFileButton);
-			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.TargetHTMLFileButton]));
+			this.TargetJavaScriptFileButton.Add (w2);
+			this.hbox1.Add (this.TargetJavaScriptFileButton);
+			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.TargetJavaScriptFileButton]));
 			w10.Position = 1;
 			w10.Expand = false;
 			w10.Fill = false;
@@ -87,12 +87,12 @@ namespace MonoDevelop.TypeScriptBinding.Projects.Gui
 			w11.RightAttach = ((uint)(2));
 			w11.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
-			this.TargetHTMLFileLabel = new global::Gtk.Label ();
-			this.TargetHTMLFileLabel.Name = "TargetHTMLFileLabel";
-			this.TargetHTMLFileLabel.Xalign = 0F;
-			this.TargetHTMLFileLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("Target HTML file:");
-			this.table1.Add (this.TargetHTMLFileLabel);
-			global::Gtk.Table.TableChild w12 = ((global::Gtk.Table.TableChild)(this.table1 [this.TargetHTMLFileLabel]));
+			this.TargetJavaScriptFileLabel = new global::Gtk.Label ();
+			this.TargetJavaScriptFileLabel.Name = "TargetJavaScriptFileLabel";
+			this.TargetJavaScriptFileLabel.Xalign = 0F;
+			this.TargetJavaScriptFileLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("Target .js file:");
+			this.table1.Add (this.TargetJavaScriptFileLabel);
+			global::Gtk.Table.TableChild w12 = ((global::Gtk.Table.TableChild)(this.table1 [this.TargetJavaScriptFileLabel]));
 			w12.XOptions = ((global::Gtk.AttachOptions)(4));
 			w12.YOptions = ((global::Gtk.AttachOptions)(4));
 			this.GtkAlignment.Add (this.table1);
@@ -156,7 +156,6 @@ namespace MonoDevelop.TypeScriptBinding.Projects.Gui
 				this.Child.ShowAll ();
 			}
 			this.Hide ();
-			this.TargetHTMLFileButton.Clicked += new global::System.EventHandler (this.OnTargetHTMLFileButtonClicked);
 		}
 	}
 }

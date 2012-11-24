@@ -39,7 +39,7 @@ namespace MonoDevelop.TypeScriptBinding.Projects.Gui
 
 		public TypeScriptOutputOptionsWidget ()
 		{
-			this.Build ();
+			//this.Build ();
 			this.Show ();
 		}
 

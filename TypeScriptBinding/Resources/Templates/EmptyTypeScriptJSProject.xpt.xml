@@ -11,7 +11,7 @@
 
     <Combine name="${ProjectName}" directory=".">
         <Project name="${ProjectName}" directory="." type="TypeScript">
-            <!-- Options TargetHTMLFile="dummy.html" / -->
+            <!-- Options TargetJavaScriptFile="dummy.html" / -->
             <Files>
                 <File name="Source/${ProjectName}.ts" AddStandardHeader="True">
 <![CDATA[

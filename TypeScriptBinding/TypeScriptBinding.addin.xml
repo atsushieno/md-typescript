@@ -93,8 +93,7 @@
 	
 	<Extension path="/MonoDevelop/ProjectModel/Gui/ItemOptionPanels/Build">
 		<Condition id="ItemType" value="MonoDevelop.TypeScriptBinding.Projects.TypeScriptProject">
-			<Section id="TypeScriptProjectOptionsPanel" _label="General" icon="fd-icon" class="MonoDevelop.TypeScriptBinding.Projects.Gui.TypeScriptProjectOptionsPanel" />
-			<Section id="TypeScriptOutputOptionsPanel" _label="Output" icon="fd-icon" class="MonoDevelop.TypeScriptBinding.Projects.Gui.TypeScriptOutputOptionsPanel" />
+			<Section id="TypeScriptProjectOptionsPanel" _label="TypeScript" icon="ts-icon" class="MonoDevelop.TypeScriptBinding.Projects.Gui.TypeScriptProjectOptionsPanel" />
 		</Condition>
 	</Extension>
 	
