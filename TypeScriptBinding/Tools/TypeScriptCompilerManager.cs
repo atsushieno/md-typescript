@@ -20,16 +20,23 @@ namespace MonoDevelop.TypeScriptBinding.Tools
 
 	static class TypeScriptCompilerManager
 	{
-		
+		static readonly string tsc_path;
+
+		static TypeScriptCompilerManager ()
+		{
+			var paths = Environment.GetEnvironmentVariable ("PATH").Split (Path.PathSeparator);
+			foreach (var path in paths) {
+				var tsc = Path.Combine (path, "tsc");
+				if (File.Exists (tsc)) {
+					tsc_path = tsc;
+					break;
+				}
+			}
+		}
+
 		private static Process compilationServer;
 		private static int compilationServerPort;
-		
-		private static string cacheArgumentsGlobal;
-		private static string cacheArgumentsPlatform;
-		private static string cacheHTML;
-		private static string cachePlatform;
-		private static DateTime cacheNMMLTime;
-		
+
 		private static Regex mErrorFull = new Regex (@"^(?<file>.+)\((?<line>\d+)\):\s(col:\s)?(?<column>\d*)\s?(?<level>\w+):\s(?<message>.*)\.?$", RegexOptions.Compiled | RegexOptions.ExplicitCapture);
 
 		// example: test.hx:11: character 7 : Unterminated string
@@ -47,67 +54,33 @@ namespace MonoDevelop.TypeScriptBinding.Tools
 		public static BuildResult Compile (TypeScriptProject project, TypeScriptProjectConfiguration configuration, IProgressMonitor monitor)
 		{
 			string exe = PropertyService.Get<string> ("TypeScriptBinding.TscLocation");
-			exe = String.IsNullOrWhiteSpace (exe) ? "tsc" : exe;
-			//string args = project.TargetJavaScriptFile;
-			
-			string jsPath = !string.IsNullOrWhiteSpace (project.TargetJavaScriptFile) ? Path.GetFullPath (project.TargetJavaScriptFile) : null;
-			
-			if (!string.IsNullOrWhiteSpace (jsPath) && !File.Exists (jsPath))
-			{
-				jsPath = Path.Combine (project.BaseDirectory, project.TargetJavaScriptFile);
-			}
+			exe = tsc_path;
 
-			string js = !string.IsNullOrWhiteSpace (jsPath) ? File.ReadAllText (jsPath) : string.Empty;
-			js = js.Replace (Environment.NewLine, " ");
-			string[] htmlArgs = js.Split (' ');
-			
-			bool createNext = false;
-			
-			foreach (string htmlArg in htmlArgs)
-			{
-				if (createNext)
-				{
-					if (!htmlArg.StartsWith ("-"))
-					{
-						string path = Path.GetFullPath (Path.GetDirectoryName (htmlArg));
-						if (!Directory.Exists (path))
-						{
-							path = Path.Combine (project.BaseDirectory, htmlArg);
-							if (!Directory.Exists (Path.GetDirectoryName (path)))
-							{
-								Directory.CreateDirectory (Path.GetDirectoryName (path));
-							}
-						}
-					}
-					createNext = false;
-				}
-				
-				if (htmlArg == "-js" || htmlArg == "-swf" || htmlArg == "-swf9" || htmlArg == "-neko")
-				{
-					createNext = true;
-				}
-			}
-			
-			string args = String.Join (" ", htmlArgs);
-			
+			var argList = new List<string> ();
+			//argList.Add (tsc_path);
+			if (!string.IsNullOrEmpty (project.TargetJavaScriptFile))
+				argList.Add ("--out:\"" + project.TargetJavaScriptFile + "\"");
+
 			if (configuration.DebugMode)
 			{
-				args += " -debug";
+				argList.Add ("-c");
 			}
 			
 			if (project.AdditionalArguments != "")
 			{
-				args += " " + project.AdditionalArguments;
+				argList.Add (project.AdditionalArguments);
 			}
 			
 			if (configuration.AdditionalArguments != "")
 			{
-				args += " " + configuration.AdditionalArguments;
+				argList.Add (configuration.AdditionalArguments);
 			}
 			
 			foreach (var fp in project.Files.Where (pf => pf.BuildAction == "Compile"))
-				args += " " + fp.FilePath.FullPath;
-			
+				argList.Add (fp.FilePath.FullPath);
+
+			var args = String.Join (" ", argList.ToArray ());
+
 			string error = "";
 			int exitCode = DoCompilation (exe, args, project.BaseDirectory, monitor, ref error);
 			

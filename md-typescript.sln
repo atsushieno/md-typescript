@@ -9,10 +9,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "external", "external", "{10
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jurassic", "external\jurassic\Jurassic\Jurassic.csproj", "{2CE5502D-8710-4BE3-9D90-201D526904B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeScriptServiceBridge.Tests", "TypeScriptServiceBridge.Tests\TypeScriptServiceBridge.Tests.csproj", "{79ABA548-0764-4A71-B93B-8F027C039DC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		Default|Any CPU = Default|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{17F48D22-DFF8-48FB-935B-BBF17F63B39C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -27,6 +30,12 @@ Global
 		{3B95464D-3CFC-44A3-8FF1-A5BD85E7A8B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B95464D-3CFC-44A3-8FF1-A5BD85E7A8B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B95464D-3CFC-44A3-8FF1-A5BD85E7A8B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79ABA548-0764-4A71-B93B-8F027C039DC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79ABA548-0764-4A71-B93B-8F027C039DC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79ABA548-0764-4A71-B93B-8F027C039DC1}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{79ABA548-0764-4A71-B93B-8F027C039DC1}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{79ABA548-0764-4A71-B93B-8F027C039DC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79ABA548-0764-4A71-B93B-8F027C039DC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2CE5502D-8710-4BE3-9D90-201D526904B3} = {10276CC6-E3E7-4F26-ADBE-DE290668BF7A}

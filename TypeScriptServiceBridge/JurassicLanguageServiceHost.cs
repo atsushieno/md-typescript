@@ -6,13 +6,13 @@ namespace TypeScriptServiceBridge
 {
 	public class JurassicLanguageServiceHost : LanguageServiceHost
 	{
-		const string typeScriptService = "ts-all.js";
+		const string typeScriptService = "ls-bridge.js";
 		ScriptEngine engine;
 
 		public JurassicLanguageServiceHost ()
 		{
 			engine = new ScriptEngine ();
-			engine.Evaluate (File.ReadAllText (typeScriptService));
+			engine.Evaluate (new StreamReader (GetType ().Assembly.GetManifestResourceStream (typeScriptService)).ReadToEnd ());
 		}
 
 		public override T Eval<T> (string command)

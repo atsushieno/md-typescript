@@ -24,6 +24,11 @@
         <Command type="Execute" command="../../monodevelop-master/main/build/bin/MonoDevelop.exe" />
       </CustomCommands>
     </CustomCommands>
+    <EnvironmentVariables>
+      <EnvironmentVariables>
+        <Variable name="PATH" value="/devel/bin" />
+      </EnvironmentVariables>
+    </EnvironmentVariables>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -94,7 +99,6 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="Helpers\PathHelper.cs" />
     <Compile Include="Tools\TypeScriptCompilerManager.cs" />
     <Compile Include="Languages\Gui\TypeScriptOptionsPanel.cs" />
     <Compile Include="Languages\Gui\TypeScriptTextEditorCompletion.cs" />
@@ -125,6 +129,21 @@
     <EmbeddedResource Include="Resources\SyntaxModes\TypeScriptSyntaxMode.xml">
       <LogicalName>TypeScriptSyntaxMode.xml</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Icons\typescript-icon-16.png">
+      <LogicalName>typescript-icon-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Icons\typescript-icon-24.png">
+      <LogicalName>typescript-icon-24.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Icons\typescript-icon-32.png">
+      <LogicalName>typescript-icon-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Icons\typescript-overlay-16.png">
+      <LogicalName>typescript-overlay-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Icons\typescript-overlay-32.png">
+      <LogicalName>typescript-overlay-32.png</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Projects\" />
@@ -137,10 +156,5 @@
     <Folder Include="Resources\SyntaxModes\" />
     <Folder Include="Tools\" />
     <Folder Include="Helpers\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Icons\typescript-icon-24.png" />
-    <None Include="Resources\Icons\typescript-icon-16.png" />
-    <None Include="Resources\Icons\typescript-icon-32.png" />
   </ItemGroup>
 </Project>

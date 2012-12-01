@@ -5,10 +5,10 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{17F48D22-DFF8-48FB-935B-BBF17F63B39C}</ProjectGuid>
+    <ProjectGuid>{79ABA548-0764-4A71-B93B-8F027C039DC1}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>TypeScriptServiceBridge</RootNamespace>
-    <AssemblyName>TypeScriptServiceBridge</AssemblyName>
+    <RootNamespace>TypeScriptServiceBridge.Tests</RootNamespace>
+    <AssemblyName>TypeScriptServiceBridge.Tests</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,28 +30,23 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="LanguageService.cs" />
-    <Compile Include="LanguageServiceHost.cs" />
-    <Compile Include="NodeLanguageServiceHost.cs" />
-    <Compile Include="JurassicLanguageServiceHost.cs" />
+    <Reference Include="nunit.framework">
+      <Private>False</Private>
+      <Package>mono-nunit</Package>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <ProjectReference Include="..\TypeScriptServiceBridge\TypeScriptServiceBridge.csproj">
+      <Project>{17F48D22-DFF8-48FB-935B-BBF17F63B39C}</Project>
+      <Name>TypeScriptServiceBridge</Name>
+    </ProjectReference>
     <ProjectReference Include="..\external\jurassic\Jurassic\Jurassic.csproj">
       <Project>{2CE5502D-8710-4BE3-9D90-201D526904B3}</Project>
       <Name>Jurassic</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ls-bridge.js">
-      <LogicalName>ls-bridge.js</LogicalName>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ls-bridge.ts" />
+    <Compile Include="JurassicLanguageServiceHostTest.cs" />
   </ItemGroup>
 </Project>

@@ -10,8 +10,8 @@ using Jurassic;
 namespace TypeScriptServiceBridge
 {
 
-	// Since mono is not capable of processing Jurassic https://bugzilla.xamarin.com/show_bug.cgi?id=7829
-	// we need non-Jurassic host. It is not ideal though.
+	// Since mono is not capable of processing Jurassic in full CLR mode https://bugzilla.xamarin.com/show_bug.cgi?id=7829
+	// we practically need non-Jurassic host. It is not ideal though.
 	public class NodeLanguageServiceHost : LanguageServiceHost
 	{
 		internal const string NodeServerAppFullPath = "mdTypeScriptBridge.js";

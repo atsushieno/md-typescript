@@ -6,7 +6,7 @@
 
     <TemplateConfiguration>
         <_Name>Empty Class</_Name>
-        <Icon>fd-file</Icon>
+        <Icon>ts-file</Icon>
         <_Category>General</_Category>
         <LanguageName>TypeScript</LanguageName>
         <_Description>Creates an empty class.</_Description>

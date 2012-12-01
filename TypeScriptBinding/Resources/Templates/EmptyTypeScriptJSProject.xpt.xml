@@ -4,7 +4,7 @@
     <TemplateConfiguration>
         <_Name>Empty TypeScript/JS Project</_Name>
         <_Category>TypeScript</_Category>
-        <Icon>fd-project</Icon>
+        <Icon>ts-project</Icon>
         <LanguageName>TypeScript</LanguageName>
         <_Description>Creates an empty TypeScript/JS project</_Description>
     </TemplateConfiguration>

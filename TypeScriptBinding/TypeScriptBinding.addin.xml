@@ -21,16 +21,15 @@
 	<!-- Icons -->
 	
 	<Extension path="/MonoDevelop/Core/StockIcons">
-		<StockIcon stockid="fd-icon" resource="typescript-icon-16.png" size="Menu" />
-		<StockIcon stockid="fd-icon" resource="typescript-icon-24.png" size="Dnd" />
-		<StockIcon stockid="fd-icon" resource="typescript-icon-32.png" size="Dialog" />
-		<!-- FIXME: create overlay icon -->
-		<StockIcon stockid="fd-project" icon="md-project|res:typescript-icon-16.png" size="Menu" />
-		<StockIcon stockid="fd-project" icon="md-project|res:typescript-icon-32.png" size="Dnd" />
-		<StockIcon stockid="fd-project" icon="md-project|res:typescript-icon-32.png" size="Dialog" />
-		<StockIcon stockid="fd-file" icon="md-text-file-icon|res:typescript-icon-16.png" size="Menu" />
-		<StockIcon stockid="fd-file" icon="md-text-file-icon|res:typescript-icon-32.png" size="Dnd" />
-		<StockIcon stockid="fd-file" icon="md-text-file-icon|res:typescript-icon-32.png" size="Dialog" />
+		<StockIcon stockid="ts-icon" resource="typescript-icon-16.png" size="Menu" />
+		<StockIcon stockid="ts-icon" resource="typescript-icon-24.png" size="Dnd" />
+		<StockIcon stockid="ts-icon" resource="typescript-icon-32.png" size="Dialog" />
+		<StockIcon stockid="ts-project" icon="md-project|res:typescript-overlay-16.png" size="Menu" />
+		<StockIcon stockid="ts-project" icon="md-project|res:typescript-overlay-32.png" size="Dnd" />
+		<StockIcon stockid="ts-project" icon="md-project|res:typescript-overlay-32.png" size="Dialog" />
+		<StockIcon stockid="ts-file" icon="md-text-file-icon|res:typescript-overlay-16.png" size="Menu" />
+		<StockIcon stockid="ts-file" icon="md-text-file-icon|res:typescript-overlay-32.png" size="Dnd" />
+		<StockIcon stockid="ts-file" icon="md-text-file-icon|res:typescript-overlay-32.png" size="Dialog" />
 	</Extension>
 	
 	
@@ -64,7 +63,7 @@
 	<!-- File Types -->
 	
 	<Extension path="/MonoDevelop/Core/MimeTypes">
-		<MimeType id="text/x-typescript" _description="TypeScript source code" icon="fd-file" isText="true"><File pattern="*.ts" /></MimeType>
+		<MimeType id="text/x-typescript" _description="TypeScript source code" icon="ts-file" isText="true"><File pattern="*.ts" /></MimeType>
 	</Extension>
 	
 	<Extension path="/MonoDevelop/Ide/FileFilters">

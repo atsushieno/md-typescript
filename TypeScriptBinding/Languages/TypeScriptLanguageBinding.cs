@@ -2,10 +2,6 @@ using System;
 using System.IO;
 using MonoDevelop.Core;
 using MonoDevelop.Projects;
-//using MonoDevelop.Projects.CodeGeneration;
-//using MonoDevelop.Projects.Dom;
-//using MonoDevelop.Projects.Dom.Parser;
-
 
 namespace MonoDevelop.TypeScriptBinding.Languages
 {
@@ -30,17 +26,6 @@ namespace MonoDevelop.TypeScriptBinding.Languages
 		{
 			return fileName.Extension == "ts";
 		}
-		
-		
-		/*public IParser Parser {
-			get { return null; }
-		}
-		
-		
-		public IRefactorer Refactorer {
-			get { return null; }
-		}*/
-		
 	}
 	
 }

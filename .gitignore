@@ -1,4 +1,6 @@
 external/jurassic/
+TypeScriptServiceBridge/ls-bridge.js
+TypeScriptServiceBridge/ls.lst
 bin
 obj
 *.userprefs
