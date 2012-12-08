@@ -1,13 +1,13 @@
 using System;
 using System.Reflection;
 
-namespace TypeScriptServiceBridge
+namespace TypeScriptServiceBridge.Hosting
 {
 	public abstract class LanguageServiceHost
 	{
 		static readonly LanguageServiceHost host = Create ();
 
-		public static LanguageServiceHost Create ()
+		static LanguageServiceHost Create ()
 		{
 			/*
 			var ca = typeof (object).Assembly.GetCustomAttributes (typeof (AssemblyCompanyAttribute), false) [0] as AssemblyCompanyAttribute;
@@ -18,6 +18,10 @@ namespace TypeScriptServiceBridge
 			return new JurassicLanguageServiceHost ();
 		}
 
+		public static LanguageServiceHost Instance {
+			get { return host; }
+		}
+
 		// FIXME: async!
 		public static T Evaluate<T> (string command)
 		{
@@ -26,5 +30,8 @@ namespace TypeScriptServiceBridge
 
 		// FIXME: async!
 		public abstract T Eval<T> (string command);
+
+		// FIXME: async!
+		public abstract void SetGlobalVariable (string label, object obj);
 	}
 }

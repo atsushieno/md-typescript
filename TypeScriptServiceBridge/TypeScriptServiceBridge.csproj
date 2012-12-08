@@ -34,10 +34,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="LanguageService.cs" />
-    <Compile Include="LanguageServiceHost.cs" />
-    <Compile Include="NodeLanguageServiceHost.cs" />
-    <Compile Include="JurassicLanguageServiceHost.cs" />
+    <Compile Include="Hosting\LanguageServiceHost.cs" />
+    <Compile Include="Hosting\JurassicLanguageServiceHost.cs" />
+    <Compile Include="Hosting\NodeLanguageServiceHost.cs" />
+    <Compile Include="TypeSystem\CompilerCompilationUnit.cs" />
+    <Compile Include="TypeSystem\TypeScriptObject.cs" />
+    <Compile Include="Harness\TypeScriptLS.cs" />
+    <Compile Include="Services\LanguageServiceShimHostAdapter.cs" />
+    <Compile Include="Services\ILanguageServiceHost.cs" />
+    <Compile Include="Services\ILanguageService.cs" />
+    <Compile Include="TypeScript\ILogger.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -53,5 +59,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ls-bridge.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TypeSystem\" />
+    <Folder Include="Hosting\" />
+    <Folder Include="Harness\" />
+    <Folder Include="Services\" />
+    <Folder Include="TypeScript\" />
   </ItemGroup>
 </Project>

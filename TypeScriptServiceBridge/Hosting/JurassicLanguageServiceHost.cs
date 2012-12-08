@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using Jurassic;
 
-namespace TypeScriptServiceBridge
+namespace TypeScriptServiceBridge.Hosting
 {
 	public class JurassicLanguageServiceHost : LanguageServiceHost
 	{
@@ -18,6 +18,11 @@ namespace TypeScriptServiceBridge
 		public override T Eval<T> (string command)
 		{
 			return engine.Evaluate<T> (command);
+		}
+
+		public override void SetGlobalVariable (string label, object value)
+		{
+			engine.SetGlobalValue (label, value);
 		}
 	}
 }

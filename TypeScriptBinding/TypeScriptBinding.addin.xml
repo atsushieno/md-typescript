@@ -112,6 +112,10 @@
 	<Extension path="/MonoDevelop/Ide/TextEditorExtensions">
 		<Class fileExtensions=".ts" class="MonoDevelop.TypeScriptBinding.Languages.Gui.TypeScriptTextEditorCompletion" />
 	</Extension>
-	
+
+	<!-- TypeSystem Ambience -->
+	<Extension path = "/MonoDevelop/TypeSystem/Ambiences">
+		<Ambience mimeType="text/x-typescript" class = "MonoDevelop.TypeScriptBinding.TypeScriptAmbience" />
+	</Extension>
 	
 </Addin>

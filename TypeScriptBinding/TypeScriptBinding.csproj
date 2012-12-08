@@ -71,21 +71,6 @@
       <HintPath>\Applications\MonoDevelop.app\Contents\MacOS\lib\monodevelop\bin\ICSharpCode.NRefactory.dll</HintPath>
       <Package>monodevelop</Package>
     </Reference>
-    <Reference Include="Mono.TextEditor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>\Applications\MonoDevelop.app\Contents\MacOS\lib\monodevelop\bin\Mono.TextEditor.dll</HintPath>
-      <Private>False</Private>
-      <Package>monodevelop</Package>
-    </Reference>
-    <Reference Include="MonoDevelop.DesignerSupport, Version=2.6.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>\Applications\MonoDevelop.app\Contents\MacOS\lib\monodevelop\AddIns\MonoDevelop.DesignerSupport\MonoDevelop.DesignerSupport.dll</HintPath>
-      <Private>False</Private>
-      <Package>monodevelop-core-addins</Package>
-    </Reference>
-    <Reference Include="MonoDevelop.Refactoring, Version=2.6.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>\Applications\MonoDevelop.app\Contents\MacOS\lib\monodevelop\AddIns\MonoDevelop.Refactoring\MonoDevelop.Refactoring.dll</HintPath>
-      <Private>False</Private>
-      <Package>monodevelop-core-addins</Package>
-    </Reference>
     <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <Private>False</Private>
       <Package>gtk-sharp-2.0</Package>
@@ -95,6 +80,18 @@
       <Package>glib-sharp-2.0</Package>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="Mono.TextEditor, Version=1.0.0.0, Culture=neutral">
+      <Private>False</Private>
+      <Package>monodevelop</Package>
+    </Reference>
+    <Reference Include="MonoDevelop.DesignerSupport, Version=2.6.0.0, Culture=neutral">
+      <Private>False</Private>
+      <Package>monodevelop-core-addins</Package>
+    </Reference>
+    <Reference Include="MonoDevelop.Refactoring, Version=2.6.0.0, Culture=neutral">
+      <Private>False</Private>
+      <Package>monodevelop-core-addins</Package>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
@@ -110,6 +107,11 @@
     <Compile Include="Projects\Gui\TypeScriptProjectOptionsPanel.cs" />
     <Compile Include="gtk-gui\MonoDevelop.TypeScriptBinding.Projects.Gui.TypeScriptProjectOptionsWidget.cs" />
     <Compile Include="gtk-gui\MonoDevelop.TypeScriptBinding.Languages.Gui.TypeScriptOptionsWidget.cs" />
+    <Compile Include="TypeSystem\TypeScriptAmbience.cs" />
+    <Compile Include="TypeSystem\TypeScriptTypeSystemParser.cs" />
+    <Compile Include="TypeSystem\TypeScriptParser.cs" />
+    <Compile Include="TypeSystem\TypeScriptSyntaxTree.cs" />
+    <Compile Include="TypeSystem\CompilerSettings.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -156,5 +158,12 @@
     <Folder Include="Resources\SyntaxModes\" />
     <Folder Include="Tools\" />
     <Folder Include="Helpers\" />
+    <Folder Include="TypeSystem\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TypeScriptServiceBridge\TypeScriptServiceBridge.csproj">
+      <Project>{17F48D22-DFF8-48FB-935B-BBF17F63B39C}</Project>
+      <Name>TypeScriptServiceBridge</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

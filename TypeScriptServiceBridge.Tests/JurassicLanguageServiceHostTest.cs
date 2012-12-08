@@ -1,5 +1,5 @@
 using System;
-using TypeScriptServiceBridge;
+using TypeScriptServiceBridge.Hosting;
 using NUnit.Framework;
 
 namespace TypeScriptServiceBridge.Tests
