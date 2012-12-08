@@ -1,10 +1,9 @@
 using System;
 using Jurassic.Library;
-using TypeScriptServiceBridge.TypeSystem;
 
 namespace TypeScriptServiceBridge.TypeScript
 {
-	public interface ILogger
+	public interface ILogger : ITypeScriptObject
 	{
         bool Information ();
 		bool Debug ();
@@ -16,11 +15,9 @@ namespace TypeScriptServiceBridge.TypeScript
 
 	public class Logger_Impl : TypeScriptObject, ILogger
 	{
-		ObjectInstance instance;
-
 		public Logger_Impl (ObjectInstance instance)
+			: base (instance)
 		{
-			this.instance = instance;
 		}
 
 		public override void Dispose ()
@@ -30,32 +27,32 @@ namespace TypeScriptServiceBridge.TypeScript
 		#region ILogger implementation
 		public bool Information ()
 		{
-			return (bool) instance.CallMemberFunction ("information");
+			return (bool) Instance.CallMemberFunction ("information");
 		}
 
 		public bool Debug ()
 		{
-			return (bool) instance.CallMemberFunction ("debug");
+			return (bool) Instance.CallMemberFunction ("debug");
 		}
 
 		public bool Warning ()
 		{
-			return (bool) instance.CallMemberFunction ("warning");
+			return (bool) Instance.CallMemberFunction ("warning");
 		}
 
 		public bool Error ()
 		{
-			return (bool) instance.CallMemberFunction ("error");
+			return (bool) Instance.CallMemberFunction ("error");
 		}
 
 		public bool Fatal ()
 		{
-			return (bool) instance.CallMemberFunction ("fatal");
+			return (bool) Instance.CallMemberFunction ("fatal");
 		}
 
 		public void Log (string s)
 		{
-			instance.CallMemberFunction ("log", s);
+			Instance.CallMemberFunction ("log", s);
 		}
 		#endregion
 	}

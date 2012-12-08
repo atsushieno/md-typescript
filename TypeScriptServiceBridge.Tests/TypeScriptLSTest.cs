@@ -1,5 +1,7 @@
 using System;
+using Jurassic.Library;
 using NUnit.Framework;
+using TypeScriptServiceBridge.Hosting;
 using TypeScriptServiceBridge.Harness;
 
 namespace TypeScriptServiceBridge.Tests
@@ -10,7 +12,7 @@ namespace TypeScriptServiceBridge.Tests
 		[Test]
 		public void TestBasics ()
 		{
-			var ls = new TypeScriptLS ();
+			var ls = new TypeScriptLS (LanguageServiceHost.Instance.Eval<ObjectInstance> ("new Harness.TypeScriptLS ();"));
 			Assert.AreEqual (100, ls.MaxScriptVersions, "#1");
 			Assert.IsNotNull (ls.Scripts, "#2");
 			Assert.AreEqual (0, ls.Scripts.Length, "#3");

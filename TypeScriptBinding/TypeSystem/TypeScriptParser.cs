@@ -3,7 +3,8 @@ using System.IO;
 using ICSharpCode.NRefactory;
 using ICSharpCode.NRefactory.Documentation;
 using ICSharpCode.NRefactory.Editor;
-using TypeScriptServiceBridge.TypeSystem;
+using TypeScriptServiceBridge;
+using TypeScriptServiceBridge.Harness;
 using TypeScriptServiceBridge.Services;
 
 namespace MonoDevelop.TypeScriptBinding
@@ -16,12 +17,21 @@ namespace MonoDevelop.TypeScriptBinding
 		{
 		}
 
+		TypeScriptServicesFactory factory;
+		TypeScriptLS tsls;
+		ILanguageService ls;
+
 		// FIXME: make use of it if neccessary.
 		public bool GenerateTypeSystemMode { get; set; }
 
 		public TypeScriptSyntaxTree Parse (TextReader reader, string fileName)
 		{
-			throw new NotImplementedException ();
+			if (factory == null)
+				factory = new TypeScriptServicesFactory (TypeScriptObject.CallConstructor ("Services", "TypeScriptServicesFactory"));
+			if (tsls == null)
+				tsls = new TypeScriptLS (TypeScriptObject.CallConstructor ("Harness", "TypeScriptLS"));
+			if (ls == null)
+				ls = factory.CreateLanguageService (new LanguageServiceShimHostAdapter (tsls));
 		}
 	}
 }

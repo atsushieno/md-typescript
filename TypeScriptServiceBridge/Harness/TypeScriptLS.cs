@@ -1,81 +1,71 @@
 using System;
 using Jurassic.Library;
 using TypeScriptServiceBridge.Hosting;
-using TypeScriptServiceBridge.TypeSystem;
+using TypeScriptServiceBridge.Services;
 
 namespace TypeScriptServiceBridge.Harness
 {
-	public class TypeScriptLS : TypeScriptObject
+	public class TypeScriptLS : TypeScriptObject, ILanguageServiceShimHost
 	{
-		ObjectInstance instance;
-
-		public TypeScriptLS ()
+		public TypeScriptLS (ObjectInstance instance)
+			: base (instance)
 		{
-			instance = Eval<ObjectInstance> ("new Harness.TypeScriptLS ();");
-			Label = AllocateVariable (instance);
-		}
-
-		public string Label { get; private set; }
-
-		public override void Dispose ()
-		{
-			ReleaseVariable (Label);
 		}
 
 		#region ts public members
 
         public ArrayInstance Scripts { // ScriptInfo[]
-			get { return (ArrayInstance) instance.GetPropertyValue ("scripts"); }
-			set { instance.SetPropertyValue ("scripts", value, true); }
+			get { return (ArrayInstance) Instance.GetPropertyValue ("scripts"); }
+			set { Instance.SetPropertyValue ("scripts", value, true); }
 		}
 
         public int MaxScriptVersions {
-			get { return (int) instance.GetPropertyValue ("maxScriptVersions"); }
-			set { instance.SetPropertyValue ("maxScriptVersions", value, true); }
+			get { return (int) Instance.GetPropertyValue ("maxScriptVersions"); }
+			set { Instance.SetPropertyValue ("maxScriptVersions", value, true); }
 		}
 
         public void AddDefaultLibrary () 
 		{
-            //this.addScript("lib.d.ts", Harness.Compiler.libText, true);
+			Instance.CallMemberFunction ("addDefaultLibrary");
         }
 
         public void AddFile (string name, bool isResident = false) 
 		{
-			instance.CallMemberFunction ("addFile", name, isResident);
+			Instance.CallMemberFunction ("addFile", name, isResident);
         }
 
         public void AddScript (string name, string content, bool isResident = false)
 		{
-			instance.CallMemberFunction ("addScript", name, content, isResident);
+			Instance.CallMemberFunction ("addScript", name, content, isResident);
         }
 
 		public void UpdateScript (string name, string content, bool isResident = false)
 		{
-			instance.CallMemberFunction ("updateScript", name, content, isResident);
+			Instance.CallMemberFunction ("updateScript", name, content, isResident);
         }
 
 		public void EditScript (string name, double minChar, double limChar, string newText)
 		{
-			instance.CallMemberFunction ("editScript", name, minChar, limChar, newText);
+			Instance.CallMemberFunction ("editScript", name, minChar, limChar, newText);
         }
 
 		public string GetScriptContent (double scriptIndex)
 		{
-			return (string) instance.CallMemberFunction ("getScriptContent", scriptIndex);
+			return (string) Instance.CallMemberFunction ("getScriptContent", scriptIndex);
 		}
 
         //////////////////////////////////////////////////////////////////////
         // ILogger implementation
         //
-        public bool Information () { return (bool) instance.CallMemberFunction ("information"); }
-        public bool Debug () { return (bool) instance.CallMemberFunction ("debug"); }
-        public bool Warning () { return (bool) instance.CallMemberFunction ("warning"); }
-        public bool Error () { return (bool) instance.CallMemberFunction ("error"); }
-        public bool Fatal () { return (bool) instance.CallMemberFunction ("fatal"); }
+        public bool Information () { return (bool) Instance.CallMemberFunction ("information"); }
+        public bool Debug () { return (bool) Instance.CallMemberFunction ("debug"); }
+        public bool Warning () { return (bool) Instance.CallMemberFunction ("warning"); }
+        public bool Error () { return (bool) Instance.CallMemberFunction ("error"); }
+        public bool Fatal () { return (bool) Instance.CallMemberFunction ("fatal"); }
 
         public void Log (string s)
 		{
-			instance.CallMemberFunction ("log", s);
+			Instance.CallMemberFunction ("log", s);
         }
 
         //////////////////////////////////////////////////////////////////////
@@ -84,51 +74,51 @@ namespace TypeScriptServiceBridge.Harness
 
         public string GetCompilationSettings ()
 		{
-			return (string) instance.CallMemberFunction ("getCompilationSettings");
+			return (string) Instance.CallMemberFunction ("getCompilationSettings");
         }
 
         public double GetScriptCount ()
 		{
-			return (double) instance.CallMemberFunction ("getScriptCount");
+			return (double) Instance.CallMemberFunction ("getScriptCount");
         }
 
 		public string GetScriptSourceText (double scriptIndex, double start, double end)
 		{
-			return (string) instance.CallMemberFunction ("getScriptSourceText", scriptIndex, start, end);
+			return (string) Instance.CallMemberFunction ("getScriptSourceText", scriptIndex, start, end);
 		}
 
 		public double GetScriptSourceLength (double scriptIndex)
 		{
-			return (double) instance.CallMemberFunction ("getScriptSourceLength", scriptIndex);
+			return (double) Instance.CallMemberFunction ("getScriptSourceLength", scriptIndex);
 		}
 
 		public string GetScriptId (double scriptIndex)
 		{
-			return (string) instance.CallMemberFunction ("getScriptId", scriptIndex);
+			return (string) Instance.CallMemberFunction ("getScriptId", scriptIndex);
 		}
 
 		public bool GetScriptIsResident (double scriptIndex)
 		{
-			return (bool) instance.CallMemberFunction ("getScriptIsResident", scriptIndex);
+			return (bool) Instance.CallMemberFunction ("getScriptIsResident", scriptIndex);
 		}
 
 		public double GetScriptVersion (double scriptIndex)
 		{
-			return (double) instance.CallMemberFunction ("getScriptVersion", scriptIndex);
+			return (double) Instance.CallMemberFunction ("getScriptVersion", scriptIndex);
 		}
 
 		public string GetScriptEditRangeSinceVersion (double scriptIndex, double scriptVersion)
 		{
-			return (string) instance.CallMemberFunction ("getScriptEditRangeSinceVersion", scriptIndex, scriptVersion);
+			return (string) Instance.CallMemberFunction ("getScriptEditRangeSinceVersion", scriptIndex, scriptVersion);
 		}
 
         //
-        // Return a new instance of the language service shim, up-to-date wrt to typecheck.
+        // Return a new Instance of the language service shim, up-to-date wrt to typecheck.
         // To access the non-shim (i.e. actual) language service, use the "ls.languageService" property.
         //
-		public ObjectInstance GetLanguageService ()
+		public ILanguageServiceShim GetLanguageService ()
 		{
-			return (ObjectInstance) instance.CallMemberFunction ("getLanguageService");
+			return new LanguageServiceShim_Impl ((ObjectInstance) Instance.CallMemberFunction ("getLanguageService"));
         }
 
         //
@@ -136,7 +126,7 @@ namespace TypeScriptServiceBridge.Harness
         //
 		public ObjectInstance ParseSourceText (string fileName, ObjectInstance sourceText)
 		{
-			return (ObjectInstance) instance.CallMemberFunction ("parseSourceText", fileName, sourceText);
+			return (ObjectInstance) Instance.CallMemberFunction ("parseSourceText", fileName, sourceText);
         }
 
         //
@@ -144,7 +134,7 @@ namespace TypeScriptServiceBridge.Harness
         //
 		public ObjectInstance ParseFile (string fileName)
 		{
-			return (ObjectInstance) instance.CallMemberFunction ("parseFile", fileName);
+			return (ObjectInstance) Instance.CallMemberFunction ("parseFile", fileName);
         }
 
         //
@@ -152,7 +142,7 @@ namespace TypeScriptServiceBridge.Harness
         //
 		public double LineColToPosition (string fileName, double line, double col)
 		{
-			return (double) instance.CallMemberFunction ("lineColToPosition", fileName, line, col);
+			return (double) Instance.CallMemberFunction ("lineColToPosition", fileName, line, col);
 		}
 
         //
@@ -160,7 +150,7 @@ namespace TypeScriptServiceBridge.Harness
         //
 		public ObjectInstance PositionToLineCol (string fileName, double position)
 		{
-			return (ObjectInstance) instance.CallMemberFunction ("positionToLineCol", fileName, position);
+			return (ObjectInstance) Instance.CallMemberFunction ("positionToLineCol", fileName, position);
         }
 
         //
@@ -169,7 +159,7 @@ namespace TypeScriptServiceBridge.Harness
         //
 		public void CheckEdits (string sourceFileName, string baselineFileName, ArrayInstance edits)
 		{
-			instance.CallMemberFunction ("checkEdits", sourceFileName, baselineFileName, edits);
+			Instance.CallMemberFunction ("checkEdits", sourceFileName, baselineFileName, edits);
         }
 
         //
@@ -177,7 +167,7 @@ namespace TypeScriptServiceBridge.Harness
         //
 		public string ApplyEdits (string content, ArrayInstance edits)
 		{
-			return (string) instance.CallMemberFunction ("applyEdits", content, edits);
+			return (string) Instance.CallMemberFunction ("applyEdits", content, edits);
 		}
 		#endregion
 	}

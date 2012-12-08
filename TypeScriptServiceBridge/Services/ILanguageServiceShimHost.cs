@@ -1,33 +1,32 @@
 using System;
 using Jurassic.Library;
-using TypeScriptServiceBridge.Hosting;
 using TypeScriptServiceBridge.TypeScript;
 
-namespace TypeScriptServiceBridge
+namespace TypeScriptServiceBridge.Services
 {
-	public interface ILanguageServiceHost : ILogger
+	public interface ILanguageServiceShimHost : ILogger
 	{
-		ObjectInstance GetCompilationSettings ();
-        double GetScriptCount ();
-        string GetScriptId(double scriptIndex);
-		string GetScriptSourceText (double scriptIndex, double start, double end);
+		string GetCompilationSettings ();
+        double GetScriptCount();
+		string GetScriptId (double scriptIndex);
+        string GetScriptSourceText (double scriptIndex, double start, double end);
         double GetScriptSourceLength (double scriptIndex);
         bool GetScriptIsResident (double scriptIndex);
         double GetScriptVersion (double scriptIndex);
-        ObjectInstance GetScriptEditRangeSinceVersion (double scriptIndex, double scriptVersion);
-	}
+        string GetScriptEditRangeSinceVersion (double scriptIndex, double scriptVersion);
+    }
 
-	public class LanguageServiceHost_Impl : Logger_Impl, ILanguageServiceHost
+	public class LanguageServiceShimHost_Impl : Logger_Impl, ILanguageServiceShimHost
 	{
-		public LanguageServiceHost_Impl (ObjectInstance instance)
+		public LanguageServiceShimHost_Impl (ObjectInstance instance)
 			: base (instance)
 		{
 		}
 
-		#region ILanguageServiceHost implementation
-		public ObjectInstance GetCompilationSettings ()
+		#region ILanguageServiceShimHost implementation
+		public string GetCompilationSettings ()
 		{
-			return (ObjectInstance) Instance.CallMemberFunction ("getCompilationSettings");
+			return (string) Instance.CallMemberFunction ("getCompilationSettings");
 		}
 
 		public double GetScriptCount ()
@@ -47,7 +46,7 @@ namespace TypeScriptServiceBridge
 
 		public double GetScriptSourceLength (double scriptIndex)
 		{
-			return (double) Instance.CallMemberFunction ("GetScriptSourceLength", scriptIndex);
+			return (double) Instance.CallMemberFunction ("getScriptSourceLength", scriptIndex);
 		}
 
 		public bool GetScriptIsResident (double scriptIndex)
@@ -60,9 +59,9 @@ namespace TypeScriptServiceBridge
 			return (double) Instance.CallMemberFunction ("getScriptVersion", scriptIndex);
 		}
 
-		public ObjectInstance GetScriptEditRangeSinceVersion (double scriptIndex, double scriptVersion)
+		public string GetScriptEditRangeSinceVersion (double scriptIndex, double scriptVersion)
 		{
-			return (ObjectInstance) Instance.CallMemberFunction ("getScriptEditRangeSinceVersion", scriptIndex, scriptVersion);
+			return (string) Instance.CallMemberFunction ("getScriptEditRangeSinceVersion", scriptIndex, scriptVersion);
 		}
 		#endregion
 	}
