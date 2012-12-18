@@ -1,5 +1,5 @@
 
-all: external/jurassic
+all: external/jurassic external/ts2cs/src/TypeScriptBridge.cs
 
 external/jurassic:
 	make -C checkout-jurassic
@@ -11,3 +11,7 @@ checkout-jurassic:
 	hg checkout 362:7f18d6625a84
 	patch -i ../../jurassic-mono.patch -p1
 	cd ..
+
+external/ts2cs/src/TypeScriptBridge.cs:
+	make -C external/ts2cs
+	make -C external/ts2cs/src
