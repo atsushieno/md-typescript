@@ -5,11 +5,10 @@
     <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="MonoDevelop.Ide, Version=2.6.0.0, Culture=neutral" />
-    <widget-library name="MonoDevelop.Ide, Version=2.6.0.0, Culture=neutral" />
-    <widget-library name="Mono.TextEditor, Version=1.0.0.0, Culture=neutral" />
-    <widget-library name="MonoDevelop.DesignerSupport, Version=2.6.0.0, Culture=neutral" />
-    <widget-library name="MonoDevelop.Refactoring, Version=2.6.0.0, Culture=neutral" />
+    <widget-library name="../../../monodevelop-master/main/build/bin/MonoDevelop.Ide.dll" />
+    <widget-library name="../../../monodevelop-master/main/build/bin/Mono.TextEditor.dll" />
+    <widget-library name="../../../monodevelop-master/main/build/AddIns/MonoDevelop.DesignerSupport/MonoDevelop.DesignerSupport.dll" />
+    <widget-library name="../../../monodevelop-master/main/build/AddIns/MonoDevelop.Refactoring/MonoDevelop.Refactoring.dll" />
     <widget-library name="../../../monodevelop-master/main/build/AddIns/TypeScriptBinding/MonoDevelop.TypeScriptBinding.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="MonoDevelop.TypeScriptBinding.Projects.Gui.TypeScriptProjectOptionsWidget" design-size="427 300">

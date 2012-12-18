@@ -27,11 +27,12 @@ namespace MonoDevelop.TypeScriptBinding
 		public TypeScriptSyntaxTree Parse (TextReader reader, string fileName)
 		{
 			if (factory == null)
-				factory = new TypeScriptServicesFactory (TypeScriptObject.CallConstructor ("Services", "TypeScriptServicesFactory"));
+				factory = new TypeScriptServicesFactory ();
 			if (tsls == null)
-				tsls = new TypeScriptLS (TypeScriptObject.CallConstructor ("Harness", "TypeScriptLS"));
+				tsls = new TypeScriptLS ();
 			if (ls == null)
 				ls = factory.CreateLanguageService (new LanguageServiceShimHostAdapter (tsls));
+			throw new NotImplementedException ();
 		}
 	}
 }
