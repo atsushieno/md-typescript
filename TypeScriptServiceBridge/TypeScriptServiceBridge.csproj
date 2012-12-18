@@ -52,28 +52,12 @@
     <Compile Include="..\external\ts2cs\src\Runtime\TypeScriptObject.cs">
       <Link>src\Runtime\TypeScriptObject.cs</Link>
     </Compile>
-    <Compile Include="Harness\TypeScriptLS.cs" />
-    <Compile Include="Services\Classifier.cs" />
-    <Compile Include="Services\ClassifierShim.cs" />
-    <Compile Include="Services\CoreServices.cs" />
-    <Compile Include="Services\CoreServicesShim.cs" />
-    <Compile Include="Services\IClassifierHost.cs" />
-    <Compile Include="Services\ICoreServicesHost.cs" />
-    <Compile Include="Services\ILanguageService.cs" />
-    <Compile Include="Services\ILanguageServiceHost.cs" />
-    <Compile Include="Services\ILanguageServiceShim.cs" />
-    <Compile Include="Services\ILanguageServiceShimHost.cs" />
-    <Compile Include="Services\LanguageServiceShimHostAdapter.cs" />
-    <Compile Include="Services\TypeScriptServicesFactory.cs" />
-    <Compile Include="TypeScript\AST.cs" />
-    <Compile Include="TypeScript\CompilationSettings.cs" />
-    <Compile Include="TypeScript\FuncDecl.cs" />
-    <Compile Include="TypeScript\ILogger.cs" />
-    <Compile Include="TypeScript\IPreProcessedFileInfo.cs" />
-    <Compile Include="TypeScript\ISourceText.cs" />
-    <Compile Include="TypeScript\LexState.cs" />
-    <Compile Include="TypeScript\Script.cs" />
-    <Compile Include="src\Hosting\JurassicTypeHosting.cs" />
+    <Compile Include="..\external\ts2cs\src\Hosting\JurassicTypeHosting.cs">
+      <Link>src\Hosting\JurassicTypeHosting.cs</Link>
+    </Compile>
+    <Compile Include="..\external\ts2cs\src\TypeScriptBridge.cs">
+      <Link>src\TypeScriptBridge.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -92,6 +76,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\" />
-    <Folder Include="TypeScriptServiceBridge\" />
   </ItemGroup>
 </Project>

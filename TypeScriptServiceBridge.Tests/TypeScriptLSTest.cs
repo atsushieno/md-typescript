@@ -12,7 +12,17 @@ namespace TypeScriptServiceBridge.Tests
 		[Test]
 		public void TestBasics ()
 		{
-			var ls = new TypeScriptLS (LanguageServiceHost.Instance.Eval<ObjectInstance> ("new Harness.TypeScriptLS ();"));
+			TestBasicInstance (new TypeScriptLS (LanguageServiceHost.Instance.Eval<ObjectInstance> ("new Harness.TypeScriptLS ();")));
+		}
+
+		[Test]
+		public void TestDefaultConstructor ()
+		{
+			TestBasicInstance (new TypeScriptLS ());
+		}
+
+		void TestBasicInstance (TypeScriptLS ls)
+		{
 			Assert.AreEqual (100, ls.MaxScriptVersions, "#1");
 			Assert.IsNotNull (ls.Scripts, "#2");
 			Assert.AreEqual (0, ls.Scripts.Length, "#3");
