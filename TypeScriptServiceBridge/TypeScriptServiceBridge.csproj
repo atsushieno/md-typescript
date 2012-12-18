@@ -34,32 +34,46 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Hosting\LanguageServiceHost.cs" />
-    <Compile Include="Hosting\JurassicLanguageServiceHost.cs" />
-    <Compile Include="Hosting\NodeLanguageServiceHost.cs" />
+    <Compile Include="..\external\ts2cs\src\Hosting\JurassicLanguageServiceHost.cs">
+      <Link>src\Hosting\JurassicLanguageServiceHost.cs</Link>
+    </Compile>
+    <Compile Include="..\external\ts2cs\src\Hosting\LanguageServiceHost.cs">
+      <Link>src\Hosting\LanguageServiceHost.cs</Link>
+    </Compile>
+    <Compile Include="..\external\ts2cs\src\Hosting\NodeLanguageServiceHost.cs">
+      <Link>src\Hosting\NodeLanguageServiceHost.cs</Link>
+    </Compile>
+    <Compile Include="..\external\ts2cs\src\Runtime\DangerousDefaultValueAttribute.cs">
+      <Link>src\Runtime\DangerousDefaultValueAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\external\ts2cs\src\Runtime\ITypeScriptObject.cs">
+      <Link>src\Runtime\ITypeScriptObject.cs</Link>
+    </Compile>
+    <Compile Include="..\external\ts2cs\src\Runtime\TypeScriptObject.cs">
+      <Link>src\Runtime\TypeScriptObject.cs</Link>
+    </Compile>
     <Compile Include="Harness\TypeScriptLS.cs" />
-    <Compile Include="Services\LanguageServiceShimHostAdapter.cs" />
-    <Compile Include="Services\ILanguageServiceHost.cs" />
-    <Compile Include="Services\ILanguageService.cs" />
-    <Compile Include="TypeScript\ILogger.cs" />
-    <Compile Include="Services\ILanguageServiceShimHost.cs" />
-    <Compile Include="Runtime\TypeScriptObject.cs" />
-    <Compile Include="Runtime\ITypeScriptObject.cs" />
-    <Compile Include="Services\TypeScriptServicesFactory.cs" />
-    <Compile Include="Services\ILanguageServiceShim.cs" />
     <Compile Include="Services\Classifier.cs" />
     <Compile Include="Services\ClassifierShim.cs" />
+    <Compile Include="Services\CoreServices.cs" />
     <Compile Include="Services\CoreServicesShim.cs" />
     <Compile Include="Services\IClassifierHost.cs" />
-    <Compile Include="TypeScript\LexState.cs" />
     <Compile Include="Services\ICoreServicesHost.cs" />
-    <Compile Include="Services\CoreServices.cs" />
-    <Compile Include="TypeScript\ISourceText.cs" />
-    <Compile Include="TypeScript\CompilationSettings.cs" />
-    <Compile Include="TypeScript\IPreProcessedFileInfo.cs" />
-    <Compile Include="TypeScript\Script.cs" />
-    <Compile Include="TypeScript\FuncDecl.cs" />
+    <Compile Include="Services\ILanguageService.cs" />
+    <Compile Include="Services\ILanguageServiceHost.cs" />
+    <Compile Include="Services\ILanguageServiceShim.cs" />
+    <Compile Include="Services\ILanguageServiceShimHost.cs" />
+    <Compile Include="Services\LanguageServiceShimHostAdapter.cs" />
+    <Compile Include="Services\TypeScriptServicesFactory.cs" />
     <Compile Include="TypeScript\AST.cs" />
+    <Compile Include="TypeScript\CompilationSettings.cs" />
+    <Compile Include="TypeScript\FuncDecl.cs" />
+    <Compile Include="TypeScript\ILogger.cs" />
+    <Compile Include="TypeScript\IPreProcessedFileInfo.cs" />
+    <Compile Include="TypeScript\ISourceText.cs" />
+    <Compile Include="TypeScript\LexState.cs" />
+    <Compile Include="TypeScript\Script.cs" />
+    <Compile Include="src\Hosting\JurassicTypeHosting.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -77,10 +91,7 @@
     <None Include="ls-bridge.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Hosting\" />
-    <Folder Include="Harness\" />
-    <Folder Include="Services\" />
-    <Folder Include="TypeScript\" />
-    <Folder Include="Runtime\" />
+    <Folder Include="src\" />
+    <Folder Include="TypeScriptServiceBridge\" />
   </ItemGroup>
 </Project>
