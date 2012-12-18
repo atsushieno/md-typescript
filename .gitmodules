@@ -1,0 +1,3 @@
+[submodule "external/ts2cs"]
+	path = external/ts2cs
+	url = https://git01.codeplex.com/forks/atsushieno/ts2cs
