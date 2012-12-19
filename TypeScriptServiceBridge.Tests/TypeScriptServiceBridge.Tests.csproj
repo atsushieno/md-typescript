@@ -49,5 +49,6 @@
   <ItemGroup>
     <Compile Include="JurassicLanguageServiceHostTest.cs" />
     <Compile Include="TypeScriptLSTest.cs" />
+    <Compile Include="LanguageServiceTest.cs" />
   </ItemGroup>
 </Project>
