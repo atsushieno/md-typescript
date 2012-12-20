@@ -6,8 +6,9 @@ using ICSharpCode.NRefactory.Editor;
 using TypeScriptServiceBridge;
 using TypeScriptServiceBridge.Harness;
 using TypeScriptServiceBridge.Services;
+using MonoDevelop.TypeScriptBinding.NRefactory;
 
-namespace MonoDevelop.TypeScriptBinding
+namespace MonoDevelop.TypeScriptBinding.NRefactory
 {
 	public class TypeScriptParser
 	{

@@ -96,6 +96,11 @@
     <Compile Include="TypeSystem\TypeScriptParser.cs" />
     <Compile Include="TypeSystem\TypeScriptSyntaxTree.cs" />
     <Compile Include="TypeSystem\CompilerSettings.cs" />
+    <Compile Include="TypeSystem\TypeScriptUnresolvedFile.cs" />
+    <Compile Include="TypeSystem\TypeScriptTypeResolveContext.cs" />
+    <Compile Include="TypeSystem\ResolvedUsingScope.cs" />
+    <Compile Include="TypeSystem\TypeScriptResolver.cs" />
+    <Compile Include="TypeSystem\AstNode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
