@@ -1,3 +1,4 @@
+#if USE_JURASSIC
 using System;
 using Jurassic.Library;
 using NUnit.Framework;
@@ -34,3 +35,4 @@ namespace TypeScriptServiceBridge.Tests
 	}
 }
 
+#endif

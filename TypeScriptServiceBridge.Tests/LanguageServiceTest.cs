@@ -1,3 +1,4 @@
+#if USE_JURASSIC
 using System;
 using Jurassic;
 using TypeScriptServiceBridge.Harness;
@@ -36,4 +37,6 @@ namespace TypeScriptServiceBridge.Tests
 		}
 	}
 }
+
+#endif
 

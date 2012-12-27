@@ -16,6 +16,8 @@ Global
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 		Default|Any CPU = Default|Any CPU
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{17F48D22-DFF8-48FB-935B-BBF17F63B39C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -41,6 +43,6 @@ Global
 		{2CE5502D-8710-4BE3-9D90-201D526904B3} = {10276CC6-E3E7-4F26-ADBE-DE290668BF7A}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = TypeScriptBinding\TypeScriptBinding.csproj
+		StartupItem = TypeScriptServiceBridge.Tests\TypeScriptServiceBridge.Tests.csproj
 	EndGlobalSection
 EndGlobal

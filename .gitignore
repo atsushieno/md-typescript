@@ -1,6 +1,7 @@
 external/jurassic/
 TypeScriptServiceBridge/ls-bridge.js
 TypeScriptServiceBridge/ls.lst
+TypeScriptServiceBridge/node-ts-server.js
 bin
 obj
 *.userprefs

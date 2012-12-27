@@ -1,5 +1,8 @@
 
-// mostly copy of harness.ts
+// mostly copy of harness.ts, removed references that results in duplicates.
+
+// Copyright (c) Microsoft. All rights reserved. Licensed under the Apache License, Version 2.0. 
+// See LICENSE.txt in the project root for complete license information.
 
 declare var assert: Harness.Assert;
 declare var it;
@@ -9,7 +12,6 @@ declare var IO: IIO;
 declare var __dirname; // Node-specific
 
 module Harness {
-
 
     // Assert functions
     export module Assert {
@@ -52,18 +54,6 @@ module Harness {
                 throw new Error("Expected " + result + " to *not* be null");
             }
         }
-
-	/*
-        export function compilerWarning(result: Compiler.CompilerResult, line: number, column: number, desc: string) {
-            if (!result.isErrorAt(line, column, desc)) {
-                var actual = '';
-                result.errors.forEach(err => {
-                    actual = actual + '\n     ' + err.toString();
-                });
-                throw new Error("Expected compiler warning at (" + line + ", " + column + "): " + desc + "\nActual errors follow: " + actual);
-            }
-        }
-	*/
 
         export function noDiff(text1, text2) {
             text1 = text1.replace(/^\s+|\s+$/g, "").replace(/\r\n?/g, "\n");
@@ -116,12 +106,6 @@ module Harness {
         }
     }
 
-    // Reads a file under tests
-
-    export function readFile(path: string) {
-        //return IO.readFile(Harness.userSpecifiedroot + "tests/" + path);
-        return IO.readFile(path);
-    }
 
     export class ScriptInfo {
         public version: number;
@@ -181,7 +165,6 @@ module Harness {
         }
     }
 
-
     export class TypeScriptLS implements Services.ILanguageServiceShimHost {
         private ls: Services.ILanguageServiceShim = null;
 
@@ -190,11 +173,6 @@ module Harness {
 
         public addDefaultLibrary() {
             //this.addScript("lib.d.ts", Harness.Compiler.libText, true);
-        }
-
-        public addFile(name: string, isResident = false) {
-            var code: string = readFile(name);
-            this.addScript(name, code, isResident);
         }
 
         public addScript(name: string, content: string, isResident = false) {
@@ -296,7 +274,7 @@ module Harness {
         //
         public parseSourceText(fileName: string, sourceText: TypeScript.ISourceText): TypeScript.Script {
             var parser = new TypeScript.Parser();
-            parser.setErrorRecovery(null, -1, -1);
+            parser.setErrorRecovery(null);
             parser.errorCallback = (a, b, c, d) => { };
 
             var script = parser.parse(sourceText, fileName, 0);
@@ -336,19 +314,6 @@ module Harness {
             assert.is(result.line >= 1);
             assert.is(result.col >= 1);
             return result;
-        }
-
-        //
-        // Verify that applying edits to "sourceFileName" result in the content of the file
-        // "baselineFileName"
-        //
-        public checkEdits(sourceFileName: string, baselineFileName: string, edits: Services.TextEdit[]) {
-            var script = readFile(sourceFileName);
-            var formattedScript = this.applyEdits(script, edits);
-            var baseline = readFile(baselineFileName);
-
-            assert.noDiff(formattedScript, baseline);
-            assert.equal(formattedScript, baseline);
         }
 
 
@@ -429,6 +394,4 @@ module Harness {
         }
 
     }
-
 }
-
