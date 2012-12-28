@@ -1,7 +1,7 @@
 /// <reference src='ls-bridge.ts' />
 
-function evaluateFromRequest (cmd : string) : string {
-  return JSON.stringify (eval (cmd));
+function evaluateFromRequest (cmd : string) {
+  return eval (cmd);
 }
 
 var http = require('http');
@@ -13,12 +13,21 @@ server = http.createServer(function (req, res) {
     req.setEncoding ('utf-8');
     req.on ('data', function (chunk) {
         IO.printLine('request: ' + chunk.toString ());
-        var ret = evaluateFromRequest (chunk.toString ());
-        IO.printLine('response:' + ret);
-        res.writeHead(200, {
-            'Content-Type': 'text/plain'
-        });
-        res.end(ret);
+        try {
+	        var ret = evaluateFromRequest (chunk.toString ());
+    	    IO.printLine('response:' + ret);
+    	    ret = {'result': ret};
+    	    res.writeHead(200, {
+    	        'Content-Type': 'text/plain'
+    	    });
+    	} catch (err) {
+    	    IO.printLine('ERROR response:' + err);
+    	    res.writeHead(200, {
+    	        'Content-Type': 'text/plain'
+    	    });
+    	    ret = {'error': err};
+    	}
+        res.end(JSON.stringify (ret));
     });
     switch(u.query['command']) {
         case 'quit': {
@@ -40,7 +49,6 @@ server = http.createServer(function (req, res) {
             });
             res.end('unexpected operation: ' + req.url);
             break;
-
         }
     }
 }).listen(port, 'localhost');
