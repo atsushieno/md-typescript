@@ -15,13 +15,13 @@ namespace TypeScriptServiceBridge.Tests
 		NodeLanguageServiceHost host;
 
 		[TestFixtureSetUp]
-		public void SetUp ()
+		public void TestFixtureSetUp ()
 		{
-			host = new NodeLanguageServiceHost (36140, true);
+			host = new NodeLanguageServiceHost ();
 		}
 
 		[TestFixtureTearDown]
-		public void TearDown ()
+		public void TestFixtureTearDown ()
 		{
 			host.Dispose ();
 		}
@@ -76,8 +76,8 @@ new Services.TypeScriptServicesFactory ().createLanguageService (
 			shimHost.AddScript ("foo.ts", "class Foo { public foo : int = 5; public bar (baz: int) : string { return 'hello #' + baz; } }");
 			var search = ls.GetNavigateToItems ("foo");
 			Assert.IsNotNull (search, "#3");
-			Assert.AreEqual (1, search.Length, "#4");
-			Assert.AreEqual (10, search [0], "#5");
+			Assert.AreEqual (3, search.Length, "#4");
+			Assert.AreEqual (94, ((ObjectInstance) search [0]) ["limChar"], "#5");
 		}
 		[Test]
 		public void TestBasics ()

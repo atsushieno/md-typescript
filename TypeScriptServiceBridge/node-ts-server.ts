@@ -10,13 +10,11 @@ var port = IO.arguments[0];
 var server = null;
 server = http.createServer(function (req, res) {
     var u = url.parse("http://localhost" + req.url, true);
-    IO.printLine('URL: ' + u);
-    IO.printLine('operation: ' + u.query['command']);
     req.setEncoding ('utf-8');
     req.on ('data', function (chunk) {
-        IO.printLine('expr: ' + chunk.toString ());
+        IO.printLine('request: ' + chunk.toString ());
         var ret = evaluateFromRequest (chunk.toString ());
-        IO.printLine('ret:' + ret);
+        IO.printLine('response:' + ret);
         res.writeHead(200, {
             'Content-Type': 'text/plain'
         });
