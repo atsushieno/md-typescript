@@ -50,15 +50,15 @@ new Services.TypeScriptServicesFactory ().createLanguageService (
 		[Test]
 		public void UseArrayInstance ()
 		{
-			var searchRaw = host.Eval (@"
-			var shimHost = new Harness.TypeScriptLS ();
-			var lsHost = new Services.LanguageServiceShimHostAdapter (shimHost);
-			var factory = new Services.TypeScriptServicesFactory ();
-			var ls = factory.createLanguageService (lsHost);
+			host.Execute (@"
+			shimHost = new Harness.TypeScriptLS ();
+			lsHost = new Services.LanguageServiceShimHostAdapter (shimHost);
+			factory = new Services.TypeScriptServicesFactory ();
+			ls = factory.createLanguageService (lsHost);
 			shimHost.addScript (""foo.ts"", ""class Foo { public foo : int = 5; public bar (baz: int) : string { return 'hello #' + baz; } }"");
-			var search = ls.getNavigateToItems (""foo"");
-			search
+			search = ls.getNavigateToItems (""foo"");
 			");
+			var searchRaw = host.Eval ("search");
 			Console.WriteLine (searchRaw);
 			var search = Jurassic.TypeConverter.ConvertTo<ArrayInstance> (JurassicTypeHosting.Engine, searchRaw);
 			Assert.IsNotNull (search, "#3");
