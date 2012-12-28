@@ -77,7 +77,7 @@ new Services.TypeScriptServicesFactory ().createLanguageService (
 			var search = ls.GetNavigateToItems ("foo");
 			Assert.IsNotNull (search, "#3");
 			Assert.AreEqual (3, search.Length, "#4");
-			Assert.AreEqual (94, ((ObjectInstance) search [0]) ["limChar"], "#5");
+			Assert.AreEqual (94, search [0].LimChar, "#5");
 		}
 		[Test]
 		public void TestBasics ()

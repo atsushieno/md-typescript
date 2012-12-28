@@ -58,6 +58,9 @@
     <Compile Include="..\external\ts2cs\src\TypeScriptBridge.cs">
       <Link>src\TypeScriptBridge.cs</Link>
     </Compile>
+    <Compile Include="..\external\ts2cs\src\Runtime\TypeScriptArray.cs">
+      <Link>src\Runtime\TypeScriptArray.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
