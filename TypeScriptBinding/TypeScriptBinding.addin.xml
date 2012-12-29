@@ -38,14 +38,7 @@
 	
 	<Extension path="/MonoDevelop/SourceEditor2/SyntaxModes">
 		<Templates resource="TypeScriptSyntaxMode.xml" />
-	</Extension>
-	
-	<!--
-	<Extension path="/MonoDevelop/SourceEditor2/Styles">
-		<Templates resource="FlashDevelopStyle.xml" />
-	</Extension>
-	-->
-	
+	</Extension>	
 	
 	
 	<!-- Templates -->

@@ -1,4 +1,4 @@
-<SyntaxMode name="TypeScript" mimeTypes="text/x-TypeScript">
+<SyntaxMode name="TypeScript" mimeTypes="text/x-typescript">
 	
 	
 	<Property name="BlockCommentStart">/*</Property>
@@ -47,11 +47,9 @@
 	<Keywords color = "keyword.selection">
 		<Word>else</Word>
 		<Word>if</Word>
-		<!---
 		<Word>switch</Word>
 		<Word>case</Word>
 		<Word>default</Word>
-		-->
 	</Keywords>
 	
 	<Keywords color = "keyword.iteration">
@@ -62,19 +60,15 @@
 	</Keywords>
 	
 	<Keywords color = "keyword.jump">
-		<!---
 		<Word>break</Word>
 		<Word>continue</Word>
-		-->
 		<Word>return</Word>
 	</Keywords>
 	
 	<Keywords color = "keyword.exceptions">
-	<!---
 		<Word>try</Word>
 		<Word>throw</Word>
 		<Word>catch</Word>
-	-->
 	</Keywords>
 	
 	<Keywords color = "constant.language">
@@ -97,6 +91,7 @@
 	<Keywords color = "keyword.declaration">
 		<Word>function</Word>
 		<Word>class</Word>
+		<Word>enum</Word>
 		<Word>interface</Word>
 		<Word>var</Word>
 	</Keywords>
@@ -105,6 +100,8 @@
 		<Word>export</Word>
 		<Word>extends</Word>
 		<Word>implements</Word>
+		<Word>public</Word>
+		<Word>private</Word>
 	</Keywords>
 
 	<Keywords color = "keyword.namespace">

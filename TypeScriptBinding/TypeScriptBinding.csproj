@@ -100,15 +100,11 @@
     <Compile Include="TypeSystem\ResolvedUsingScope.cs" />
     <Compile Include="TypeSystem\TypeScriptResolver.cs" />
     <Compile Include="TypeSystem\AstNode.cs" />
-    <Compile Include="Tools\TypeScriptBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
       <LogicalName>gui.stetic</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\SyntaxModes\FlashDevelopStyle.xml">
-      <LogicalName>FlashDevelopStyle.xml</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="TypeScriptBinding.addin.xml" />
     <EmbeddedResource Include="Resources\Templates\EmptyTypeScriptJSProject.xpt.xml">
@@ -145,7 +141,6 @@
     <Folder Include="Resources\Icons\" />
     <Folder Include="Resources\Templates\" />
     <Folder Include="Resources\SyntaxModes\" />
-    <Folder Include="Tools\" />
     <Folder Include="Helpers\" />
     <Folder Include="TypeSystem\" />
   </ItemGroup>

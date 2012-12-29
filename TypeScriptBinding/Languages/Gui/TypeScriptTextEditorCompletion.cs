@@ -16,7 +16,6 @@ using MonoDevelop.Projects;
 //using MonoDevelop.Projects.Dom.Output;
 //using MonoDevelop.Projects.Dom.Parser;
 using MonoDevelop.TypeScriptBinding.Projects;
-using MonoDevelop.TypeScriptBinding.Tools;
 using ICSharpCode.NRefactory.Completion;
 
 

@@ -14,7 +14,6 @@ using MonoDevelop.Core.ProgressMonitoring;
 using MonoDevelop.Core.Serialization;
 using MonoDevelop.Ide.Gui;
 using MonoDevelop.Projects;
-using MonoDevelop.TypeScriptBinding.Tools;
 
 
 namespace MonoDevelop.TypeScriptBinding.Projects
