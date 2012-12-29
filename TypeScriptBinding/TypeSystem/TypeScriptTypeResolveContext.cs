@@ -1,3 +1,4 @@
+#if ADVANCED_TYPE_SYSTEM_PARSER
 using System;
 using ICSharpCode.NRefactory.TypeSystem;
 
@@ -62,3 +63,4 @@ namespace MonoDevelop.TypeScriptBinding.NRefactory.Resolver
 	}
 }
 
+#endif

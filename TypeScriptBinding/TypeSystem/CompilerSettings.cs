@@ -1,3 +1,4 @@
+#if ADVANCED_TYPE_SYSTEM_PARSER
 using System;
 
 namespace MonoDevelop.TypeScriptBinding
@@ -9,3 +10,4 @@ namespace MonoDevelop.TypeScriptBinding
 		}
 	}
 }
+#endif

@@ -43,6 +43,6 @@ Global
 		{2CE5502D-8710-4BE3-9D90-201D526904B3} = {10276CC6-E3E7-4F26-ADBE-DE290668BF7A}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = TypeScriptServiceBridge.Tests\TypeScriptServiceBridge.Tests.csproj
+		StartupItem = TypeScriptBinding\TypeScriptBinding.csproj
 	EndGlobalSection
 EndGlobal

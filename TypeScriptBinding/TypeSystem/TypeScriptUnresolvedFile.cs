@@ -1,3 +1,4 @@
+#if ADVANCED_TYPE_SYSTEM_PARSER
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -155,3 +156,4 @@ namespace MonoDevelop.TypeScriptBinding
 		#endregion
 	}
 }
+#endif

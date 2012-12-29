@@ -1,3 +1,4 @@
+#if ADVANCED_TYPE_SYSTEM_PARSER
 // 
 // SyntaxTree.cs
 //
@@ -188,3 +189,4 @@ namespace MonoDevelop.TypeScriptBinding.NRefactory
 		}
 	}
 }
+#endif

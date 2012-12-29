@@ -12,12 +12,12 @@ namespace TypeScriptServiceBridge.Tests
 	[TestFixture]
 	public class NodeLanguageServiceHostTest
 	{
-		NodeLanguageServiceHost host;
+		LanguageServiceHost host;
 
 		[TestFixtureSetUp]
 		public void TestFixtureSetUp ()
 		{
-			host = new NodeLanguageServiceHost ();
+			host = LanguageServiceHost.Instance; //new NodeLanguageServiceHost ();
 		}
 
 		[TestFixtureTearDown]

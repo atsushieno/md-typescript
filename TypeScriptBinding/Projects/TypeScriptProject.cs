@@ -18,7 +18,7 @@ using MonoDevelop.TypeScriptBinding.Tools;
 namespace MonoDevelop.TypeScriptBinding.Projects
 {
 
-	[DataInclude(typeof(TypeScriptProjectConfiguration))]
+	[DataInclude (typeof (TypeScriptProjectConfiguration))]
     public class TypeScriptProject : Project
 	{
 		
@@ -30,7 +30,6 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 			set { mAdditionalArguments = value; }
 		}
 		
-		
 		[ItemProperty("TargetJavaScriptFile", DefaultValue="")]
 		string mTargetJavaScriptFile = string.Empty;
 		
@@ -39,19 +38,14 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 			set { mTargetJavaScriptFile = value; }
 		}
 
-
-		public TypeScriptProject () : base()
+		public string GetTargetJavascriptFilePath ()
 		{
-			
-		}
-		
-		
-		public override void Dispose ()
-		{
-			TypeScriptCompilerManager.StopServer ();
-			base.Dispose ();
+			return Path.Combine (BaseDirectory, TargetJavaScriptFile);
 		}
 
+		public TypeScriptProject ()
+		{
+		}
 
 		public TypeScriptProject (ProjectCreateInformation info, XmlElement projectOptions) : base()
 		{
@@ -71,7 +65,6 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 			
 			TypeScriptProjectConfiguration configuration;
 			
-			
 			configuration = (TypeScriptProjectConfiguration)CreateConfiguration ("Debug");
 			configuration.DebugMode = true;
 			//configuration.Platform = target;
@@ -90,56 +83,47 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 			conf.Name = name;
 			return conf;
 		}
-		
-		
+
 		protected override BuildResult DoBuild (IProgressMonitor monitor, ConfigurationSelector configurationSelector)
 		{
 			TypeScriptProjectConfiguration TypeScriptConfig = (TypeScriptProjectConfiguration)GetConfiguration (configurationSelector);
-			return TypeScriptCompilerManager.Compile (this, TypeScriptConfig, monitor);
+			return TypeScriptBuilder.Compile (this, TypeScriptConfig, monitor);
 		}
-		
-		
+
 		protected override void DoClean (IProgressMonitor monitor, ConfigurationSelector configuration)
 		{
-			//base.DoClean (monitor, configuration);
-		}
-		
+			base.DoClean (monitor, configuration);
+		}		
 		
 		protected override void DoExecute (IProgressMonitor monitor, ExecutionContext context, ConfigurationSelector configurationSelector)
 		{
 			TypeScriptProjectConfiguration TypeScriptConfig = (TypeScriptProjectConfiguration)GetConfiguration (configurationSelector);
-			TypeScriptCompilerManager.Run (this, TypeScriptConfig, monitor, context);
+			TypeScriptBuilder.Execute (this, TypeScriptConfig, monitor, context);
 		}
-		
-		
+
 		protected string GetOptionAttribute (ProjectCreateInformation info, XmlElement projectOptions, string attributeName)
 		{
 			string value = projectOptions.Attributes [attributeName].InnerText;
 			value = value.Replace ("${ProjectName}", info.ProjectName);
 			return value;
 		}
-		
-		
+
 		public override bool IsCompileable (string fileName)
 		{
-			return true;
-		}
-		
-		
-		protected override bool OnGetCanExecute (ExecutionContext context, ConfigurationSelector configurationSelector)
-		{
-			TypeScriptProjectConfiguration TypeScriptConfig = (TypeScriptProjectConfiguration)GetConfiguration (configurationSelector);
-			return TypeScriptCompilerManager.CanRun (this, TypeScriptConfig, context);
+			return !string.IsNullOrEmpty (this.TargetJavaScriptFile);
 		}
 
+		protected override bool OnGetCanExecute (ExecutionContext context, ConfigurationSelector configurationSelector)
+		{
+			return !string.IsNullOrEmpty (this.TargetJavaScriptFile);
+		}
 
 		public override string ProjectType {
 			get { return "TypeScript"; }
 		}
-		
 
 		public override string[] SupportedLanguages {
-			get { return new string[] { "", "TypeScript", "HTML" }; }
+			get { return new string[] { "", "TypeScript" }; }
 		}
 		
 	}
