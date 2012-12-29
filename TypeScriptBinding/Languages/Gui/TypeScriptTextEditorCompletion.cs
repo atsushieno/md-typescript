@@ -89,6 +89,7 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 		
 		private void FetchCompletionData (CodeCompletionContext completionContext)
 		{
+			/*
 			if (completionContext != null && completionContext.TriggerOffset != mCacheTriggerOffset)
 			{
 				mCacheTriggerOffset = completionContext.TriggerOffset;
@@ -142,6 +143,7 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 					mCacheIsObject = true;
 				}
 			}
+			*/
 		}
 
 
