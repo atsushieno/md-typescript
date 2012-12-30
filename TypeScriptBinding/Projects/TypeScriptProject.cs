@@ -14,7 +14,8 @@ using MonoDevelop.Core.ProgressMonitoring;
 using MonoDevelop.Core.Serialization;
 using MonoDevelop.Ide.Gui;
 using MonoDevelop.Projects;
-
+using TypeScriptServiceBridge.Harness;
+using TypeScriptServiceBridge.Services;
 
 namespace MonoDevelop.TypeScriptBinding.Projects
 {
@@ -22,7 +23,9 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 	[DataInclude (typeof (TypeScriptProjectConfiguration))]
     public class TypeScriptProject : Project
 	{
-		
+		TypeScriptLS shim_host;
+		ILanguageService language_service;
+
 		[ItemProperty("AdditionalArguments", DefaultValue="")]
 		string mAdditionalArguments = string.Empty;
 		
@@ -46,34 +49,28 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 
 		public TypeScriptProject ()
 		{
+			shim_host = new TypeScriptLS ();
+			language_service = new TypeScriptServicesFactory ()
+				.CreateLanguageService (new LanguageServiceShimHostAdapter (shim_host));
 		}
 
-		public TypeScriptProject (ProjectCreateInformation info, XmlElement projectOptions) : base()
+		public TypeScriptProject (ProjectCreateInformation info, XmlElement projectOptions)
+			: this ()
 		{
 			if (projectOptions.Attributes ["TargetJavaScriptFile"] != null)
-			{
-				
 				TargetJavaScriptFile = GetOptionAttribute (info, projectOptions, "TargetJavaScriptFile");
-				
-			}
-			
+
 			if (projectOptions.Attributes ["AdditionalArguments"] != null)
-			{
-				
 				AdditionalArguments = GetOptionAttribute (info, projectOptions, "AdditionalArguments");
-				
-			}
-			
+
 			TypeScriptProjectConfiguration configuration;
 			
-			configuration = (TypeScriptProjectConfiguration)CreateConfiguration ("Debug");
+			configuration = (TypeScriptProjectConfiguration) CreateConfiguration ("Debug");
 			configuration.DebugMode = true;
-			//configuration.Platform = target;
 			Configurations.Add (configuration);
 			
-			configuration = (TypeScriptProjectConfiguration)CreateConfiguration ("Release");
+			configuration = (TypeScriptProjectConfiguration) CreateConfiguration ("Release");
 			configuration.DebugMode = false;
-			//configuration.Platform = target;
 			Configurations.Add (configuration);
 		}
 		
@@ -278,6 +275,38 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 				console.Dispose ();
 			}
 		}
+
+		#region file change events
+
+		protected override void OnFileRemovedFromProject (ProjectFileEventArgs e)
+		{
+			base.OnFileRemovedFromProject (e);
+			// how to remove files???
+			foreach (var item in e)
+				shim_host.UpdateScript (item.ProjectFile.FilePath.CanonicalPath, null);
+		}
+		
+		protected override void OnFileAddedToProject (ProjectFileEventArgs e)
+		{
+			base.OnFileAddedToProject (e);
+			// FIXME: make sure that adding, removing and then adding the same file still works (as "remove" does not really remove it).
+			foreach (var item in e)
+				if (item.ProjectFile.BuildAction == BuildAction.Compile)
+					shim_host.AddScript (item.ProjectFile.FilePath.FullPath, File.ReadAllText (item.ProjectFile.FilePath.CanonicalPath));
+		}
+		
+		protected override void OnFileRenamedInProject (ProjectFileRenamedEventArgs e)
+		{
+			base.OnFileRenamedInProject (e);
+			foreach (ProjectFileRenamedEventInfo item in e)
+				if (item.ProjectFile.BuildAction == BuildAction.Compile)
+					shim_host.UpdateScript (item.OldName.CanonicalPath, null);
+			// FIXME: make sure that adding, removing and then adding the same file still works (as "remove" does not really remove it).
+			foreach (ProjectFileRenamedEventInfo item in e)
+				if (item.ProjectFile.BuildAction == BuildAction.Compile)
+					shim_host.AddScript (item.NewName.FullPath, File.ReadAllText (item.NewName.CanonicalPath));
+		}
+
+		#endregion
 	}
-	
 }

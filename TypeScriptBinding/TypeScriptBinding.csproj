@@ -81,9 +81,7 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="gtk-gui\generated.cs" />
     <Compile Include="Languages\Gui\TypeScriptOptionsPanel.cs" />
-    <Compile Include="Languages\Gui\TypeScriptTextEditorCompletion.cs" />
     <Compile Include="Languages\TypeScriptLanguageBinding.cs" />
-    <Compile Include="Languages\Gui\TypeScriptParameterDataProvider.cs" />
     <Compile Include="Projects\TypeScriptProject.cs" />
     <Compile Include="Projects\TypeScriptProjectConfiguration.cs" />
     <Compile Include="Projects\TypeScriptProjectBinding.cs" />
@@ -100,6 +98,7 @@
     <Compile Include="TypeSystem\ResolvedUsingScope.cs" />
     <Compile Include="TypeSystem\TypeScriptResolver.cs" />
     <Compile Include="TypeSystem\AstNode.cs" />
+    <Compile Include="Languages\Gui\TypeScriptCompletionTextEditorExtension.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -103,7 +103,7 @@
 	<!-- Code Completion -->
 	
 	<Extension path="/MonoDevelop/Ide/TextEditorExtensions">
-		<Class fileExtensions=".ts" class="MonoDevelop.TypeScriptBinding.Languages.Gui.TypeScriptTextEditorCompletion" />
+		<Class fileExtensions=".ts" class="MonoDevelop.TypeScriptBinding.Languages.Gui.TypeScriptCompletionTextEditorExtension" />
 	</Extension>
 
 	<!-- TypeSystem Ambience -->
