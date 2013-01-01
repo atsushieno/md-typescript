@@ -99,6 +99,7 @@
     <Compile Include="TypeSystem\TypeScriptResolver.cs" />
     <Compile Include="TypeSystem\AstNode.cs" />
     <Compile Include="Languages\Gui\TypeScriptCompletionTextEditorExtension.cs" />
+    <Compile Include="Languages\TypeScriptFacade.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

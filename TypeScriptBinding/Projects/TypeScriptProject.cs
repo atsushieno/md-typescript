@@ -14,8 +14,7 @@ using MonoDevelop.Core.ProgressMonitoring;
 using MonoDevelop.Core.Serialization;
 using MonoDevelop.Ide.Gui;
 using MonoDevelop.Projects;
-using TypeScriptServiceBridge.Harness;
-using TypeScriptServiceBridge.Services;
+using MonoDevelop.TypeScriptBinding;
 
 namespace MonoDevelop.TypeScriptBinding.Projects
 {
@@ -23,8 +22,11 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 	[DataInclude (typeof (TypeScriptProjectConfiguration))]
     public class TypeScriptProject : Project
 	{
-		TypeScriptLS shim_host;
-		ILanguageService language_service;
+		TypeScriptFacade typescript;
+
+		public TypeScriptFacade TypeScriptService {
+			get { return typescript; }
+		}
 
 		[ItemProperty("AdditionalArguments", DefaultValue="")]
 		string mAdditionalArguments = string.Empty;
@@ -49,9 +51,7 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 
 		public TypeScriptProject ()
 		{
-			shim_host = new TypeScriptLS ();
-			language_service = new TypeScriptServicesFactory ()
-				.CreateLanguageService (new LanguageServiceShimHostAdapter (shim_host));
+			typescript = new TypeScriptFacade ();
 		}
 
 		public TypeScriptProject (ProjectCreateInformation info, XmlElement projectOptions)
@@ -283,7 +283,7 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 			base.OnFileRemovedFromProject (e);
 			// how to remove files???
 			foreach (var item in e)
-				shim_host.UpdateScript (item.ProjectFile.FilePath.CanonicalPath, null);
+				typescript.ShimHost.UpdateScript (item.ProjectFile.FilePath.CanonicalPath, null);
 		}
 		
 		protected override void OnFileAddedToProject (ProjectFileEventArgs e)
@@ -292,7 +292,7 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 			// FIXME: make sure that adding, removing and then adding the same file still works (as "remove" does not really remove it).
 			foreach (var item in e)
 				if (item.ProjectFile.BuildAction == BuildAction.Compile)
-					shim_host.AddScript (item.ProjectFile.FilePath.FullPath, File.ReadAllText (item.ProjectFile.FilePath.CanonicalPath));
+					typescript.ShimHost.AddScript (typescript.GetFilePath (item.ProjectFile), File.ReadAllText (typescript.GetFilePath (item.ProjectFile)));
 		}
 		
 		protected override void OnFileRenamedInProject (ProjectFileRenamedEventArgs e)
@@ -300,11 +300,11 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 			base.OnFileRenamedInProject (e);
 			foreach (ProjectFileRenamedEventInfo item in e)
 				if (item.ProjectFile.BuildAction == BuildAction.Compile)
-					shim_host.UpdateScript (item.OldName.CanonicalPath, null);
+					typescript.ShimHost.UpdateScript (typescript.GetFilePath (item.OldName), null);
 			// FIXME: make sure that adding, removing and then adding the same file still works (as "remove" does not really remove it).
 			foreach (ProjectFileRenamedEventInfo item in e)
 				if (item.ProjectFile.BuildAction == BuildAction.Compile)
-					shim_host.AddScript (item.NewName.FullPath, File.ReadAllText (item.NewName.CanonicalPath));
+					typescript.ShimHost.AddScript (typescript.GetFilePath (item.NewName), File.ReadAllText (typescript.GetFilePath (item.NewName)));
 		}
 
 		#endregion
