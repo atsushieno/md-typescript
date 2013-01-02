@@ -112,11 +112,26 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 			}
 		}
 
+		DateTimeOffset last_script_updated_time = DateTimeOffset.MinValue;
+		Dictionary<string,DateTimeOffset> lastUpdatedTime = new Dictionary<string, DateTimeOffset> ();
+
+		void UpdateScripts ()
+		{
+			foreach (var doc in IdeApp.Workbench.Documents.Where (d => d.Project == this.Document.Project && d.IsCompileableInProject)) {
+				DateTimeOffset last;
+				var path = service.GetFilePath (doc.FileName);
+				if (!lastUpdatedTime.TryGetValue (path, out last) || last > last_script_updated_time) {
+					lastUpdatedTime [path] = DateTimeOffset.UtcNow;
+					shimHost.UpdateScript (path, doc.Editor.Text);
+				}
+			}
+		}
+
 		ICompletionDataList InternalHandleCodeCompletion (CodeCompletionContext completionContext, char completionChar, bool ctrlSpace, ref int triggerWordLength)
 		{
 			if (completionContext != null) {
+				UpdateScripts ();
 				string file = service.GetFilePath (Document.FileName);
-				shimHost.UpdateScript (file, Editor.Text);
 				var ret = new CompletionDataList ();
 				var list = ls.GetCompletionsAtPosition (file, (int) completionContext.TriggerOffset, true);
 				foreach (var entry in list.Entries) {
