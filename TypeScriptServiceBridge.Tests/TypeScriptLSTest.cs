@@ -9,11 +9,13 @@ namespace TypeScriptServiceBridge.Tests
 	[TestFixture]
 	public class TypeScriptLSTest
 	{
+#if USE_JURASSIC
 		[Test]
 		public void TestBasics ()
 		{
 			TestBasicInstance (new TypeScriptLS (LanguageServiceHost.Instance.Eval<ObjectInstance> ("new Harness.TypeScriptLS ();")));
 		}
+#endif
 
 		[Test]
 		public void TestDefaultConstructor ()

@@ -15,8 +15,12 @@ server = http.createServer(function (req, res) {
         IO.printLine('request: ' + chunk.toString ());
         try {
 	        var ret = evaluateFromRequest (chunk.toString ());
-    	    IO.printLine('response:' + ret);
-    	    ret = {'result': ret};
+    	    ret = {'result': ret == null ? ret : ret instanceof Object ? "__dummy__" : ret};
+    	    try {
+	    	    IO.printLine('response:' + JSON.stringify (ret['result']));
+	    	} catch (err) {
+	    	    IO.printLine('response:' + ret ['result']);
+	    	}
     	    res.writeHead(200, {
     	        'Content-Type': 'text/plain'
     	    });

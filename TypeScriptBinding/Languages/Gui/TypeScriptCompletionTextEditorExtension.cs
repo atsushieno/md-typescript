@@ -18,8 +18,9 @@ using ICSharpCode.NRefactory.TypeSystem;
 using ICSharpCode.NRefactory.Completion;
 
 using MonoDevelop.TypeScriptBinding.Projects;
-using TypeScriptServiceBridge.TypeScript;
+using TypeScriptServiceBridge.Harness;
 using TypeScriptServiceBridge.Services;
+using TypeScriptServiceBridge.TypeScript;
 
 namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 {
@@ -69,6 +70,10 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 			return base.GetCurrentParameterIndex (startOffset);
 		}
 
+		TypeScriptLS shimHost {
+			get { return service.ShimHost; }
+		}
+
 		ILanguageService ls {
 			get { return service.LanguageService; }
 		}
@@ -76,11 +81,13 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 		public override ICompletionDataList HandleCodeCompletion (CodeCompletionContext completionContext, char completionChar, ref int triggerWordLength)
 		{
 			if (completionContext != null) {
+				string file = service.GetFilePath (Document.FileName);
+				shimHost.UpdateScript (file, Editor.Text);
 				var ret = new CompletionDataList ();
-				var list = ls.GetCompletionsAtPosition (service.GetFilePath (Document.FileName), completionContext.TriggerOffset, true);
-				foreach (var entry in list.Entries) {
+				var ast = ls.GetScriptAST (file);
+				var list = ls.GetCompletionsAtPosition (file, (int) completionContext.TriggerOffset, true);
+				foreach (var entry in list.Entries)
 					ret.Add (new CompletionData (entry.Name, MonoDevelop.Core.IconId.Null, entry.Name + " : " + entry.Type));
-				}
 				return ret;
 			}
 			return base.HandleCodeCompletion (completionContext, completionChar, ref triggerWordLength);
