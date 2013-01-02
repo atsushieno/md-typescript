@@ -125,6 +125,7 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 					shimHost.UpdateScript (path, doc.Editor.Text);
 				}
 			}
+			last_script_updated_time = DateTimeOffset.UtcNow;
 		}
 
 		ICompletionDataList InternalHandleCodeCompletion (CodeCompletionContext completionContext, char completionChar, bool ctrlSpace, ref int triggerWordLength)
