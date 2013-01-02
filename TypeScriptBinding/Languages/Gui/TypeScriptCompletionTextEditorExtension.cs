@@ -76,6 +76,8 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 			
 			if (EnableParameterInsight && (keyChar == ',' || keyChar == ')') && CanRunParameterCompletionCommand ())
 				base.RunParameterCompletionCommand ();
+
+			last_updated_time_for_docs [service.GetFilePath (this.Document.FileName)] = DateTimeOffset.UtcNow;
 			
 			return result;
 		}
@@ -113,15 +115,15 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 		}
 
 		DateTimeOffset last_script_updated_time = DateTimeOffset.MinValue;
-		Dictionary<string,DateTimeOffset> lastUpdatedTime = new Dictionary<string, DateTimeOffset> ();
+		Dictionary<string,DateTimeOffset> last_updated_time_for_docs = new Dictionary<string, DateTimeOffset> ();
 
 		void UpdateScripts ()
 		{
 			foreach (var doc in IdeApp.Workbench.Documents.Where (d => d.Project == this.Document.Project && d.IsCompileableInProject)) {
 				DateTimeOffset last;
 				var path = service.GetFilePath (doc.FileName);
-				if (!lastUpdatedTime.TryGetValue (path, out last) || last > last_script_updated_time) {
-					lastUpdatedTime [path] = DateTimeOffset.UtcNow;
+				if (!last_updated_time_for_docs.TryGetValue (path, out last) || last > last_script_updated_time) {
+					last_updated_time_for_docs [path] = DateTimeOffset.UtcNow;
 					shimHost.UpdateScript (path, doc.Editor.Text);
 				}
 			}
