@@ -21,6 +21,7 @@ using MonoDevelop.TypeScriptBinding.Projects;
 using TypeScriptServiceBridge.Harness;
 using TypeScriptServiceBridge.Services;
 using TypeScriptServiceBridge.TypeScript;
+using Jurassic.Library;
 
 namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 {
@@ -136,8 +137,11 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 				UpdateScripts ();
 				string file = service.GetFilePath (Document.FileName);
 				var ret = new CompletionDataList ();
-				var list = ls.GetCompletionsAtPosition (file, (int) completionContext.TriggerOffset, true);
-				foreach (var entry in list.Entries) {
+				var list = (CompletionInfo) ls.GetCompletionsAtPosition (file, (int) completionContext.TriggerOffset, true);
+				var arr = (ArrayInstance) list.Entries.Instance;
+				var len = arr.Length;
+				for (int i = 0; i < len; i++) {
+					var entry = (ObjectInstance) arr [i];
 					IconId icon = IconId.Null;
 					// FIXME: fill icons
 					/*
@@ -148,7 +152,7 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 					    || entry.Kind == ScriptElementKind.VariableElement)
 						icon = fieldIcon;
 					*/
-					ret.Add (new CompletionData (entry.Name, icon, string.Format ("({0}) {1} : {2}", entry.Kind, entry.Name, entry.Type)));
+					ret.Add (new CompletionData ((string) entry ["name"], icon, string.Format ("({0}) {1} : {2}", entry ["kind"], entry ["name"], entry ["type"])));
 				}
 				return ret;
 			}
