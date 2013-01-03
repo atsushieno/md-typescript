@@ -11,10 +11,14 @@ var server = null;
 server = http.createServer(function (req, res) {
     var u = url.parse("http://localhost" + req.url, true);
     req.setEncoding ('utf-8');
+    var data = "";
     req.on ('data', function (chunk) {
-        IO.printLine('request: ' + chunk.toString ());
+        data += chunk.toString ();
+    });
+    req.on ('end', function () {
+        IO.printLine('request: ' + data);
         try {
-	        var ret = evaluateFromRequest (chunk.toString ());
+	        var ret = evaluateFromRequest (data);
     	    ret = {'result': ret == null ? ret : ret instanceof Object ? "__dummy__" : ret};
     	    try {
 	    	    IO.printLine('response:' + JSON.stringify (ret['result']));
