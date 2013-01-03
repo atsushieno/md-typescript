@@ -56,4 +56,13 @@
     <Compile Include="LanguageServiceTest.cs" />
     <Compile Include="NodeLanguageServiceHostTest.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\external\typescript\src\services\languageService.ts">
+      <Link>TestFiles\languageService.ts</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TestFiles\" />
+  </ItemGroup>
 </Project>

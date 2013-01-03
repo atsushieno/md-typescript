@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Jurassic;
 using TypeScriptServiceBridge.Harness;
 using TypeScriptServiceBridge.Services;
@@ -116,6 +117,15 @@ document.body.appendChild(button)
 				var list = ls.GetCompletionsAtPosition ("foo.ts", i, true);
 				Assert.AreEqual (0, list.Entries.Length, "#6 " + i + " : " + script.Substring (i));
 			}
+		}
+		
+		[Test]
+		public void LoadLanguageService ()
+		{
+			var shimHost = new TypeScriptLS ();
+			var lsHost = new LanguageServiceShimHostAdapter (shimHost);
+			var ls = new TypeScriptServicesFactory ().CreateLanguageService (lsHost);
+			shimHost.AddScript ("languageService.ts", File.ReadAllText (Path.Combine (Path.GetDirectoryName (new Uri (GetType ().Assembly.CodeBase).LocalPath), "TestFiles", "languageService.ts")));
 		}
 	}
 }
