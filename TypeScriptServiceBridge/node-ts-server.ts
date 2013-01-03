@@ -17,25 +17,28 @@ server = http.createServer(function (req, res) {
     });
     req.on ('end', function () {
         IO.printLine('request: ' + data);
+        var ret : any;
         try {
-	        var ret = evaluateFromRequest (data);
-    	    ret = {'result': ret == null ? ret : ret instanceof Object ? "__dummy__" : ret};
+	        ret = {'result': evaluateFromRequest (data)};
+	        var result : any;
     	    try {
-	    	    IO.printLine('response:' + JSON.stringify (ret['result']));
+	    	    result = JSON.stringify (ret);
 	    	} catch (err) {
-	    	    IO.printLine('response:' + ret ['result']);
+	            result = JSON.stringify ({'result': null});
 	    	}
+    	    IO.printLine('response:' + result);
     	    res.writeHead(200, {
-    	        'Content-Type': 'text/plain'
+                'Content-Type': 'text/plain'
     	    });
+            res.end(result);
     	} catch (err) {
     	    IO.printLine('ERROR response:' + err);
     	    res.writeHead(200, {
     	        'Content-Type': 'text/plain'
     	    });
-    	    ret = {'error': err};
+            ret = {'error': err};
+            res.end(JSON.stringify (ret));
     	}
-        res.end(JSON.stringify (ret));
     });
     switch(u.query['command']) {
         case 'quit': {

@@ -43,7 +43,7 @@ new Services.TypeScriptServicesFactory ().createLanguageService (
 			string json = @"
 [{'name':'foo.ts','kind':'script','kindModifiers':'','matchKind':'prefix','unitIndex':0,'minChar':0,'limChar':94,'containerName':'','containerKind':''},{'name':'Foo','kind':'class','kindModifiers':'','matchKind':'exact','unitIndex':0,'minChar':0,'limChar':94,'containerName':'','containerKind':''},{'name':'foo','kind':'property','kindModifiers':'public','matchKind':'exact','unitIndex':0,'minChar':12,'limChar':32,'containerName':'Foo','containerKind':'class'}]
 			";
-			var arr = new TypeScriptArray<TypeScriptObject> (host.Eval<string> (json));
+			var arr = new TypeScriptArray<TypeScriptObject> (host.Eval (json) as ArrayInstance);
 			Assert.IsNotNull (arr, "#1");
 			Assert.AreEqual (3, arr.Length, "#2");
 		}
@@ -61,7 +61,7 @@ new Services.TypeScriptServicesFactory ().createLanguageService (
 			");
 			var searchRaw = host.Eval ("search");
 			Console.WriteLine (searchRaw);
-			var search = new TypeScriptArray<TypeScriptObject> (searchRaw);
+			var search = new TypeScriptArray<TypeScriptObject> (searchRaw as ArrayInstance);
 			Assert.IsNotNull (search, "#3");
 			Assert.AreEqual (3, search.Length, "#4");
 			Assert.AreEqual (94, ((TypeScriptObject) search [0]).GetPropertyValue ("limChar"), "#5");
