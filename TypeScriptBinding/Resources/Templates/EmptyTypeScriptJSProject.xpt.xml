@@ -13,7 +13,7 @@
         <Project name="${ProjectName}" directory="." type="TypeScript">
             <Options TargetJavaScriptFile="bin/${ProjectName}.js" />
             <Files>
-                <File name="Source/${ProjectName}.ts" AddStandardHeader="True">
+                <File name="${ProjectName}.ts" AddStandardHeader="True">
 <![CDATA[
 class Greeter {
 	greeting: string;
