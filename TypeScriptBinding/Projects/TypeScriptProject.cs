@@ -161,7 +161,7 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 			if (configuration.AdditionalArguments != "")
 				argList.Add (configuration.AdditionalArguments);
 			
-			foreach (var fp in project.Files.Where (pf => pf.BuildAction == "Compile"))
+			foreach (var fp in project.Files.Where (pf => pf.Subtype == Subtype.Code && pf.BuildAction == "Compile"))
 				argList.Add (fp.FilePath.FullPath);
 			
 			var args = String.Join (" ", argList.ToArray ());
@@ -283,7 +283,8 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 			base.OnFileRemovedFromProject (e);
 			// how to remove files???
 			foreach (var item in e)
-				typescript.ShimHost.UpdateScript (item.ProjectFile.FilePath.CanonicalPath, null);
+				if (item.ProjectFile.Subtype == Subtype.Code && item.ProjectFile.BuildAction == BuildAction.Compile)
+					typescript.ShimHost.UpdateScript (item.ProjectFile.FilePath.CanonicalPath, null);
 		}
 		
 		protected override void OnFileAddedToProject (ProjectFileEventArgs e)
@@ -291,7 +292,7 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 			base.OnFileAddedToProject (e);
 			// FIXME: make sure that adding, removing and then adding the same file still works (as "remove" does not really remove it).
 			foreach (var item in e)
-				if (item.ProjectFile.BuildAction == BuildAction.Compile)
+				if (item.ProjectFile.Subtype == Subtype.Code && item.ProjectFile.BuildAction == BuildAction.Compile)
 					typescript.ShimHost.AddScript (typescript.GetFilePath (item.ProjectFile), File.ReadAllText (typescript.GetFilePath (item.ProjectFile)));
 		}
 		
@@ -299,11 +300,11 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 		{
 			base.OnFileRenamedInProject (e);
 			foreach (ProjectFileRenamedEventInfo item in e)
-				if (item.ProjectFile.BuildAction == BuildAction.Compile)
+				if (item.ProjectFile.Subtype == Subtype.Code && item.ProjectFile.BuildAction == BuildAction.Compile)
 					typescript.ShimHost.UpdateScript (typescript.GetFilePath (item.OldName), null);
 			// FIXME: make sure that adding, removing and then adding the same file still works (as "remove" does not really remove it).
 			foreach (ProjectFileRenamedEventInfo item in e)
-				if (item.ProjectFile.BuildAction == BuildAction.Compile)
+				if (item.ProjectFile.Subtype == Subtype.Code && item.ProjectFile.BuildAction == BuildAction.Compile)
 					typescript.ShimHost.AddScript (typescript.GetFilePath (item.NewName), File.ReadAllText (typescript.GetFilePath (item.NewName)));
 		}
 
