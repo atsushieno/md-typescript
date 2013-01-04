@@ -78,8 +78,8 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 			if (EnableParameterInsight && (keyChar == ',' || keyChar == ')') && CanRunParameterCompletionCommand ())
 				base.RunParameterCompletionCommand ();
 
-			last_updated_time_for_docs [service.GetFilePath (this.Document.FileName)] = DateTimeOffset.UtcNow;
-			
+			service.UpdateLastEditTime (this.Document.FileName);
+
 			return result;
 		}
 
@@ -115,26 +115,10 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 			}
 		}
 
-		DateTimeOffset last_script_updated_time = DateTimeOffset.MinValue;
-		Dictionary<string,DateTimeOffset> last_updated_time_for_docs = new Dictionary<string, DateTimeOffset> ();
-
-		void UpdateScripts ()
-		{
-			foreach (var doc in IdeApp.Workbench.Documents.Where (d => d.Project == this.Document.Project && d.IsCompileableInProject)) {
-				DateTimeOffset last;
-				var path = service.GetFilePath (doc.FileName);
-				if (!last_updated_time_for_docs.TryGetValue (path, out last) || last > last_script_updated_time) {
-					last_updated_time_for_docs [path] = DateTimeOffset.UtcNow;
-					shimHost.UpdateScript (path, doc.Editor.Text);
-				}
-			}
-			last_script_updated_time = DateTimeOffset.UtcNow;
-		}
-
 		ICompletionDataList InternalHandleCodeCompletion (CodeCompletionContext completionContext, char completionChar, bool ctrlSpace, ref int triggerWordLength)
 		{
 			if (completionContext != null) {
-				UpdateScripts ();
+				service.UpdateScripts ();
 				string file = service.GetFilePath (Document.FileName);
 				var ret = new CompletionDataList ();
 				var list = (CompletionInfo) ls.GetCompletionsAtPosition (file, (int) completionContext.TriggerOffset, true);

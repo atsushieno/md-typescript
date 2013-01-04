@@ -51,7 +51,7 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 
 		public TypeScriptProject ()
 		{
-			typescript = new TypeScriptFacade ();
+			typescript = new TypeScriptFacade (this);
 		}
 
 		public TypeScriptProject (ProjectCreateInformation info, XmlElement projectOptions)

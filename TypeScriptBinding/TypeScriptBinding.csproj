@@ -105,6 +105,7 @@
     <Compile Include="TypeScriptFacade.cs" />
     <Compile Include="Languages\Gui\TypeScriptLanguageItemWindow.cs" />
     <Compile Include="Languages\Gui\TypeScriptTextEditorTooltipProvider.cs.cs" />
+    <Compile Include="Languages\TypeScriptReferenceFinder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

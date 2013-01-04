@@ -65,8 +65,12 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 		public TooltipItem GetItem (Mono.TextEditor.TextEditor editor, int offset)
 		{
 			var service = GetFacade (((ExtensibleTextEditor) editor).Project);
-			var item = service.LanguageService.GetDefinitionAtPosition (service.GetFilePath (editor.FileName), offset);
-			return new TooltipItem (item, (int) item.MinChar, (int) (item.LimChar - item.MinChar));
+			if (service != null) {
+				service.UpdateScripts ();
+				var item = service.LanguageService.GetDefinitionAtPosition (service.GetFilePath (editor.FileName), offset);
+				return new TooltipItem (item, (int)item.MinChar, (int)(item.LimChar - item.MinChar));
+			}
+			return null;
 		}
 		
 		DefinitionInfo lastResult = null;
