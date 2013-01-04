@@ -76,6 +76,9 @@
     <Reference Include="MonoDevelop.Refactoring, Version=2.6.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\monodevelop-master\main\build\AddIns\MonoDevelop.Refactoring\MonoDevelop.Refactoring.dll</HintPath>
     </Reference>
+    <Reference Include="MonoDevelop.SourceEditor2, Version=2.6.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\monodevelop-master\main\build\AddIns\DisplayBindings\SourceEditor\MonoDevelop.SourceEditor2.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
@@ -99,7 +102,9 @@
     <Compile Include="TypeSystem\TypeScriptResolver.cs" />
     <Compile Include="TypeSystem\AstNode.cs" />
     <Compile Include="Languages\Gui\TypeScriptCompletionTextEditorExtension.cs" />
-    <Compile Include="Languages\TypeScriptFacade.cs" />
+    <Compile Include="TypeScriptFacade.cs" />
+    <Compile Include="Languages\Gui\TypeScriptLanguageItemWindow.cs" />
+    <Compile Include="Languages\Gui\TypeScriptTextEditorTooltipProvider.cs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

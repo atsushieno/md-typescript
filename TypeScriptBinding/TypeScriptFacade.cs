@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using MonoDevelop.Core;
 using MonoDevelop.Projects;
 using TypeScriptServiceBridge.Harness;
@@ -26,6 +27,11 @@ namespace MonoDevelop.TypeScriptBinding
 		public string GetFilePath (FilePath path)
 		{
 			return path.CanonicalPath.FullPath;
+		}
+
+		public string GetFilePath (string file)
+		{
+			return Path.GetFullPath (file);
 		}
 	}
 }

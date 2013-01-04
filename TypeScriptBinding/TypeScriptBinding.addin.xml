@@ -105,6 +105,12 @@
 	<Extension path="/MonoDevelop/Ide/TextEditorExtensions">
 		<Class fileExtensions=".ts" class="MonoDevelop.TypeScriptBinding.Languages.Gui.TypeScriptCompletionTextEditorExtension" />
 	</Extension>
+	
+	<!-- Tooltip Provider -->
+	<!-- FIXME: would be nice if it could be MonoDevelop.SourceEditor.LanguageItemTooltipProvider -->
+	<Extension path = "/MonoDevelop/SourceEditor2/TooltipProviders">
+        <Class id="LanguageItem" class="MonoDevelop.TypeScriptBinding.Languages.Gui.TypeScriptTextEditorTooltipProvider" />
+    </Extension>
 
 	<!-- TypeSystem Ambience -->
 	<Extension path = "/MonoDevelop/TypeSystem/Ambiences">
