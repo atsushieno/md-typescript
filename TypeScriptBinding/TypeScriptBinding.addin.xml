@@ -117,10 +117,8 @@
 	</Extension>
 	
 	<!-- Tooltip Provider -->
-	<!-- FIXME: would be nice if it could be MonoDevelop.SourceEditor.LanguageItemTooltipProvider -->
 	<Extension path = "/MonoDevelop/SourceEditor2/TooltipProviders">
-        <!-- Class id="LanguageItem" class="MonoDevelop.TypeScriptBinding.Languages.Gui.TypeScriptTextEditorTooltipProvider" / -->
-        <Class id="LanguageItem" class="MonoDevelop.SourceEditor.LanguageItemTooltipProvider" />
+        <Class id="LanguageItem" class="MonoDevelop.TypeScriptBinding.Languages.Gui.TypeScriptTextEditorTooltipProvider" />
     </Extension>
 
     <!--- TextEditor Resolver -->

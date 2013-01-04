@@ -46,6 +46,7 @@ namespace MonoDevelop.TypeScriptBinding
 		public void UpdateScripts ()
 		{
 			foreach (var doc in IdeApp.Workbench.Documents.Where (d => d.Project == project && d.IsCompileableInProject)) {
+				doc.UpdateParseDocument ();
 				DateTimeOffset last;
 				var path = GetFilePath (doc.FileName);
 				if (!last_updated_time_for_docs.TryGetValue (path, out last) || last > last_script_updated_time) {

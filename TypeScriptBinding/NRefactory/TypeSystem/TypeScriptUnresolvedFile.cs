@@ -82,6 +82,8 @@ namespace MonoDevelop.TypeScriptBinding
 
 		public IList<Error> Errors {
 			get {
+				return new Error [0];
+
 				var errors = service.LanguageService.GetScriptErrors (file, short.MaxValue);
 				return errors.Select (e => new Error (ErrorType.Unknown, e.Message)).ToArray ();
 			}

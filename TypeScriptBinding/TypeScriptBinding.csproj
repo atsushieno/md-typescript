@@ -103,7 +103,6 @@
     <Compile Include="TypeSystem\AstNode.cs" />
     <Compile Include="Languages\Gui\TypeScriptCompletionTextEditorExtension.cs" />
     <Compile Include="Languages\Gui\TypeScriptLanguageItemWindow.cs" />
-    <Compile Include="Languages\Gui\TypeScriptTextEditorTooltipProvider.cs.cs" />
     <Compile Include="Languages\TypeScriptReferenceFinder.cs" />
     <Compile Include="TypeScriptService.cs" />
     <Compile Include="NRefactory\TypeSystem\TypeScriptType.cs" />
@@ -111,6 +110,7 @@
     <Compile Include="NRefactory\TypeSystem\TypeScriptTypeSystemParser.cs" />
     <Compile Include="NRefactory\TypeSystem\TypeScriptUnresolvedTypeDefinition.cs" />
     <Compile Include="NRefactory\TypeSystem\TypeScriptUnresolvedFile.cs" />
+    <Compile Include="Languages\Gui\TypeScriptTextEditorTooltipProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

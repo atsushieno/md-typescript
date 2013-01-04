@@ -32,6 +32,7 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 			var service = GetService (document.Project);
 			if (service == null)
 				return null;
+			service.UpdateScripts ();
 			var file = service.GetFilePath (document.FileName);
 
 			var def = service.LanguageService.GetDefinitionAtPosition (file, offset);
@@ -44,6 +45,7 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 			var service = GetService (document.Project);
 			if (service == null)
 				return null;
+			service.UpdateScripts ();
 			var file = service.GetFilePath (document.FileName);
 
 			var def = service.LanguageService.GetDefinitionAtPosition (file, offset);
@@ -65,6 +67,7 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 			var service = GetService (document.Project);
 			if (service == null)
 				return null;
+			service.UpdateScripts ();
 			var file = service.GetFilePath (document.FileName);
 
 			var def = service.LanguageService.GetDefinitionAtPosition (file, offset);
