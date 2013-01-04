@@ -45,7 +45,7 @@ namespace MonoDevelop.TypeScriptBinding
 		{
 		}
 		
-		TypeScriptFacade GetFacade (Project project)
+		TypeScriptService GetService (Project project)
 		{
 			var tp = project as TypeScriptProject;
 			return tp != null ? tp.TypeScriptService : null;

@@ -1,4 +1,4 @@
-#if ADVANCED_TYPE_SYSTEM_PARSER
+#if HAVE_NREFACTORY_TYPESYSTEM
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,8 +19,6 @@ namespace MonoDevelop.TypeScriptBinding
 			classTypes [TypeKind.Class] = "class";
 			classTypes [TypeKind.Enum] = "enum";
 			classTypes [TypeKind.Interface] = "interface";
-			classTypes [TypeKind.Struct] = "struct";
-			classTypes [TypeKind.Delegate] = "delegate";
 		}
 
 		public TypeScriptAmbience ()
@@ -467,10 +465,10 @@ namespace MonoDevelop.TypeScriptBinding
 		{
 			if (!settings.IncludeModifiers)
 				return;
-			// TypeScript does not support them.
-			/*
 			if (entity.IsStatic)
 				result.Append (settings.EmitModifiers ("static"));
+			// TypeScript does not support them.
+			/*
 			if (entity.IsSealed)
 				result.Append (settings.EmitModifiers ("sealed"));
 			if (entity.IsAbstract)
@@ -536,21 +534,12 @@ namespace MonoDevelop.TypeScriptBinding
 		{
 			if (parameter == null)
 				return;
-			// No in/out parameter modifiers in TypeScript.
-			/*
-			if (parameter.IsOut) {
-				result.Append (settings.Markup ("out"));
-				result.Append (settings.Markup (" "));
-			} else if (parameter.IsRef) {
-				result.Append (settings.Markup ("ref"));
-				result.Append (settings.Markup (" "));
-			} else*/ if (parameter.IsParams) {
+			result.Append (GetParameterString (null, parameter, settings));
+			if (parameter.IsParams) {
 				result.Append (settings.Markup ("params"));
 				result.Append (settings.Markup (" "));
 			}
-			result.Append (GetParameterString (null, parameter, settings));
 		}
 	}
 }
-
 #endif

@@ -217,7 +217,7 @@ module Harness {
 
         public log(s: string): void {
             // For debugging...
-            //IO.printLine("TypeScriptLS:" + s);
+            IO.printLine("TypeScriptLS:" + s);
         }
 
         //////////////////////////////////////////////////////////////////////

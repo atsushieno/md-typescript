@@ -105,16 +105,27 @@
 	<Extension path="/MonoDevelop/Ide/TextEditorExtensions">
 		<Class fileExtensions=".ts" class="MonoDevelop.TypeScriptBinding.Languages.Gui.TypeScriptCompletionTextEditorExtension" />
 	</Extension>
-	
-	<!-- Tooltip Provider -->
-	<!-- FIXME: would be nice if it could be MonoDevelop.SourceEditor.LanguageItemTooltipProvider -->
-	<Extension path = "/MonoDevelop/SourceEditor2/TooltipProviders">
-        <Class id="LanguageItem" class="MonoDevelop.TypeScriptBinding.Languages.Gui.TypeScriptTextEditorTooltipProvider" />
-    </Extension>
+
+    <!-- TypeSystem Parser -->
+	<Extension path = "/MonoDevelop/TypeSystem/Parser">
+		<Parser class="MonoDevelop.TypeScriptBinding.NRefactory.TypeSystem.TypeScriptTypeSystemParser" mimeType = "text/x-typescript" />
+	</Extension>
 
 	<!-- TypeSystem Ambience -->
 	<Extension path = "/MonoDevelop/TypeSystem/Ambiences">
 		<Ambience mimeType="text/x-typescript" class = "MonoDevelop.TypeScriptBinding.TypeScriptAmbience" />
 	</Extension>
+	
+	<!-- Tooltip Provider -->
+	<!-- FIXME: would be nice if it could be MonoDevelop.SourceEditor.LanguageItemTooltipProvider -->
+	<Extension path = "/MonoDevelop/SourceEditor2/TooltipProviders">
+        <!-- Class id="LanguageItem" class="MonoDevelop.TypeScriptBinding.Languages.Gui.TypeScriptTextEditorTooltipProvider" / -->
+        <Class id="LanguageItem" class="MonoDevelop.SourceEditor.LanguageItemTooltipProvider" />
+    </Extension>
+
+    <!--- TextEditor Resolver -->
+	<Extension path = "/MonoDevelop/Ide/TextEditorResolver">
+        <Resolver class = "MonoDevelop.TypeScriptBinding.Languages.Gui.TypeScriptTextEditorResolverProvider" mimeType="text/x-typescript" />
+    </Extension>
 	
 </Addin>

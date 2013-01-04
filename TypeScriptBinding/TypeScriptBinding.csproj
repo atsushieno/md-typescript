@@ -102,10 +102,15 @@
     <Compile Include="TypeSystem\TypeScriptResolver.cs" />
     <Compile Include="TypeSystem\AstNode.cs" />
     <Compile Include="Languages\Gui\TypeScriptCompletionTextEditorExtension.cs" />
-    <Compile Include="TypeScriptFacade.cs" />
     <Compile Include="Languages\Gui\TypeScriptLanguageItemWindow.cs" />
     <Compile Include="Languages\Gui\TypeScriptTextEditorTooltipProvider.cs.cs" />
     <Compile Include="Languages\TypeScriptReferenceFinder.cs" />
+    <Compile Include="TypeScriptService.cs" />
+    <Compile Include="NRefactory\TypeSystem\TypeScriptType.cs" />
+    <Compile Include="Languages\Gui\TypeScriptTextEditorResolverProvider.cs" />
+    <Compile Include="NRefactory\TypeSystem\TypeScriptTypeSystemParser.cs" />
+    <Compile Include="NRefactory\TypeSystem\TypeScriptUnresolvedTypeDefinition.cs" />
+    <Compile Include="NRefactory\TypeSystem\TypeScriptUnresolvedFile.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -147,8 +152,9 @@
     <Folder Include="Resources\Icons\" />
     <Folder Include="Resources\Templates\" />
     <Folder Include="Resources\SyntaxModes\" />
-    <Folder Include="Helpers\" />
     <Folder Include="TypeSystem\" />
+    <Folder Include="NRefactory\" />
+    <Folder Include="NRefactory\TypeSystem\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TypeScriptServiceBridge\TypeScriptServiceBridge.csproj">

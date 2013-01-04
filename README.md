@@ -9,6 +9,7 @@ Features so far:
 	- It runs tsc to generate javascript output from set of ts sources.
 	- It provides simple syntax highlighting.
 	- It gives some code completion for members.
+	- It provides tooltip for the language item at cursor.
 
 It uses console node.js server to interoperate with typescript language service to retrieve code completion
 information and so on.

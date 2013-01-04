@@ -22,9 +22,9 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 	[DataInclude (typeof (TypeScriptProjectConfiguration))]
     public class TypeScriptProject : Project
 	{
-		TypeScriptFacade typescript;
+		TypeScriptService typescript;
 
-		public TypeScriptFacade TypeScriptService {
+		public TypeScriptService TypeScriptService {
 			get { return typescript; }
 		}
 
@@ -51,7 +51,7 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 
 		public TypeScriptProject ()
 		{
-			typescript = new TypeScriptFacade (this);
+			typescript = new TypeScriptService (this);
 		}
 
 		public TypeScriptProject (ProjectCreateInformation info, XmlElement projectOptions)

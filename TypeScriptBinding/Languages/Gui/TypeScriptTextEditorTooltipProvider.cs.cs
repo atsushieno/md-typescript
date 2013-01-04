@@ -1,12 +1,12 @@
 //
-// TextEditorResolverProvider.cs
+// TypeScriptTextEditorTooltipProvider.cs
 //
 // Author:
 // Atsushi Enomoto <atsushieno@veritas-vos-liberabit.com>
 // Mike Krüger <mkrueger@novell.com>
 //
 // Copyright (c) 2010 Novell, Inc (http://www.novell.com)
-// Copyright (c) 2012 Xamarin, Inc (http://xamarin.com)
+// Copyright (c) 2013 Xamarin, Inc (http://xamarin.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -53,7 +53,7 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 		{
 		}
 
-		TypeScriptFacade GetFacade (Project project)
+		TypeScriptService GetService (Project project)
 		{
 			var tp = project as TypeScriptProject;
 			return tp != null ? tp.TypeScriptService : null;
@@ -64,7 +64,7 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 		
 		public TooltipItem GetItem (Mono.TextEditor.TextEditor editor, int offset)
 		{
-			var service = GetFacade (((ExtensibleTextEditor) editor).Project);
+			var service = GetService (((ExtensibleTextEditor) editor).Project);
 			if (service != null) {
 				service.UpdateScripts ();
 				var item = service.LanguageService.GetDefinitionAtPosition (service.GetFilePath (editor.FileName), offset);

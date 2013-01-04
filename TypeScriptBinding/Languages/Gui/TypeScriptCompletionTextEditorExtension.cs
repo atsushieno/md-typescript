@@ -27,7 +27,7 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 {
 	public class TypeScriptCompletionTextEditorExtension : CompletionTextEditorExtension//, IPathedDocument
 	{
-		TypeScriptFacade service;
+		TypeScriptService service;
 
 		public TypeScriptCompletionTextEditorExtension ()
 		{

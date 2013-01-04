@@ -3,4 +3,4 @@
 	url = https://git01.codeplex.com/forks/atsushieno/ts2cs
 [submodule "external/typescript"]
 	path = external/typescript
-	url = https://git01.codeplex.com/typescript
+	url = https://git01.codeplex.com/forks/atsushieno/bugfixes

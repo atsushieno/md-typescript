@@ -10,11 +10,11 @@ using TypeScriptServiceBridge.Services;
 
 namespace MonoDevelop.TypeScriptBinding
 {
-	public class TypeScriptFacade
+	public class TypeScriptService
 	{
 		Project project;
 
-		public TypeScriptFacade (Project project)
+		public TypeScriptService (Project project)
 		{
 			this.project = project;
 			ShimHost = new TypeScriptLS ();
