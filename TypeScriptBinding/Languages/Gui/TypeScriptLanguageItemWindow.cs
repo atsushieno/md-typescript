@@ -49,12 +49,11 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 
 		string GetTooltopString (DefinitionInfo info)
 		{
-			return string.Format ("{0} {1} (in {2} {3}) [index {4}]",
+			return string.Format ("{0} {1} (in {2} {3})",
 			                      info.Kind,
 			                      info.Name,
 			                      info.ContainerKind,
-			                      info.ContainerName,
-			                      info.UnitIndex);
+			                      info.ContainerName);
 		}
 		
 		public TypeScriptLanguageItemWindow (TextEditor ed, Gdk.ModifierType modifierState, DefinitionInfo result)
