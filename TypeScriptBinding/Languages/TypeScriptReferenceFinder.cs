@@ -1,6 +1,5 @@
-#if HAVE_NREFACTORY_TYPESYSTEM
 // 
-// CSharpReferenceFinder.cs
+// TypeScriptReferenceFinder.cs
 //  
 // Author:
 //	Atsushi Enomoto <atsushieno@veritas-vos-liberabit.com>
@@ -37,7 +36,7 @@ using System.IO;
 using Mono.TextEditor;
 using MonoDevelop.TypeScriptBinding.Projects;
 
-namespace MonoDevelop.TypeScriptBinding
+namespace MonoDevelop.TypeScriptBinding.Languages
 {
 	public class TypeScriptReferenceFinder : ReferenceFinder
 	{
@@ -62,4 +61,3 @@ namespace MonoDevelop.TypeScriptBinding
 		#endregion
 	}
 }
-#endif

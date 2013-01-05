@@ -105,6 +105,11 @@
 	<Extension path="/MonoDevelop/Ide/TextEditorExtensions">
 		<Class fileExtensions=".ts" class="MonoDevelop.TypeScriptBinding.Languages.Gui.TypeScriptCompletionTextEditorExtension" />
 	</Extension>
+	
+	<!-- Tooltip Provider -->
+	<Extension path = "/MonoDevelop/SourceEditor2/TooltipProviders">
+        <Class id="LanguageItem" class="MonoDevelop.TypeScriptBinding.Languages.Gui.TypeScriptTextEditorTooltipProvider" />
+    </Extension>
 
     <!-- TypeSystem Parser -->
 	<Extension path = "/MonoDevelop/TypeSystem/Parser">
@@ -115,15 +120,14 @@
 	<Extension path = "/MonoDevelop/TypeSystem/Ambiences">
 		<Ambience mimeType="text/x-typescript" class = "MonoDevelop.TypeScriptBinding.TypeScriptAmbience" />
 	</Extension>
-	
-	<!-- Tooltip Provider -->
-	<Extension path = "/MonoDevelop/SourceEditor2/TooltipProviders">
-        <Class id="LanguageItem" class="MonoDevelop.TypeScriptBinding.Languages.Gui.TypeScriptTextEditorTooltipProvider" />
-    </Extension>
 
     <!--- TextEditor Resolver -->
 	<Extension path = "/MonoDevelop/Ide/TextEditorResolver">
         <Resolver class = "MonoDevelop.TypeScriptBinding.Languages.Gui.TypeScriptTextEditorResolverProvider" mimeType="text/x-typescript" />
     </Extension>
-	
+
+	<!-- Reference Finder -->
+    <Extension path = "/MonoDevelop/Ide/ReferenceFinder">
+        <ReferenceFinder class = "MonoDevelop.TypeScriptBinding.Languages.TypeScriptReferenceFinder" supportedmimetypes = "text/x-typescript" />
+    </Extension>
 </Addin>
