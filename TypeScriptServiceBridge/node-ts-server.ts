@@ -16,7 +16,7 @@ server = http.createServer(function (req, res) {
         data += chunk.toString ();
     });
     req.on ('end', function () {
-        IO.printLine('request: ' + data);
+        IO.printLine('request: ' + (data.length > 80 ? data.substring (0, 80) + "..." : data));
         var ret : any;
         try {
 	        ret = {'result': evaluateFromRequest (data)};
@@ -26,7 +26,7 @@ server = http.createServer(function (req, res) {
 	    	} catch (err) {
 	            result = JSON.stringify ({'result': null});
 	    	}
-    	    IO.printLine('response:' + result);
+    	    IO.printLine('response:' + (result.length > 80 ? result.substring (0, 80) + "..." : result));
     	    res.writeHead(200, {
                 'Content-Type': 'text/plain'
     	    });
