@@ -1,8 +1,11 @@
 using System;
 using System.IO;
+using System.Linq;
 using MonoDevelop.Ide.TypeSystem;
 using MonoDevelop.Projects;
 using MonoDevelop.TypeScriptBinding.Projects;
+using Jurassic.Library;
+using TypeScriptServiceBridge.Harness;
 
 namespace MonoDevelop.TypeScriptBinding.NRefactory.TypeSystem
 {
@@ -27,7 +30,14 @@ namespace MonoDevelop.TypeScriptBinding.NRefactory.TypeSystem
 				return null;
 
 			var file = service.GetFilePath (fileName);
-			service.ShimHost.AddScript (file, content.ReadToEnd ());
+			bool contains = false;
+			foreach (ObjectInstance sinfo in ((ArrayInstance) service.ShimHost.Scripts.Instance).ElementValues)
+				if (sinfo ["name"] == file) {
+					contains = true;
+					break;
+				}
+			if (!contains)
+				service.ShimHost.AddScript (file, content.ReadToEnd ());
 
 			var doc = new ParsedDocumentDecorator (new TypeScriptUnresolvedFile (service, file));
 

@@ -15,6 +15,7 @@ using MonoDevelop.Core.Serialization;
 using MonoDevelop.Ide.Gui;
 using MonoDevelop.Projects;
 using MonoDevelop.TypeScriptBinding;
+using Mono.JavaScriptDebugger;
 
 namespace MonoDevelop.TypeScriptBinding.Projects
 {
@@ -152,8 +153,10 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 			argList.Add ("--out");
 			argList.Add (outfile.FirstOrDefault () == '"' ? '"' + outfile + '"' : outfile);
 			
-			if (configuration.DebugMode)
+			if (configuration.DebugMode) {
 				argList.Add ("-c");
+				argList.Add ("--sourcemap");
+			}
 			
 			if (project.AdditionalArguments != "")
 				argList.Add (project.AdditionalArguments);
@@ -226,8 +229,9 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 
 		ExecutionCommand CreateExecutionCommand (TypeScriptProjectConfiguration conf)
 		{
-			NativeExecutionCommand cmd = new NativeExecutionCommand (GetNodePath ());
-			cmd.Arguments = TargetJavaScriptFile + " " + conf.CommandLineParameters;
+			NodeExecutionCommand cmd = new NodeExecutionCommand (GetNodePath (), GetTargetJavascriptFilePath ());
+			cmd.Debug = conf.DebugMode;
+			cmd.AdditionalArguments = conf.CommandLineParameters;
 			cmd.WorkingDirectory = Path.GetDirectoryName (GetTargetJavascriptFilePath ());
 			return cmd;
 		}
