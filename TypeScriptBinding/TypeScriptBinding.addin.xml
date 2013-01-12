@@ -13,6 +13,7 @@
 	<Runtime>
     	<Import assembly="Jurassic.dll" />
     	<Import assembly="Mono.JavaScriptDebugger.dll" />
+    	<Import file="node-ts-server.js" />
     </Runtime>
 	
 	<Dependencies>
