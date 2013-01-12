@@ -6,6 +6,7 @@ using MonoDevelop.Core;
 using MonoDevelop.Ide;
 using MonoDevelop.Projects;
 using TypeScriptServiceBridge.Harness;
+using TypeScriptServiceBridge.Hosting;
 using TypeScriptServiceBridge.Services;
 
 namespace MonoDevelop.TypeScriptBinding
@@ -16,6 +17,7 @@ namespace MonoDevelop.TypeScriptBinding
 
 		public TypeScriptService (Project project)
 		{
+			NodeLanguageServiceHost.NodeCommandLocator = () => PropertyService.Get<string> ("TypeScriptBinding.NodeLocation");
 			this.project = project;
 			ShimHost = new TypeScriptLS ();
 			LanguageService = new TypeScriptServicesFactory ()
