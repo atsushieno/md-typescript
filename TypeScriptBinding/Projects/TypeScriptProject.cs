@@ -282,6 +282,7 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 
 		#region file change events
 
+		/*
 		protected override void OnFileRemovedFromProject (ProjectFileEventArgs e)
 		{
 			base.OnFileRemovedFromProject (e);
@@ -297,7 +298,7 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 			// FIXME: make sure that adding, removing and then adding the same file still works (as "remove" does not really remove it).
 			foreach (var item in e)
 				if (item.ProjectFile.Subtype == Subtype.Code && item.ProjectFile.BuildAction == BuildAction.Compile)
-					typescript.ShimHost.AddScript (typescript.GetFilePath (item.ProjectFile), File.ReadAllText (typescript.GetFilePath (item.ProjectFile)));
+					typescript.ShimHost.AddScript (typescript.GetFilePath (item.ProjectFile), File.ReadAllText (typescript.GetFilePath (item.ProjectFile)), true);
 		}
 		
 		protected override void OnFileRenamedInProject (ProjectFileRenamedEventArgs e)
@@ -309,8 +310,9 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 			// FIXME: make sure that adding, removing and then adding the same file still works (as "remove" does not really remove it).
 			foreach (ProjectFileRenamedEventInfo item in e)
 				if (item.ProjectFile.Subtype == Subtype.Code && item.ProjectFile.BuildAction == BuildAction.Compile)
-					typescript.ShimHost.AddScript (typescript.GetFilePath (item.NewName), File.ReadAllText (typescript.GetFilePath (item.NewName)));
+					typescript.ShimHost.AddScript (typescript.GetFilePath (item.NewName), File.ReadAllText (typescript.GetFilePath (item.NewName)), true);
 		}
+		*/
 
 		#endregion
 	}

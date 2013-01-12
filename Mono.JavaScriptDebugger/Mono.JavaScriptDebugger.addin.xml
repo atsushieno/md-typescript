@@ -4,7 +4,7 @@
         author        = "Atsushi Enomoto"  
         copyright     = "MIT X11"
         description   = "provides JavaScript debugging feature via node.js"  
-        category      = "Debugger"  
+        category      = "Debugging"  
         version       = "0.1.0" >
 	
 	<!-- Dependencies -->
@@ -15,10 +15,12 @@
 		<Addin id="Debugger" version="3.0" />
 	</Dependencies>
 		
+	<!--
 	<Extension path="/MonoDevelop/Debugging/DebuggerEngines">
 		<DebuggerEngine id="Mono.Debugger.NodeJS" 
 			name="NodeJS Debugger" 
 			features="Tracepoints, Catchpoints, DebugFile, Stepping, Pause, Breakpoints"
 			type="MonoDevelop.JavaScript.Debugger.Node.NodeDebuggerSessionFactory" />
 	</Extension>
+	-->
 </Addin>

@@ -46,6 +46,11 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 			base.Dispose ();
 		}
 
+		public override bool ExtendsEditor (Document doc, IEditableTextBuffer editor)
+		{
+			return doc.FileName.FileName.EndsWith (".ts");
+		}
+
 		public override bool CanRunCompletionCommand ()
 		{
 			return service != null;

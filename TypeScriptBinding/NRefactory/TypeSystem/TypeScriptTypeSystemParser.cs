@@ -32,12 +32,12 @@ namespace MonoDevelop.TypeScriptBinding.NRefactory.TypeSystem
 			var file = service.GetFilePath (fileName);
 			bool contains = false;
 			foreach (ObjectInstance sinfo in ((ArrayInstance) service.ShimHost.Scripts.Instance).ElementValues)
-				if (sinfo ["name"] == file) {
+				if ((string) sinfo ["name"] == file) {
 					contains = true;
 					break;
 				}
 			if (!contains)
-				service.ShimHost.AddScript (file, content.ReadToEnd ());
+				service.ShimHost.AddScript (file, content.ReadToEnd (), true);
 
 			var doc = new ParsedDocumentDecorator (new TypeScriptUnresolvedFile (service, file));
 
@@ -53,4 +53,3 @@ namespace MonoDevelop.TypeScriptBinding.NRefactory.TypeSystem
 		#endregion
 	}
 }
-
