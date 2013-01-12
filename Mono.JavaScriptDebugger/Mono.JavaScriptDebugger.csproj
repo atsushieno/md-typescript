@@ -66,9 +66,4 @@
       <Name>TypeScriptServiceBridge</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Mono.JavaScriptDebugger.addin.xml">
-      <LogicalName>Mono.JavaScriptDebugger.addin.xml</LogicalName>
-    </EmbeddedResource>
-  </ItemGroup>
 </Project>

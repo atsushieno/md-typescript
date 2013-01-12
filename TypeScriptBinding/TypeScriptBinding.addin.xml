@@ -10,6 +10,11 @@
 	
 	<!-- Dependencies -->
 	
+	<Runtime>
+    	<Import assembly="Jurassic.dll" />
+    	<Import assembly="Mono.JavaScriptDebugger.dll" />
+    </Runtime>
+	
 	<Dependencies>
 		<Addin id="Core" version="3.0" />
 		<Addin id="Ide" version="3.0" />
@@ -122,4 +127,13 @@
     <Extension path = "/MonoDevelop/Ide/ReferenceFinder">
         <ReferenceFinder class = "MonoDevelop.TypeScriptBinding.Languages.TypeScriptReferenceFinder" supportedmimetypes = "text/x-typescript" />
     </Extension>
+		
+	<!--
+	<Extension path="/MonoDevelop/Debugging/DebuggerEngines">
+		<DebuggerEngine id="Mono.Debugger.NodeJS" 
+			name="NodeJS Debugger" 
+			features="Tracepoints, Catchpoints, DebugFile, Stepping, Pause, Breakpoints"
+			type="MonoDevelop.JavaScript.Debugger.Node.NodeDebuggerSessionFactory" />
+	</Extension>
+	-->
 </Addin>
