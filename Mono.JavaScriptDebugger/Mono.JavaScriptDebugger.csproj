@@ -54,6 +54,7 @@
     <Compile Include="NodeEvent.cs" />
     <Compile Include="NodeBacktrace.cs" />
     <Compile Include="NodeExecutionCommand.cs" />
+    <Compile Include="V8DebuggerProtocolClient.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
