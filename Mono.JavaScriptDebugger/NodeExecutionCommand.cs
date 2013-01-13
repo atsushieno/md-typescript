@@ -12,7 +12,14 @@ namespace Mono.JavaScriptDebugger
 			ScriptPath = scriptPath;
 		}
 
-		public bool Debug { get; set; }
+		bool debug;
+		public bool Debug {
+			get { return debug; }
+			set {
+				debug = value;
+				UpdateArguments ();
+			}
+		}
 
 		public string ScriptPath { get; private set; }
 

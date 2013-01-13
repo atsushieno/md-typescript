@@ -5,7 +5,7 @@
         copyright     = "MIT X11"
         description   = "TypeScript Language Binding"  
         category      = "Language bindings"  
-        version       = "0.1.0" >
+        version       = "0.1.1" >
 	
 	
 	<!-- Dependencies -->
@@ -129,12 +129,10 @@
         <ReferenceFinder class = "MonoDevelop.TypeScriptBinding.Languages.TypeScriptReferenceFinder" supportedmimetypes = "text/x-typescript" />
     </Extension>
 		
-	<!--
 	<Extension path="/MonoDevelop/Debugging/DebuggerEngines">
 		<DebuggerEngine id="Mono.Debugger.NodeJS" 
 			name="NodeJS Debugger" 
 			features="Tracepoints, Catchpoints, DebugFile, Stepping, Pause, Breakpoints"
 			type="MonoDevelop.JavaScript.Debugger.Node.NodeDebuggerSessionFactory" />
 	</Extension>
-	-->
 </Addin>

@@ -16,7 +16,6 @@ namespace MonoDevelop.JavaScript.Debugger.Node
 	class NodeDebuggerSession: DebuggerSession
 	{
 		Process proc;
-		StreamReader sout;
 		StreamWriter sin;
 		IProcessAsyncOperation console;
 		NodeCommandResult lastResult;
@@ -69,7 +68,7 @@ namespace MonoDevelop.JavaScript.Debugger.Node
 		string GetNodePath ()
 		{
 			string exe = PropertyService.Get<string> ("TypeScriptBinding.NodeLocation");
-			return exe ?? FindToolPath ("node");
+			return string.IsNullOrEmpty (exe) ? FindToolPath ("node") : exe;
 		}
 
 		static string FindToolPath (string tool)
@@ -93,15 +92,11 @@ namespace MonoDevelop.JavaScript.Debugger.Node
 			proc.StartInfo.RedirectStandardOutput = true;
 			proc.StartInfo.RedirectStandardError = true;
 			proc.StartInfo.EnvironmentVariables ["NODE_DISABLE_COLORS"] = "1";
+			proc.OutputDataReceived += (sender, e) => ProcessOutput (e.Data);
 			proc.Start ();
 			
-			sout = proc.StandardOutput;
 			sin = proc.StandardInput;
-			
-			thread = new Thread (OutputInterpreter);
-			thread.Name = "Node output interpeter";
-			thread.IsBackground = true;
-			thread.Start ();
+			sin.NewLine = Environment.NewLine;
 		}
 		
 		public override void Dispose ()
@@ -110,9 +105,6 @@ namespace MonoDevelop.JavaScript.Debugger.Node
 				console.Cancel ();
 				console = null;
 			}
-			
-			if (thread != null)
-				thread.Abort ();
 
 			if (proc != null)
 				proc.Kill ();
@@ -474,6 +466,7 @@ namespace MonoDevelop.JavaScript.Debugger.Node
 						Console.WriteLine ("node debugger<: " + command + " " + string.Join (" ", args));
 					
 					sin.WriteLine (command + " " + string.Join (" ", args));
+					sin.Flush ();
 					
 					if (!Monitor.Wait (syncLock, 4000))
 						throw new InvalidOperationException ("Command execution timeout: " + command + " " + string.Join (" ", args));
@@ -502,25 +495,13 @@ namespace MonoDevelop.JavaScript.Debugger.Node
 			if (resume)
 				RunCommand ("cont");
 		}
-		
-		void OutputInterpreter ()
-		{
-			string line;
-			while ((line = sout.ReadLine ()) != null) {
-				try {
-					ProcessOutput (line);
-				} catch (Exception ex) {
-					Console.WriteLine (ex);
-				}
-			}
-		}
 
 		bool output_contd = false;
 		string stored_output = null;
 		void ProcessOutput (string line)
 		{
 			if (logNode)
-				Console.WriteLine (line); // "debug> (\b) ..."
+				LogWriter (false, line); // "debug> (\b) ..."
 			stored_output += line + "\n";
 			if (!output_contd)
 				line = line.Substring ("debug> ".Length);

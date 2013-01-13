@@ -16,6 +16,7 @@ using MonoDevelop.Ide.Gui;
 using MonoDevelop.Projects;
 using MonoDevelop.TypeScriptBinding;
 using Mono.JavaScriptDebugger;
+using System.Text.RegularExpressions;
 
 namespace MonoDevelop.TypeScriptBinding.Projects
 {
@@ -24,7 +25,8 @@ namespace MonoDevelop.TypeScriptBinding.Projects
     public class TypeScriptProject : Project
 	{
 		TypeScriptService typescript;
-
+		IConsole console;
+		
 		public TypeScriptService TypeScriptService {
 			get { return typescript; }
 		}
@@ -74,7 +76,12 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 			configuration.DebugMode = false;
 			Configurations.Add (configuration);
 		}
-		
+
+		public override void Dispose ()
+		{
+			if (console != null)
+				console.Dispose ();
+		}
 		
 		public override SolutionItemConfiguration CreateConfiguration (string name)
 		{
@@ -139,10 +146,10 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 			return null;
 		}
 		
-		public static BuildResult CompileWithTsc (TypeScriptProject project, TypeScriptProjectConfiguration configuration, IProgressMonitor monitor)
+		public BuildResult CompileWithTsc (TypeScriptProject project, TypeScriptProjectConfiguration configuration, IProgressMonitor monitor)
 		{
 			string exe = PropertyService.Get<string> ("TypeScriptBinding.TscLocation");
-			exe = exe ?? FindToolPath ("tsc");
+			exe = string.IsNullOrEmpty (exe) ? FindToolPath ("tsc") : exe;
 			
 			var outfile = project.GetTargetJavascriptFilePath ();
 			var outdir = Path.GetDirectoryName (outfile);
@@ -204,22 +211,40 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 			
 			return exitcode;
 		}
+
+		Regex error_rex = new Regex ("(.*)\\(([0-9]+),([0-9]+)\\): (.*)");
 		
-		static BuildResult ParseOutput (TypeScriptProject project, string stdOutAndErr)
+		BuildResult ParseOutput (TypeScriptProject project, string stdOutAndErr)
 		{
 			BuildResult result = new BuildResult ();
 			
 			StringBuilder output = new StringBuilder ();
-			foreach (var line in stdOutAndErr.Split ('\n').Select (l => l.Trim ())) {
+			bool enteredStackTrace = false;
+			string next = string.Empty;
+			foreach (var l in stdOutAndErr.Split ('\n').Select (l => l.Trim ()).Concat (new string [] {""})) {
+				var line = next;
+				next = l;
 				output.AppendLine (line);
-				
-				if (line.Length == 0 || line.StartsWith ("\t"))
+
+				if (next == "throw err;") {
+					result.Append (new BuildError () { ErrorText = "Internal compiler error occured. Check build output for details."});
+					enteredStackTrace = true;
+				}
+
+				if (enteredStackTrace || line.Length == 0 || line.StartsWith ("\t"))
 					continue;
-				
-				// FIXME: implement
-				BuildError error = new BuildError () { ErrorText = line };
-				if (error != null)
-					result.Append (error);
+
+				var error = new BuildError ();
+				var match = error_rex.Match (line);
+				if (match.Length > 0) {
+					error.FileName = match.Groups [1].ToString ().TrimEnd (' ');
+					error.Line = int.Parse (match.Groups [2].ToString ());
+					error.Column = int.Parse (match.Groups [3].ToString ());
+					error.ErrorText = match.Groups [4].ToString ();
+				}
+				else
+					error.ErrorText = line;
+				result.Append (error);
 			}
 			
 			result.CompilerOutput = output.ToString ();
@@ -230,7 +255,6 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 		ExecutionCommand CreateExecutionCommand (TypeScriptProjectConfiguration conf)
 		{
 			NodeExecutionCommand cmd = new NodeExecutionCommand (GetNodePath (), GetTargetJavascriptFilePath ());
-			cmd.Debug = conf.DebugMode;
 			cmd.AdditionalArguments = conf.CommandLineParameters;
 			cmd.WorkingDirectory = Path.GetDirectoryName (GetTargetJavascriptFilePath ());
 			return cmd;
@@ -239,16 +263,18 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 		string GetNodePath ()
 		{
 			string exe = PropertyService.Get<string> ("TypeScriptBinding.NodeLocation");
-			return exe ?? FindToolPath ("node");
+			return string.IsNullOrEmpty (exe) ? FindToolPath ("node") : exe;
 		}
 		
 		public void ExecuteWithNode (TypeScriptProject project, TypeScriptProjectConfiguration conf, IProgressMonitor monitor, ExecutionContext context)
 		{
+			if (console != null)
+				console.Dispose ();
+
 			var exe = GetNodePath ();
 
 			bool pause = conf.PauseConsoleOutput;
-			IConsole console;
-			
+
 			monitor.Log.WriteLine ("Running project...");
 			
 			if (conf.ExternalConsole)

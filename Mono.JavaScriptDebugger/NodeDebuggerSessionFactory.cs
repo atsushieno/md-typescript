@@ -65,6 +65,7 @@ namespace MonoDevelop.JavaScript.Debugger.Node
 		public DebuggerStartInfo CreateDebuggerStartInfo (ExecutionCommand command)
 		{
 			NodeExecutionCommand pec = (NodeExecutionCommand) command;
+			pec.Debug = true;
 			NodeDebuggerStartInfo startInfo = new NodeDebuggerStartInfo ();
 			startInfo.Command = pec.Command;
 			startInfo.Arguments = pec.Arguments;

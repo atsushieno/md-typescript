@@ -83,7 +83,8 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 			if (EnableParameterInsight && (keyChar == ',' || keyChar == ')') && CanRunParameterCompletionCommand ())
 				base.RunParameterCompletionCommand ();
 
-			service.UpdateLastEditTime (this.Document.FileName);
+			if (Document != null)
+				service.UpdateLastEditTime (this.Document.FileName);
 
 			return result;
 		}
