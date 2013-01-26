@@ -15,3 +15,6 @@ checkout-jurassic:
 external/ts2cs/src/TypeScriptBridge.cs:
 	make -C external/ts2cs
 	make -C external/ts2cs/src
+
+pack:
+	mdtool setup pack ../monodevelop-master/main/build/AddIns/TypeScriptBinding/MonoDevelop.TypeScriptBinding.dll

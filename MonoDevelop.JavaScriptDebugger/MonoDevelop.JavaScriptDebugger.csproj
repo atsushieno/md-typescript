@@ -5,10 +5,10 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{033F1267-FE01-4974-8473-16E28841F048}</ProjectGuid>
+    <ProjectGuid>{C3C01664-18E0-437D-A8B5-C4DDD42D7876}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Mono.JavaScriptDebugger</RootNamespace>
-    <AssemblyName>Mono.JavaScriptDebugger</AssemblyName>
+    <RootNamespace>MonoDevelop.JavaScriptDebugger</RootNamespace>
+    <AssemblyName>MonoDevelop.JavaScriptDebugger</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -30,17 +30,38 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
+    <Reference Include="MonoDevelop.Core">
+      <HintPath>..\..\monodevelop-master\main\build\bin\MonoDevelop.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoDevelop.Ide">
+      <HintPath>..\..\monodevelop-master\main\build\bin\MonoDevelop.Ide.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Debugging">
+      <HintPath>..\..\monodevelop-master\main\build\bin\Mono.Debugging.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoDevelop.Debugger, Version=2.6.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\monodevelop-master\main\build\AddIns\MonoDevelop.Debugger\MonoDevelop.Debugger.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SourceMap.cs" />
-    <Compile Include="V8DebuggerProtocolClient.cs" />
+    <Compile Include="NodeBacktrace.cs" />
+    <Compile Include="NodeDebuggerSession.cs" />
+    <Compile Include="NodeDebuggerSessionFactory.cs" />
+    <Compile Include="NodeExecutionCommand.cs" />
+    <Compile Include="ResultData.cs" />
+    <Compile Include="NodeEvent.cs" />
+    <Compile Include="NodeCommandResult.cs" />
+    <Compile Include="CommandStatus.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\..\..\home\atsushi\svn\md-typescript\external\jurassic\Jurassic\Jurassic.csproj">
       <Project>{2CE5502D-8710-4BE3-9D90-201D526904B3}</Project>
       <Name>Jurassic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mono.JavaScriptDebugger\Mono.JavaScriptDebugger.csproj">
+      <Project>{033F1267-FE01-4974-8473-16E28841F048}</Project>
+      <Name>Mono.JavaScriptDebugger</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\home\atsushi\svn\md-typescript\TypeScriptServiceBridge\TypeScriptServiceBridge.csproj">
       <Project>{17F48D22-DFF8-48FB-935B-BBF17F63B39C}</Project>

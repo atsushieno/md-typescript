@@ -173,5 +173,9 @@
       <Project>{033F1267-FE01-4974-8473-16E28841F048}</Project>
       <Name>Mono.JavaScriptDebugger</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\svn\md-typescript\MonoDevelop.JavaScriptDebugger\MonoDevelop.JavaScriptDebugger.csproj">
+      <Project>{C3C01664-18E0-437D-A8B5-C4DDD42D7876}</Project>
+      <Name>MonoDevelop.JavaScriptDebugger</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

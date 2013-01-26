@@ -17,6 +17,7 @@ using MonoDevelop.Projects;
 using MonoDevelop.TypeScriptBinding;
 using Mono.JavaScriptDebugger;
 using System.Text.RegularExpressions;
+using TypeScriptServiceBridge.Hosting;
 
 namespace MonoDevelop.TypeScriptBinding.Projects
 {
@@ -24,6 +25,15 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 	[DataInclude (typeof (TypeScriptProjectConfiguration))]
     public class TypeScriptProject : Project
 	{
+		static TypeScriptProject ()
+		{
+			var host = new NodeLanguageServiceHost ();
+			LanguageServiceHost.Instance = host;
+			// FIXME: redirect somewhere visible
+			//host.StandardErrorReceived += LoggingService.LogInfo;
+			//host.StandardOutputReceived += LoggingService.LogInfo;
+		}
+
 		TypeScriptService typescript;
 		IConsole console;
 		
