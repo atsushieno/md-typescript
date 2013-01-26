@@ -31,8 +31,8 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 			var host = new NodeLanguageServiceHost ();
 			LanguageServiceHost.Instance = host;
 			// FIXME: redirect somewhere visible
-			//host.StandardErrorReceived += LoggingService.LogInfo;
-			//host.StandardOutputReceived += LoggingService.LogInfo;
+			host.StandardErrorReceived += LoggingService.LogInfo;
+			host.StandardOutputReceived += LoggingService.LogInfo;
 		}
 
 		TypeScriptService typescript;

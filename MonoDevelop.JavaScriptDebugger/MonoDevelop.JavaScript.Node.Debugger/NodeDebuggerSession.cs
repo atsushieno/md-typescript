@@ -55,7 +55,7 @@ namespace MonoDevelop.JavaScript.Node.Debugger
 
 				OnStarted ();
 				
-				RunCommand ("run");
+				RunCommand ("cont");
 			}
 		}
 		
@@ -93,10 +93,12 @@ namespace MonoDevelop.JavaScript.Node.Debugger
 			proc.StartInfo.RedirectStandardError = true;
 			proc.StartInfo.EnvironmentVariables ["NODE_DISABLE_COLORS"] = "1";
 			proc.OutputDataReceived += (sender, e) => ProcessOutput (e.Data);
+			proc.ErrorDataReceived += (sender, e) => ProcessOutput (e.Data);
 			proc.Start ();
 			
 			sin = proc.StandardInput;
-			sin.NewLine = Environment.NewLine;
+			proc.BeginOutputReadLine ();
+			proc.BeginErrorReadLine ();
 		}
 		
 		public override void Dispose ()
@@ -467,7 +469,7 @@ namespace MonoDevelop.JavaScript.Node.Debugger
 					
 					sin.WriteLine (command + " " + string.Join (" ", args));
 					sin.Flush ();
-					
+
 					if (!Monitor.Wait (syncLock, 4000))
 						throw new InvalidOperationException ("Command execution timeout: " + command + " " + string.Join (" ", args));
 					if (lastResult.Status == CommandStatus.Error)
@@ -500,37 +502,38 @@ namespace MonoDevelop.JavaScript.Node.Debugger
 		string stored_output = null;
 		void ProcessOutput (string line)
 		{
-			if (logNode)
+			try {
+				DoProcessOutput (line);
+			} catch (Exception ex) {
+				if (logNode && LogWriter != null)
+					LogWriter (false, ex.ToString ());
+			}
+		}
+
+		void DoProcessOutput (string line)
+		{
+			if (line == null)
+				return;
+			if (logNode && LogWriter != null)
 				LogWriter (false, line); // "debug> (\b) ..."
-			stored_output += line + "\n";
-			if (!output_contd)
-				line = line.Substring ("debug> ".Length);
-			switch (line [0]) {
-				/*
-			case '^':
+			if (line.StartsWith ("debug>")) {
+				output_contd = false;
+				stored_output = null;
+				line = line.Substring ("debug> ....\b".Length);
+			}
+			else
+				stored_output += line + "\n";
+			if (line [0] != '<') {
 				lock (syncLock) {
 					lastResult = new NodeCommandResult (line);
 					running = (lastResult.Status == CommandStatus.Running);
 					Monitor.PulseAll (syncLock);
 				}
-				break;
-				
-			case '~':
-			case '&':
-				if (line.Length > 1 && line[1] == '"')
-					line = line.Substring (2, line.Length - 5);
-				ThreadPool.QueueUserWorkItem (delegate {
-					OnTargetOutput (false, line + "\n");
-				});
-				break;
-				
-			case '*':
-			*/
-			default:
+			} else {
 				NodeEvent ev;
 				lock (eventLock) {
 					running = false;
-					ev = new NodeEvent (line);
+					ev = new NodeEvent (line.Substring (1));
 					string ti = ev.GetValue ("thread-id");
 					if (ti != null && ti != "all")
 						currentThread = activeThread = int.Parse (ti);
@@ -547,7 +550,6 @@ namespace MonoDevelop.JavaScript.Node.Debugger
 						Console.WriteLine (ex);
 					}
 				});
-				break;
 			}
 		}
 		

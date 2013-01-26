@@ -1,4 +1,5 @@
-// Untested at all.
+// Not likely to work with nodejs.
+// Anyways using ServiceBridge is totally wrong, it's not running on top of other host.
 using System;
 using TypeScriptServiceBridge.V8Debugger;
 using TypeScriptServiceBridge;
@@ -23,8 +24,9 @@ namespace Mono.JavaScript.Node.Debugger
 		{
 			this.engine = engine;
 			client = new TcpClient ("localhost", port);
-			reader = new StreamReader (client.GetStream ());
-			writer = new StreamWriter (client.GetStream ());
+			stream = client.GetStream ();
+			reader = new StreamReader (stream);
+			writer = new StreamWriter (stream);
 			reader_loop_thread = new Thread (EventLoop);
 			reader_loop_thread.Start ();
 		}
@@ -52,6 +54,7 @@ namespace Mono.JavaScript.Node.Debugger
 		object reader_lock = new object ();
 		ScriptEngine engine;
 		TcpClient client;
+		NetworkStream stream;
 		StreamWriter writer;
 		StreamReader reader;
 
@@ -66,15 +69,26 @@ namespace Mono.JavaScript.Node.Debugger
 		public void EventLoop ()
 		{
 			while (reader_loop) {
+				Thread.Sleep (50);
+				if (!stream.DataAvailable)
+					continue;
 				lock (reader_lock) {
 					if (!reader_loop)
 						break;
 					var line = reader.ReadLine ();
-					var obj = (ObjectInstance) JSONObject.Parse (engine, line);
-					if (obj.HasProperty ("uncaught"))
-						OnUncaughtException (new DebuggerEvent (obj));
-					else
-						OnBreak (new DebuggerEvent (obj));
+					if (line == null) {
+						Console.WriteLine ("no input");
+						continue;
+					}
+					try {
+						var obj = (ObjectInstance) JSONObject.Parse (engine, line);
+						if (obj.HasProperty ("uncaught"))
+							OnUncaughtException (new DebuggerEvent (obj));
+						else
+							OnBreak (new DebuggerEvent (obj));
+					} catch (JavaScriptException ex) {
+						Console.WriteLine ("Error on parsing : " + line + Environment.NewLine + "Details: " + Environment.NewLine + ex);
+					}
 				}
 			}
 			if (reader_finished != null)

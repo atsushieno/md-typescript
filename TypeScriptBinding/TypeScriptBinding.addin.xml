@@ -13,6 +13,7 @@
 	<Runtime>
     	<Import assembly="Jurassic.dll" />
     	<Import assembly="Mono.JavaScriptDebugger.dll" />
+    	<Import assembly="MonoDevelop.JavaScriptDebugger.dll" />
     	<Import file="node-ts-server.js" />
     </Runtime>
 	
@@ -133,6 +134,6 @@
 		<DebuggerEngine id="Mono.Debugger.NodeJS" 
 			name="NodeJS Debugger" 
 			features="Tracepoints, Catchpoints, DebugFile, Stepping, Pause, Breakpoints"
-			type="MonoDevelop.JavaScript.Debugger.Node.NodeDebuggerSessionFactory" />
+			type="MonoDevelop.JavaScript.Node.Debugger.NodeDebuggerSessionFactory" />
 	</Extension>
 </Addin>
