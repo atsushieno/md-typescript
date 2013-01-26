@@ -15,7 +15,8 @@ using MonoDevelop.Core.Serialization;
 using MonoDevelop.Ide.Gui;
 using MonoDevelop.Projects;
 using MonoDevelop.TypeScriptBinding;
-using Mono.JavaScriptDebugger;
+using Mono.JavaScript.Debugger;
+using MonoDevelop.JavaScript.Node;
 using System.Text.RegularExpressions;
 using TypeScriptServiceBridge.Hosting;
 

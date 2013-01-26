@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using MonoDevelop.Core.Execution;
 
-namespace Mono.JavaScriptDebugger
+namespace MonoDevelop.JavaScript.Node
 {
 	public class NodeExecutionCommand : NativeExecutionCommand
 	{

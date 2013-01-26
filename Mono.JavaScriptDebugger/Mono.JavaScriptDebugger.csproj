@@ -33,8 +33,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SourceMap.cs" />
-    <Compile Include="V8DebuggerProtocolClient.cs" />
+    <Compile Include="Mono.JavaScript.Debugger\SourceMap.cs" />
+    <Compile Include="Mono.JavaScript.Node.Debugger\V8DebuggerProtocolClient.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -46,5 +46,9 @@
       <Project>{17F48D22-DFF8-48FB-935B-BBF17F63B39C}</Project>
       <Name>TypeScriptServiceBridge</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mono.JavaScript.Debugger\" />
+    <Folder Include="Mono.JavaScript.Node.Debugger\" />
   </ItemGroup>
 </Project>

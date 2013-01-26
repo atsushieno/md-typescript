@@ -44,14 +44,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NodeBacktrace.cs" />
-    <Compile Include="NodeDebuggerSession.cs" />
-    <Compile Include="NodeDebuggerSessionFactory.cs" />
-    <Compile Include="NodeExecutionCommand.cs" />
-    <Compile Include="ResultData.cs" />
-    <Compile Include="NodeEvent.cs" />
-    <Compile Include="NodeCommandResult.cs" />
-    <Compile Include="CommandStatus.cs" />
+    <Compile Include="MonoDevelop.JavaScript.Node.Debugger\CommandStatus.cs" />
+    <Compile Include="MonoDevelop.JavaScript.Node.Debugger\NodeBacktrace.cs" />
+    <Compile Include="MonoDevelop.JavaScript.Node.Debugger\NodeCommandResult.cs" />
+    <Compile Include="MonoDevelop.JavaScript.Node.Debugger\NodeDebuggerSession.cs" />
+    <Compile Include="MonoDevelop.JavaScript.Node.Debugger\NodeDebuggerSessionFactory.cs" />
+    <Compile Include="MonoDevelop.JavaScript.Node.Debugger\NodeEvent.cs" />
+    <Compile Include="MonoDevelop.JavaScript.Node\NodeExecutionCommand.cs">
+      <DependentUpon>NodeExecutionCommand.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MonoDevelop.JavaScript.Node.Debugger\ResultData.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -67,5 +69,9 @@
       <Project>{17F48D22-DFF8-48FB-935B-BBF17F63B39C}</Project>
       <Name>TypeScriptServiceBridge</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MonoDevelop.JavaScript.Node.Debugger\" />
+    <Folder Include="MonoDevelop.JavaScript.Node\" />
   </ItemGroup>
 </Project>

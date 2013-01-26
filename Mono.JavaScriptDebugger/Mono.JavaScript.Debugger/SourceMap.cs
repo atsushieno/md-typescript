@@ -5,7 +5,7 @@ using System.Linq;
 using Jurassic.Library;
 using Jurassic;
 
-namespace Mono.JavaScriptDebugger
+namespace Mono.JavaScript.Debugger
 {
 	public class SourceMap
 	{

@@ -8,7 +8,7 @@ using System.IO;
 using Jurassic;
 using System.Threading;
 
-namespace Mono.JavaScriptDebugger
+namespace Mono.JavaScript.Node.Debugger
 {
 	public class V8DebuggerProtocolClient : IDisposable
 	{

@@ -11,7 +11,7 @@ using MonoDevelop.Core;
 using MonoDevelop.Core.Execution;
 //using Mono.Unix.Native;
 
-namespace MonoDevelop.JavaScript.Debugger.Node
+namespace MonoDevelop.JavaScript.Node.Debugger
 {
 	class NodeDebuggerSession: DebuggerSession
 	{
@@ -20,7 +20,7 @@ namespace MonoDevelop.JavaScript.Debugger.Node
 		IProcessAsyncOperation console;
 		NodeCommandResult lastResult;
 		bool running;
-		Thread thread;
+		// While there is no thread support, it is messy to remove all relevant code.
 		long currentThread = -1;
 		long activeThread = -1;
 		//bool isMonoProcess;

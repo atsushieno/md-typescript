@@ -1,6 +1,6 @@
 using System;
 
-namespace MonoDevelop.JavaScript.Debugger.Node
+namespace MonoDevelop.JavaScript.Node.Debugger
 {
 	enum CommandStatus
 	{
