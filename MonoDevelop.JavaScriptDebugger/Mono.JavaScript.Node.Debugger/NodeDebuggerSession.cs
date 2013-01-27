@@ -7,17 +7,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using Mono.Debugging.Client;
-using MonoDevelop.Core;
-using MonoDevelop.Core.Execution;
-//using Mono.Unix.Native;
 
-namespace MonoDevelop.JavaScript.Node.Debugger
+namespace Mono.JavaScript.Node.Debugger
 {
 	class NodeDebuggerSession: DebuggerSession
 	{
 		Process proc;
 		StreamWriter sin;
-		IProcessAsyncOperation console;
 		NodeCommandResult lastResult;
 		bool running;
 		// While there is no thread support, it is messy to remove all relevant code.
@@ -40,9 +36,12 @@ namespace MonoDevelop.JavaScript.Node.Debugger
 		object syncLock = new object ();
 		object eventLock = new object ();
 		object nodeLock = new object ();
+		ManualResetEventSlim bootstrap_lock = new ManualResetEventSlim (false);
+		string node_path;
 		
-		public NodeDebuggerSession ()
+		public NodeDebuggerSession (string nodePath)
 		{
+			node_path = nodePath;
 			logNode = true;//!string.IsNullOrEmpty (Environment.GetEnvironmentVariable ("MONODEVELOP_NODE_LOG"));
 		}
 		
@@ -64,28 +63,10 @@ namespace MonoDevelop.JavaScript.Node.Debugger
 			throw new NotSupportedException ();
 		}
 
-		// Copy from MonoDevelop.TypeScriptBinding.Projects.TypeScriptProject.
-		string GetNodePath ()
-		{
-			string exe = PropertyService.Get<string> ("TypeScriptBinding.NodeLocation");
-			return string.IsNullOrEmpty (exe) ? FindToolPath ("node") : exe;
-		}
-
-		static string FindToolPath (string tool)
-		{
-			var paths = Environment.GetEnvironmentVariable ("PATH").Split (Path.PathSeparator);
-			foreach (var path in paths) {
-				var p = Path.Combine (path, tool);
-				if (File.Exists (p))
-					return p;
-			}
-			return null;
-		}
-
 		void StartNodeDebugger (string args)
 		{
 			proc = new Process ();
-			proc.StartInfo.FileName = GetNodePath ();
+			proc.StartInfo.FileName = node_path;
 			proc.StartInfo.Arguments = args;
 			proc.StartInfo.UseShellExecute = false;
 			proc.StartInfo.RedirectStandardInput = true;
@@ -93,21 +74,28 @@ namespace MonoDevelop.JavaScript.Node.Debugger
 			proc.StartInfo.RedirectStandardError = true;
 			proc.StartInfo.EnvironmentVariables ["NODE_DISABLE_COLORS"] = "1";
 			proc.OutputDataReceived += (sender, e) => ProcessOutput (e.Data);
-			proc.ErrorDataReceived += (sender, e) => ProcessOutput (e.Data);
-			proc.Start ();
+			proc.ErrorDataReceived += (sender, e) => ProcessError (e.Data);
+
+			lock (nodeLock) {
+				proc.Start ();
 			
-			sin = proc.StandardInput;
-			proc.BeginOutputReadLine ();
-			proc.BeginErrorReadLine ();
+				sin = proc.StandardInput;
+				proc.BeginOutputReadLine ();
+				proc.BeginErrorReadLine ();
+
+				if (!bootstrap_lock.Wait (8000))
+					throw new InvalidOperationException ("Debugger did not start");
+				if (logNode)
+					LogWriter (false, "connected to node debugger");
+			}
 		}
+
+		public event Action Disposing;
 		
 		public override void Dispose ()
 		{
-			if (console != null && !console.IsCompleted) {
-				console.Cancel ();
-				console = null;
-			}
-
+			if (Disposing != null)
+				Disposing ();
 			if (proc != null)
 				proc.Kill ();
 		}
@@ -119,6 +107,8 @@ namespace MonoDevelop.JavaScript.Node.Debugger
 		
 		protected override void OnStop ()
 		{
+			if (!proc.HasExited)
+				proc.Kill ();
 			//Syscall.kill (proc.Id, Signum.SIGINT);
 		}
 		
@@ -143,11 +133,12 @@ namespace MonoDevelop.JavaScript.Node.Debugger
 		protected override void OnStepLine ()
 		{
 			SelectThread (activeThread);
-			RunCommand ("step");
+			RunCommand ("next");
 		}
 		
 		protected override void OnNextLine ()
 		{
+			// can't differentiate from next on node.
 			SelectThread (activeThread);
 			RunCommand ("next");
 		}
@@ -155,7 +146,7 @@ namespace MonoDevelop.JavaScript.Node.Debugger
 		protected override void OnStepInstruction ()
 		{
 			SelectThread (activeThread);
-			RunCommand ("-exec-step-instruction");
+			RunCommand ("step");
 		}
 		
 		protected override void OnNextInstruction ()
@@ -167,6 +158,7 @@ namespace MonoDevelop.JavaScript.Node.Debugger
 		protected override void OnFinish ()
 		{
 			SelectThread (activeThread);
+			/*
 			NodeCommandResult res = RunCommand ("-stack-info-depth", "2");
 			if (res.GetValue ("depth") == "1") {
 				RunCommand ("-exec-continue");
@@ -174,6 +166,7 @@ namespace MonoDevelop.JavaScript.Node.Debugger
 				RunCommand ("-stack-select-frame", "0");
 				RunCommand ("-exec-finish");
 			}		
+			*/
 		}
 		
 		protected override BreakEventInfo OnInsertBreakEvent (BreakEvent be)
@@ -217,22 +210,12 @@ namespace MonoDevelop.JavaScript.Node.Debugger
 						// For example: -break-insert "\"C:/Documents and Settings/foo.c\":17"
 						RunCommand ("-environment-directory", Escape (Path.GetDirectoryName (bp.FileName)));
 						*/
-						handle = Escape (bp.FileName) + " " + bp.Line;
+						handle = Escape (bp.FileName) + "(" + bp.Line + ")";
 						
 						try {
 							res = RunCommand (cmd, extraCmd.Trim (), handle);
 						} catch (Exception ex) {
 							errorMsg = ex.Message;
-						}
-						
-						if (res == null) {
-							handle = Escape (Path.GetFileName (bp.FileName)) + " " + bp.Line;
-							try {
-								res = RunCommand (cmd, extraCmd.Trim (), handle);
-							}
-							catch {
-								// Ignore
-							}
 						}
 					}
 					
@@ -266,12 +249,15 @@ namespace MonoDevelop.JavaScript.Node.Debugger
 				RunCommand ("-break-condition", handle.ToString (), "(" + bp.ConditionExpression + ") != " + val);
 			}
 			*/
-			
+
 			if (bp.HitAction == HitAction.PrintExpression) {
+				throw new NotSupportedException ();
+				/*
 				NodeCommandResult res = RunCommand ("repl", Escape (bp.TraceExpression));
 				string val = res.GetValue ("value");
 				NotifyBreakEventUpdate (binfo, 0, val);
 				return false;
+				*/
 			}
 			return true;
 		}
@@ -321,6 +307,8 @@ namespace MonoDevelop.JavaScript.Node.Debugger
 		
 		void UpdateHitCountData ()
 		{
+			throw new NotSupportedException ();
+			/*
 			foreach (BreakEventInfo bp in breakpointsWithHitCount) {
 				NodeCommandResult res = RunCommand ("-break-info", bp.Handle.ToString ());
 				string val = res.GetObject ("BreakpointTable").GetObject ("body").GetObject (0).GetObject ("bkpt").GetValue ("ignore");
@@ -330,6 +318,7 @@ namespace MonoDevelop.JavaScript.Node.Debugger
 					NotifyBreakEventUpdate (bp, 0, null);
 			}
 			breakpointsWithHitCount.Clear ();
+			*/
 		}
 		
 		protected override void OnRemoveBreakEvent (BreakEventInfo binfo)
@@ -341,7 +330,7 @@ namespace MonoDevelop.JavaScript.Node.Debugger
 				breakpointsWithHitCount.Remove (binfo);
 				breakpoints.Remove ((string) binfo.Handle);
 				try {
-					RunCommand ("-break-delete", binfo.Handle.ToString ());
+					RunCommand ("clearBreakpoint", binfo.Handle.ToString ());
 				} finally {
 					InternalResume (dres);
 				}
@@ -470,10 +459,10 @@ namespace MonoDevelop.JavaScript.Node.Debugger
 					sin.WriteLine (command + " " + string.Join (" ", args));
 					sin.Flush ();
 
-					if (!Monitor.Wait (syncLock, 4000))
+					if (!Monitor.Wait (syncLock, 10000))
 						throw new InvalidOperationException ("Command execution timeout: " + command + " " + string.Join (" ", args));
 					if (lastResult.Status == CommandStatus.Error)
-						throw new InvalidOperationException (lastResult.ErrorMessage);
+						throw new InvalidOperationException (lastResult.Data);
 					return lastResult;
 				}
 			}
@@ -486,7 +475,7 @@ namespace MonoDevelop.JavaScript.Node.Debugger
 					return false;
 				internalStop = true;
 				RunCommand ("kill");
-				if (!Monitor.Wait (eventLock, 4000))
+				if (!Monitor.Wait (eventLock, 10000))
 					throw new InvalidOperationException ("Target could not be interrupted.");
 			}
 			return true;
@@ -496,6 +485,13 @@ namespace MonoDevelop.JavaScript.Node.Debugger
 		{
 			if (resume)
 				RunCommand ("cont");
+		}
+		
+		void ProcessError (string line)
+		{
+			if (line == null)
+				return;
+			throw new InvalidOperationException (line);
 		}
 
 		bool output_contd = false;
@@ -510,23 +506,57 @@ namespace MonoDevelop.JavaScript.Node.Debugger
 			}
 		}
 
+		int bootstrap_step;
+		string input_contd;
+
 		void DoProcessOutput (string line)
 		{
 			if (line == null)
 				return;
 			if (logNode && LogWriter != null)
-				LogWriter (false, line); // "debug> (\b) ..."
-			if (line.StartsWith ("debug>")) {
-				output_contd = false;
-				stored_output = null;
-				line = line.Substring ("debug> ....\b".Length);
+				LogWriter (false, line);
+			if (line.StartsWith ("debug> ")) {
+				DoProcessOutput (line.Substring ("debug> ".Length));
+				return;
 			}
-			else
+			if (line.StartsWith ("... ")) {
+				DoProcessOutput (line.Substring ("... ".Length));
+				return;
+			}
+			var idx = line.IndexOf ('\b');
+			if (idx < 0) {
+				// ignore them, extraneous information such as default stack trace.
+				return;
+			}
+			if (idx != 0)
+				throw new InvalidOperationException ("Unexpected response: " + line);
+			line = input_contd + line.Substring (idx + 1);
+
+			if (bootstrap_step < 2) {
+				if (bootstrap_step < 1 && line == "< debugger listening on port 5858") {
+					bootstrap_step++;
+					input_contd = null;
+					return;
+				}
+				if (bootstrap_step < 2 && line == "connecting... ok") {
+					bootstrap_step++;
+					input_contd = null;
+					bootstrap_lock.Set ();
+					return;
+				}
+				input_contd += line;
+				return;
+			}
+
+			if (line.StartsWith ("... \b")) {
+				line = line.Substring ("... \b".Length);
+			} else {
 				stored_output += line + "\n";
-			if (line [0] != '<') {
+			}
+			if (running) {
 				lock (syncLock) {
 					lastResult = new NodeCommandResult (line);
-					running = (lastResult.Status == CommandStatus.Running);
+					running = false;
 					Monitor.PulseAll (syncLock);
 				}
 			} else {

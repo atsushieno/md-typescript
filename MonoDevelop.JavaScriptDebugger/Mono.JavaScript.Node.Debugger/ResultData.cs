@@ -32,7 +32,7 @@ using System.Text;
 using Mono.Debugging.Client;
 using Mono.Debugging.Backend;
 
-namespace MonoDevelop.JavaScript.Node.Debugger
+namespace Mono.JavaScript.Node.Debugger
 {
 	class ResultData: IEnumerable
 	{

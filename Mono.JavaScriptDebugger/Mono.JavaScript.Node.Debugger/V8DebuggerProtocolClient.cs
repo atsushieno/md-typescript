@@ -11,7 +11,7 @@ using System.Threading;
 
 namespace Mono.JavaScript.Node.Debugger
 {
-	public class V8DebuggerProtocolClient : IDisposable
+	internal class V8DebuggerProtocolClient : IDisposable
 	{
 		public const int DefaultNodeDebuggerPort = 5858;
 

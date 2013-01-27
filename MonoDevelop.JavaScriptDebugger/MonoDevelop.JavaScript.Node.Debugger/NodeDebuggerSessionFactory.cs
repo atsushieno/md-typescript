@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using Mono.Debugging.Client;
 using Mono.Debugging.Backend;
+using MonoDevelop.Core;
 using MonoDevelop.Core.Execution;
 using MonoDevelop.Debugger;
 using Mono.JavaScript.Debugger;
+using Mono.JavaScript.Node.Debugger;
 using MonoDevelop.JavaScript.Node;
 using TypeScriptServiceBridge;
 
@@ -44,9 +46,37 @@ namespace MonoDevelop.JavaScript.Node.Debugger
 			return startInfo;
 		}
 
+		
+		static string FindToolPath (string tool)
+		{
+			var paths = Environment.GetEnvironmentVariable ("PATH").Split (Path.PathSeparator);
+			foreach (var path in paths) {
+				var p = Path.Combine (path, tool);
+				if (File.Exists (p))
+					return p;
+			}
+			return null;
+		}
+
+		// Copy from MonoDevelop.TypeScriptBinding.Projects.TypeScriptProject.
+		string GetNodePath ()
+		{
+			string exe = PropertyService.Get<string> ("TypeScriptBinding.NodeLocation");
+			return string.IsNullOrEmpty (exe) ? FindToolPath ("node") : exe;
+		}
+
 		public DebuggerSession CreateSession ()
 		{
-			NodeDebuggerSession ds = new NodeDebuggerSession ();
+			NodeDebuggerSession ds = new NodeDebuggerSession (GetNodePath ());
+			/*
+			ds.Disposing += delegate {
+				if (console != null && !console.IsCompleted) {
+					console.Cancel ();
+					console = null;
+				}
+			};
+			*/
+			
 			return ds;
 		}
 		

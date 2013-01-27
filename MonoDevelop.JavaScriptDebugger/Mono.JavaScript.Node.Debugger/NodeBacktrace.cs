@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using Mono.Debugging.Client;
 using Mono.Debugging.Backend;
+using Mono.JavaScript.Node.Debugger;
 
-namespace MonoDevelop.JavaScript.Node.Debugger
+namespace Mono.JavaScript.Node.Debugger
 {
 	class NodeBacktrace: IBacktrace, IObjectValueSource
 	{

@@ -1,14 +1,15 @@
 using System;
 
-namespace MonoDevelop.JavaScript.Node.Debugger
+namespace Mono.JavaScript.Node.Debugger
 {
 	class NodeCommandResult: ResultData
 	{
 		public CommandStatus Status;
-		public string ErrorMessage;
+		public string Data;
 		
 		public NodeCommandResult (string line)
 		{
+			/*
 			if (line.StartsWith ("^done")) {
 				Status = CommandStatus.Done;
 				ReadResults (line, 6);
@@ -21,6 +22,9 @@ namespace MonoDevelop.JavaScript.Node.Debugger
 			} else if (line.StartsWith ("^running")) {
 				Status = CommandStatus.Running;
 			}
+			*/
+			Data = line;
+			Status = CommandStatus.Done;
 		}
 	}
 }

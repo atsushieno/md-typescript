@@ -44,16 +44,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MonoDevelop.JavaScript.Node.Debugger\CommandStatus.cs" />
-    <Compile Include="MonoDevelop.JavaScript.Node.Debugger\NodeBacktrace.cs" />
-    <Compile Include="MonoDevelop.JavaScript.Node.Debugger\NodeCommandResult.cs" />
-    <Compile Include="MonoDevelop.JavaScript.Node.Debugger\NodeDebuggerSession.cs" />
     <Compile Include="MonoDevelop.JavaScript.Node.Debugger\NodeDebuggerSessionFactory.cs" />
-    <Compile Include="MonoDevelop.JavaScript.Node.Debugger\NodeEvent.cs" />
     <Compile Include="MonoDevelop.JavaScript.Node\NodeExecutionCommand.cs">
       <DependentUpon>NodeExecutionCommand.cs</DependentUpon>
     </Compile>
-    <Compile Include="MonoDevelop.JavaScript.Node.Debugger\ResultData.cs" />
+    <Compile Include="Mono.JavaScript.Node.Debugger\NodeDebuggerSession.cs" />
+    <Compile Include="Mono.JavaScript.Node.Debugger\NodeCommandResult.cs" />
+    <Compile Include="Mono.JavaScript.Node.Debugger\ResultData.cs" />
+    <Compile Include="Mono.JavaScript.Node.Debugger\NodeEvent.cs" />
+    <Compile Include="Mono.JavaScript.Node.Debugger\CommandStatus.cs" />
+    <Compile Include="Mono.JavaScript.Node.Debugger\NodeBacktrace.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -73,5 +73,6 @@
   <ItemGroup>
     <Folder Include="MonoDevelop.JavaScript.Node.Debugger\" />
     <Folder Include="MonoDevelop.JavaScript.Node\" />
+    <Folder Include="Mono.JavaScript.Node.Debugger\" />
   </ItemGroup>
 </Project>

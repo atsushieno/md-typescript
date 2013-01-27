@@ -1,6 +1,6 @@
 using System;
 
-namespace MonoDevelop.JavaScript.Node.Debugger
+namespace Mono.JavaScript.Node.Debugger
 {
 	class NodeEvent: ResultData
 	{
