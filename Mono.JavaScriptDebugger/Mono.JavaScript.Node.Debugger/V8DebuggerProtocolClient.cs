@@ -11,7 +11,7 @@ using System.Threading;
 
 namespace Mono.JavaScript.Node.Debugger
 {
-	internal class V8DebuggerProtocolClient : IDisposable
+	public class V8DebuggerProtocolClient : IDisposable
 	{
 		public const int DefaultNodeDebuggerPort = 5858;
 
@@ -27,12 +27,16 @@ namespace Mono.JavaScript.Node.Debugger
 			stream = client.GetStream ();
 			reader = new StreamReader (stream);
 			writer = new StreamWriter (stream);
-			reader_loop_thread = new Thread (EventLoop);
-			reader_loop_thread.Start ();
 		}
 
 		public event Action<DebuggerEvent> Break;
 		public event Action<DebuggerEvent> UncaughtException;
+
+		public void Start ()
+		{
+			reader_loop_thread = new Thread (EventLoop);
+			reader_loop_thread.Start ();
+		}
 
 		protected void OnBreak (DebuggerEvent evt)
 		{

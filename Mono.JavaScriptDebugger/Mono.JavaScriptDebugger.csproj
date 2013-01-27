@@ -35,6 +35,7 @@
   <ItemGroup>
     <Compile Include="Mono.JavaScript.Debugger\SourceMap.cs" />
     <Compile Include="Mono.JavaScript.Node.Debugger\V8DebuggerProtocolClient.cs" />
+    <Compile Include="Mono.JavaScript.Node.Debugger\V8DebuggerProtocolClientExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

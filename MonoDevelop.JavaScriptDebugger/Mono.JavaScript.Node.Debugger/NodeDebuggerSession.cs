@@ -7,13 +7,15 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using Mono.Debugging.Client;
+using Mono.JavaScript.Node.Debugger;
+using TypeScriptServiceBridge;
 
 namespace Mono.JavaScript.Node.Debugger
 {
 	class NodeDebuggerSession: DebuggerSession
 	{
 		Process proc;
-		StreamWriter sin;
+		//StreamWriter sin;
 		NodeCommandResult lastResult;
 		bool running;
 		// While there is no thread support, it is messy to remove all relevant code.
@@ -38,6 +40,7 @@ namespace Mono.JavaScript.Node.Debugger
 		object nodeLock = new object ();
 		ManualResetEventSlim bootstrap_lock = new ManualResetEventSlim (false);
 		string node_path;
+		V8DebuggerProtocolClient debugger;
 		
 		public NodeDebuggerSession (string nodePath)
 		{
@@ -53,8 +56,8 @@ namespace Mono.JavaScript.Node.Debugger
 				currentProcessName = startInfo.Command + " " + startInfo.Arguments;
 
 				OnStarted ();
-				
-				RunCommand ("cont");
+
+				debugger.Continue ();
 			}
 		}
 		
@@ -79,7 +82,7 @@ namespace Mono.JavaScript.Node.Debugger
 			lock (nodeLock) {
 				proc.Start ();
 			
-				sin = proc.StandardInput;
+//				sin = proc.StandardInput;
 				proc.BeginOutputReadLine ();
 				proc.BeginErrorReadLine ();
 
@@ -88,6 +91,21 @@ namespace Mono.JavaScript.Node.Debugger
 				if (logNode)
 					LogWriter (false, "connected to node debugger");
 			}
+
+			debugger = new V8DebuggerProtocolClient (JurassicTypeHosting.Engine);
+			debugger.Break += HandleBreak;
+			debugger.UncaughtException += HandleUncaughtException;
+			debugger.Start ();
+		}
+
+		void HandleUncaughtException (TypeScriptServiceBridge.V8Debugger.DebuggerEvent obj)
+		{
+			throw new NotSupportedException ();
+		}
+
+		void HandleBreak (TypeScriptServiceBridge.V8Debugger.DebuggerEvent obj)
+		{
+			throw new NotSupportedException ();
 		}
 
 		public event Action Disposing;
@@ -121,13 +139,10 @@ namespace Mono.JavaScript.Node.Debugger
 		{
 			lock (nodeLock) {
 				InternalStop ();
-				RunCommand ("kill");
+				proc.Kill ();
 				TargetEventArgs args = new TargetEventArgs (TargetEventType.TargetExited);
 				OnTargetEvent (args);
-				/*				proc.Kill ();
-				TargetEventArgs args = new TargetEventArgs (TargetEventType.TargetExited);
-				OnTargetEvent (args);
-*/			}
+			}
 		}
 		
 		protected override void OnStepLine ()
@@ -180,47 +195,18 @@ namespace Mono.JavaScript.Node.Debugger
 			lock (nodeLock) {
 				bool dres = InternalStop ();
 				try {
-					string extraCmd = string.Empty;
-					/*
-					if (bp.HitCount > 0) {
-						extraCmd += "-i " + bp.HitCount;
-						breakpointsWithHitCount.Add (bi);
-					}
-					if (!string.IsNullOrEmpty (bp.ConditionExpression)) {
-						if (!bp.BreakIfConditionChanges)
-							extraCmd += " -c " + bp.ConditionExpression;
-					}
-					*/
-
-					string cmd = be.Enabled ? "setBreakpoint" : "clearBreakpoint";
 					string handle;
-					NodeCommandResult res = null;
-					string errorMsg = null;
-					
-					if (bp is FunctionBreakpoint) {
-						handle = ((FunctionBreakpoint) bp).FunctionName;
-						try {
-							res = RunCommand (cmd, extraCmd.Trim (), handle);
-						} catch (Exception ex) {
-							errorMsg = ex.Message;
+					try {
+						if (bp is FunctionBreakpoint) {
+							var bf = (FunctionBreakpoint) bp;
+							handle = "function " + bf.FunctionName;
+							var ret = debugger.SetBreakpoint ("function", bf.FunctionName, be.Enabled, -1, -1, bp.ConditionExpression, bp.HitCount);
+						} else {
+							handle = string.Format ("{0} ({1},{2})", bp.FileName, bp.Line, bp.Column);
+							var ret = debugger.SetBreakpoint ("script", bp.FileName, be.Enabled, bp.Line, bp.Column, bp.ConditionExpression, bp.HitCount);
 						}
-					} else {
-						/*
-						// Breakpoint locations must be double-quoted if files contain spaces.
-						// For example: -break-insert "\"C:/Documents and Settings/foo.c\":17"
-						RunCommand ("-environment-directory", Escape (Path.GetDirectoryName (bp.FileName)));
-						*/
-						handle = Escape (bp.FileName) + "(" + bp.Line + ")";
-						
-						try {
-							res = RunCommand (cmd, extraCmd.Trim (), handle);
-						} catch (Exception ex) {
-							errorMsg = ex.Message;
-						}
-					}
-					
-					if (res == null) {
-						bi.SetStatus (BreakEventStatus.Invalid, errorMsg);
+					} catch (Exception ex) {
+						bi.SetStatus (BreakEventStatus.Invalid, ex.Message);
 						return bi;
 					}
 					bi.Handle = handle;
@@ -384,7 +370,7 @@ namespace Mono.JavaScript.Node.Debugger
 		protected override void OnContinue ()
 		{
 			SelectThread (activeThread);
-			RunCommand ("cont");
+			debugger.Continue ();
 		}
 		
 		protected override ThreadInfo[] OnGetThreads (long processId)
@@ -445,6 +431,8 @@ namespace Mono.JavaScript.Node.Debugger
 		
 		public NodeCommandResult RunCommand (string command, params string[] args)
 		{
+			throw new NotImplementedException ();
+			/*
 			lock (nodeLock) {
 				lock (syncLock) {
 					lastResult = null;
@@ -455,7 +443,7 @@ namespace Mono.JavaScript.Node.Debugger
 					
 					if (logNode)
 						Console.WriteLine ("node debugger<: " + command + " " + string.Join (" ", args));
-					
+
 					sin.WriteLine (command + " " + string.Join (" ", args));
 					sin.Flush ();
 
@@ -466,10 +454,13 @@ namespace Mono.JavaScript.Node.Debugger
 					return lastResult;
 				}
 			}
+			*/
 		}
 		
 		bool InternalStop ()
 		{
+			// on gdb it would make some sense. on node no point of killing the debuggee.
+			/*
 			lock (eventLock) {
 				if (!running)
 					return false;
@@ -478,6 +469,7 @@ namespace Mono.JavaScript.Node.Debugger
 				if (!Monitor.Wait (eventLock, 10000))
 					throw new InvalidOperationException ("Target could not be interrupted.");
 			}
+			*/
 			return true;
 		}
 		
@@ -491,6 +483,26 @@ namespace Mono.JavaScript.Node.Debugger
 		{
 			if (line == null)
 				return;
+			
+			if (bootstrap_step < 2) {
+				if (bootstrap_step < 1 && line == "debugger listening on port 5858") {
+					bootstrap_step++;
+					input_contd = null;
+					bootstrap_lock.Set ();
+					return;
+				}
+				/*
+				if (bootstrap_step < 2 && line == "connecting... ok") {
+					bootstrap_step++;
+					input_contd = null;
+					bootstrap_lock.Set ();
+					return;
+				}
+				*/
+				input_contd += line;
+				return;
+			}
+
 			throw new InvalidOperationException (line);
 		}
 
@@ -531,22 +543,6 @@ namespace Mono.JavaScript.Node.Debugger
 			if (idx != 0)
 				throw new InvalidOperationException ("Unexpected response: " + line);
 			line = input_contd + line.Substring (idx + 1);
-
-			if (bootstrap_step < 2) {
-				if (bootstrap_step < 1 && line == "< debugger listening on port 5858") {
-					bootstrap_step++;
-					input_contd = null;
-					return;
-				}
-				if (bootstrap_step < 2 && line == "connecting... ok") {
-					bootstrap_step++;
-					input_contd = null;
-					bootstrap_lock.Set ();
-					return;
-				}
-				input_contd += line;
-				return;
-			}
 
 			if (line.StartsWith ("... \b")) {
 				line = line.Substring ("... \b".Length);
