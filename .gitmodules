@@ -4,3 +4,6 @@
 [submodule "external/typescript"]
 	path = external/typescript
 	url = https://git01.codeplex.com/typescript
+[submodule "external/websocket-sharp"]
+	path = external/websocket-sharp
+	url = git://github.com/sta/websocket-sharp.git

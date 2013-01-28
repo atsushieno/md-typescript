@@ -8,6 +8,9 @@ using System.Net.Sockets;
 using System.IO;
 using Jurassic;
 using System.Threading;
+using System.Net.WebSockets;
+using System.Text;
+using System.Collections.Generic;
 
 namespace Mono.JavaScript.Node.Debugger
 {
@@ -23,10 +26,15 @@ namespace Mono.JavaScript.Node.Debugger
 		public V8DebuggerProtocolClient (ScriptEngine engine, int port)
 		{
 			this.engine = engine;
+#if TCP_CLIENT
 			client = new TcpClient ("localhost", port);
 			stream = client.GetStream ();
 			reader = new StreamReader (stream);
 			writer = new StreamWriter (stream);
+#else
+			websocket = new ClientWebSocket ();
+			websocket.ConnectAsync (new Uri ("ws://localhost:" + port), CancellationToken.None);
+#endif
 		}
 
 		public event Action<DebuggerEvent> Break;
@@ -57,32 +65,36 @@ namespace Mono.JavaScript.Node.Debugger
 		bool reader_loop = true;
 		object reader_lock = new object ();
 		ScriptEngine engine;
+#if TCP_CLIENT
 		TcpClient client;
 		NetworkStream stream;
 		StreamWriter writer;
 		StreamReader reader;
+#else
+		ClientWebSocket websocket = new ClientWebSocket ();
+#endif
 
 		public void Dispose ()
 		{
 			reader_finished = new ManualResetEventSlim (false);
 			reader_loop = false;
 			reader_finished.Wait (5000);
+#if TCP_CLIENT
 			client.Close ();
+#else
+			websocket.CloseAsync (WebSocketCloseStatus.NormalClosure, "quit", CancellationToken.None);
+#endif
 		}
 
 		public void EventLoop ()
 		{
 			while (reader_loop) {
-				Thread.Sleep (50);
-				if (!stream.DataAvailable)
-					continue;
-				lock (reader_lock) {
-					if (!reader_loop)
-						break;
-					var line = reader.ReadLine ();
+				var buffer = new ArraySegment<byte> (new byte [0x10000]);
+				var task = websocket.ReceiveAsync (buffer, CancellationToken.None);
+				task.ContinueWith (t => {
+					string line = Encoding.UTF8.GetString (buffer.Array, buffer.Offset, task.Result.Count);
 					if (line == null) {
 						Console.WriteLine ("no input");
-						continue;
 					}
 					try {
 						var obj = (ObjectInstance) JSONObject.Parse (engine, line);
@@ -93,23 +105,28 @@ namespace Mono.JavaScript.Node.Debugger
 					} catch (JavaScriptException ex) {
 						Console.WriteLine ("Error on parsing : " + line + Environment.NewLine + "Details: " + Environment.NewLine + ex);
 					}
-				}
+				});
 			}
 			if (reader_finished != null)
 				reader_finished.Set ();
 		}
 
-		string InternalProcess (string request)
-		{
-			writer.WriteLine (request);
+		Queue<ObjectInstance> pending_messages = new Queue<ObjectInstance> ();
 
-			return reader.ReadLine ();
+		ObjectInstance InternalProcess (string request)
+		{
+			return websocket.SendAsync (new ArraySegment<byte> (Encoding.UTF8.GetBytes (request)), WebSocketMessageType.Text, true, CancellationToken.None)
+				.ContinueWith<ObjectInstance> (t => {
+					while (pending_messages.Count == 0)
+						Thread.Sleep (50);
+					return pending_messages.Dequeue ();
+				}).Result;
 		}
 
 		public DebuggerResponse Process (DebuggerRequest request)
 		{
 			var res = InternalProcess (JSONObject.Stringify (engine, request.Instance));
-			return new DebuggerResponse ((ObjectInstance) JSONObject.Parse (engine, res));
+			return new DebuggerResponse (res);
 		}
 
 		public void Continue (ContinueRequestArguments args)

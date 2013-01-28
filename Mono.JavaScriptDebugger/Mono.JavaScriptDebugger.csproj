@@ -36,6 +36,7 @@
     <Compile Include="Mono.JavaScript.Debugger\SourceMap.cs" />
     <Compile Include="Mono.JavaScript.Node.Debugger\V8DebuggerProtocolClient.cs" />
     <Compile Include="Mono.JavaScript.Node.Debugger\V8DebuggerProtocolClientExtensions.cs" />
+    <Compile Include="System.Net.WebSockets.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -46,6 +47,10 @@
     <ProjectReference Include="..\..\..\home\atsushi\svn\md-typescript\TypeScriptServiceBridge\TypeScriptServiceBridge.csproj">
       <Project>{17F48D22-DFF8-48FB-935B-BBF17F63B39C}</Project>
       <Name>TypeScriptServiceBridge</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\home\atsushi\svn\md-typescript\external\websocket-sharp\websocket-sharp\websocket-sharp.csproj">
+      <Project>{B357BAC7-529E-4D81-A0D2-71041B19C8DE}</Project>
+      <Name>websocket-sharp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
