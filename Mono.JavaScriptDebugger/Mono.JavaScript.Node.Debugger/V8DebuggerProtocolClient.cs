@@ -1,16 +1,15 @@
 // Not likely to work with nodejs.
-// Anyways using ServiceBridge is totally wrong, it's not running on top of other host.
 using System;
-using TypeScriptServiceBridge.V8Debugger;
-using TypeScriptServiceBridge;
-using Jurassic.Library;
-using System.Net.Sockets;
+using System.Collections.Generic;
 using System.IO;
-using Jurassic;
-using System.Threading;
+using System.Net.Sockets;
 using System.Net.WebSockets;
 using System.Text;
-using System.Collections.Generic;
+using System.Threading;
+using Jurassic;
+using Jurassic.Library;
+using V8DebuggerClientBridge;
+using V8DebuggerClientBridge.V8Debugger;
 
 namespace Mono.JavaScript.Node.Debugger
 {
@@ -18,14 +17,14 @@ namespace Mono.JavaScript.Node.Debugger
 	{
 		public const int DefaultNodeDebuggerPort = 5858;
 
-		public V8DebuggerProtocolClient (ScriptEngine engine)
-			: this (engine, DefaultNodeDebuggerPort)
+		public V8DebuggerProtocolClient ()
+			: this (DefaultNodeDebuggerPort)
 		{
 		}
 
-		public V8DebuggerProtocolClient (ScriptEngine engine, int port)
+		public V8DebuggerProtocolClient (int port)
 		{
-			this.engine = engine;
+			this.engine = JavaScriptObject.Engine;
 #if TCP_CLIENT
 			client = new TcpClient ("localhost", port);
 			stream = client.GetStream ();
@@ -88,9 +87,10 @@ namespace Mono.JavaScript.Node.Debugger
 
 		public void EventLoop ()
 		{
+			var buffer = new ArraySegment<byte> (new byte [0x10000]);
 			while (reader_loop) {
-				var buffer = new ArraySegment<byte> (new byte [0x10000]);
 				var task = websocket.ReceiveAsync (buffer, CancellationToken.None);
+				task.Wait ();
 				task.ContinueWith (t => {
 					string line = Encoding.UTF8.GetString (buffer.Array, buffer.Offset, task.Result.Count);
 					if (line == null) {
@@ -117,6 +117,8 @@ namespace Mono.JavaScript.Node.Debugger
 		{
 			return websocket.SendAsync (new ArraySegment<byte> (Encoding.UTF8.GetBytes (request)), WebSocketMessageType.Text, true, CancellationToken.None)
 				.ContinueWith<ObjectInstance> (t => {
+					if (t.IsFaulted)
+						throw t.Exception;
 					while (pending_messages.Count == 0)
 						Thread.Sleep (50);
 					return pending_messages.Dequeue ();
@@ -220,4 +222,3 @@ namespace Mono.JavaScript.Node.Debugger
 		}
 	}
 }
-

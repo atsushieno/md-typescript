@@ -10,7 +10,7 @@
     <widget-library name="../../../monodevelop-master/main/build/AddIns/MonoDevelop.DesignerSupport/MonoDevelop.DesignerSupport.dll" />
     <widget-library name="../../../monodevelop-master/main/build/AddIns/MonoDevelop.Refactoring/MonoDevelop.Refactoring.dll" />
     <widget-library name="../../../monodevelop-master/main/build/AddIns/DisplayBindings/SourceEditor/MonoDevelop.SourceEditor2.dll" />
-    <widget-library name="../../../../../../svn/md-typescript/Mono.JavaScriptDebugger/bin/Debug/Mono.JavaScriptDebugger.dll" />
+    <widget-library name="../../../../../../svn/md-typescript/MonoDevelop.JavaScriptDebugger/bin/Debug/MonoDevelop.JavaScriptDebugger.dll" />
     <widget-library name="../../../monodevelop-master/main/build/AddIns/TypeScriptBinding/MonoDevelop.TypeScriptBinding.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="MonoDevelop.TypeScriptBinding.Projects.Gui.TypeScriptProjectOptionsWidget" design-size="427 300">
