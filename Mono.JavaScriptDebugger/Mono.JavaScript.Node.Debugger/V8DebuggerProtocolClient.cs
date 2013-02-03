@@ -84,19 +84,50 @@ namespace Mono.JavaScript.Node.Debugger
 						Console.WriteLine ("no input");
 						continue;
 					}
-					try {
-						var obj = (ObjectInstance) JSONObject.Parse (engine, line);
-						if (obj.HasProperty ("uncaught"))
-							OnUncaughtException (new DebuggerEvent (obj));
-						else
-							OnBreak (new DebuggerEvent (obj));
-					} catch (JavaScriptException ex) {
-						Console.WriteLine ("Error on parsing : " + line + Environment.NewLine + "Details: " + Environment.NewLine + ex);
-					}
+					line = line_remaining + line;
+					line_remaining = null;
+					ProcessInputLine (line);
 				}
 			}
 			if (reader_finished != null)
 				reader_finished.Set ();
+		}
+
+		string line_remaining;
+		int current_size = 0;
+		void ProcessInputLine (string line)
+		{
+			var idx = line.IndexOf (':');
+			if (idx > 0) {
+				switch (line.Substring (0, idx)) {
+				case "Type":
+				case "V8-Version":
+				case "Protocol-Version":
+				case "Embedding-Host":
+					return;
+				case "Content-Length":
+					current_size = int.Parse (line.Substring (idx + 1));
+					break;
+				}
+			}
+			if (current_size > 0 && line.Length > current_size) {
+				line_remaining = line.Substring (current_size);
+				line = line.Substring (0, current_size);
+			}
+			try {
+				var obj = (ObjectInstance) JSONObject.Parse (engine, line);
+				if (obj.HasProperty ("uncaught"))
+					OnUncaughtException (new DebuggerEvent (obj));
+				else
+					OnBreak (new DebuggerEvent (obj));
+			} catch (JavaScriptException ex) {
+				Console.WriteLine ("Error on parsing : " + line + Environment.NewLine + "Details: " + Environment.NewLine + ex);
+			}
+			if (!string.IsNullOrEmpty (line_remaining)) {
+				line = line_remaining;
+				line_remaining = null;
+				ProcessInputLine (line);
+			}
 		}
 
 		string InternalProcess (string request)

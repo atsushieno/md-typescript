@@ -15,7 +15,7 @@ namespace Mono.JavaScript.Node.Debugger
 	class NodeDebuggerSession: DebuggerSession
 	{
 		Process proc;
-		//StreamWriter sin;
+		StreamWriter sin;
 		NodeCommandResult lastResult;
 		bool running;
 		// While there is no thread support, it is messy to remove all relevant code.
@@ -82,7 +82,7 @@ namespace Mono.JavaScript.Node.Debugger
 			lock (nodeLock) {
 				proc.Start ();
 			
-//				sin = proc.StandardInput;
+				sin = proc.StandardInput;
 				proc.BeginOutputReadLine ();
 				proc.BeginErrorReadLine ();
 
@@ -431,8 +431,6 @@ namespace Mono.JavaScript.Node.Debugger
 		
 		public NodeCommandResult RunCommand (string command, params string[] args)
 		{
-			throw new NotImplementedException ();
-			/*
 			lock (nodeLock) {
 				lock (syncLock) {
 					lastResult = null;
@@ -454,7 +452,6 @@ namespace Mono.JavaScript.Node.Debugger
 					return lastResult;
 				}
 			}
-			*/
 		}
 		
 		bool InternalStop ()
