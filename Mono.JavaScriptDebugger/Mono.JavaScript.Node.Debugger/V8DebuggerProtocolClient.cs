@@ -116,10 +116,17 @@ namespace Mono.JavaScript.Node.Debugger
 			    return;
 			try {
 				var obj = (ObjectInstance) JSONObject.Parse (JavaScriptObject.Engine, line);
-				if (obj.HasProperty ("uncaught"))
+				switch ((string) obj ["event"]) {
+				case "exception":
 					OnUncaughtException (new DebuggerEvent (obj));
-				else
+					break;
+				case "break":
 					OnBreak (new DebuggerEvent (obj));
+					break;
+				default:
+					Console.WriteLine ("unexpected event: " + line);
+					break;
+				}
 			} catch (JavaScriptException ex) {
 				Console.WriteLine ("Error on parsing : " + line + Environment.NewLine + "Details: " + Environment.NewLine + ex);
 			}
