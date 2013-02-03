@@ -1,8 +1,8 @@
 // Not likely to work with nodejs.
 // Anyways using ServiceBridge is totally wrong, it's not running on top of other host.
 using System;
-using TypeScriptServiceBridge.V8Debugger;
-using TypeScriptServiceBridge;
+using V8DebuggerClientBridge.V8Debugger;
+using V8DebuggerClientBridge;
 using Jurassic.Library;
 using System.Net.Sockets;
 using System.IO;
@@ -15,14 +15,13 @@ namespace Mono.JavaScript.Node.Debugger
 	{
 		public const int DefaultNodeDebuggerPort = 5858;
 
-		public V8DebuggerProtocolClient (ScriptEngine engine)
-			: this (engine, DefaultNodeDebuggerPort)
+		public V8DebuggerProtocolClient ()
+			: this (DefaultNodeDebuggerPort)
 		{
 		}
 
-		public V8DebuggerProtocolClient (ScriptEngine engine, int port)
+		public V8DebuggerProtocolClient (int port)
 		{
-			this.engine = engine;
 			client = new TcpClient ("localhost", port);
 			stream = client.GetStream ();
 			reader = new StreamReader (stream);
@@ -56,7 +55,6 @@ namespace Mono.JavaScript.Node.Debugger
 		ManualResetEventSlim reader_finished;
 		bool reader_loop = true;
 		object reader_lock = new object ();
-		ScriptEngine engine;
 		TcpClient client;
 		NetworkStream stream;
 		StreamWriter writer;
@@ -107,15 +105,17 @@ namespace Mono.JavaScript.Node.Debugger
 					return;
 				case "Content-Length":
 					current_size = int.Parse (line.Substring (idx + 1));
-					break;
+					return;
 				}
 			}
 			if (current_size > 0 && line.Length > current_size) {
 				line_remaining = line.Substring (current_size);
 				line = line.Substring (0, current_size);
 			}
+			if (string.IsNullOrEmpty (line))
+			    return;
 			try {
-				var obj = (ObjectInstance) JSONObject.Parse (engine, line);
+				var obj = (ObjectInstance) JSONObject.Parse (JavaScriptObject.Engine, line);
 				if (obj.HasProperty ("uncaught"))
 					OnUncaughtException (new DebuggerEvent (obj));
 				else
@@ -139,8 +139,8 @@ namespace Mono.JavaScript.Node.Debugger
 
 		public DebuggerResponse Process (DebuggerRequest request)
 		{
-			var res = InternalProcess (JSONObject.Stringify (engine, request.Instance));
-			return new DebuggerResponse ((ObjectInstance) JSONObject.Parse (engine, res));
+			var res = InternalProcess (JSONObject.Stringify (JavaScriptObject.Engine, request.Instance));
+			return new DebuggerResponse ((ObjectInstance) JSONObject.Parse (JavaScriptObject.Engine, res));
 		}
 
 		public void Continue (ContinueRequestArguments args)

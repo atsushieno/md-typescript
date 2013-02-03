@@ -8,7 +8,7 @@ using System.Diagnostics;
 using System.Threading;
 using Mono.Debugging.Client;
 using Mono.JavaScript.Node.Debugger;
-using TypeScriptServiceBridge;
+using V8DebuggerClientBridge.V8Debugger;
 
 namespace Mono.JavaScript.Node.Debugger
 {
@@ -92,18 +92,18 @@ namespace Mono.JavaScript.Node.Debugger
 					LogWriter (false, "connected to node debugger");
 			}
 
-			debugger = new V8DebuggerProtocolClient (JurassicTypeHosting.Engine);
+			debugger = new V8DebuggerProtocolClient ();
 			debugger.Break += HandleBreak;
 			debugger.UncaughtException += HandleUncaughtException;
 			debugger.Start ();
 		}
 
-		void HandleUncaughtException (TypeScriptServiceBridge.V8Debugger.DebuggerEvent obj)
+		void HandleUncaughtException (DebuggerEvent obj)
 		{
 			throw new NotSupportedException ();
 		}
 
-		void HandleBreak (TypeScriptServiceBridge.V8Debugger.DebuggerEvent obj)
+		void HandleBreak (DebuggerEvent obj)
 		{
 			throw new NotSupportedException ();
 		}
