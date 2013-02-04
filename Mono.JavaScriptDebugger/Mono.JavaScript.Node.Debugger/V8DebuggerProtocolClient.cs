@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.IO;
 using Jurassic;
 using System.Threading;
+using System.Collections.Generic;
 
 namespace Mono.JavaScript.Node.Debugger
 {
@@ -116,19 +117,31 @@ namespace Mono.JavaScript.Node.Debugger
 			    return;
 			try {
 				var obj = (ObjectInstance) JSONObject.Parse (JavaScriptObject.Engine, line);
-				switch ((string) obj ["event"]) {
-				case "exception":
-					OnUncaughtException (new DebuggerEvent (obj));
+				switch ((string) obj ["type"]) {
+				case "event":
+					switch ((string) obj ["event"]) {
+					case "exception":
+						OnUncaughtException (new DebuggerEvent (obj));
+						break;
+					case "break":
+						OnBreak (new DebuggerEvent (obj));
+						break;
+					default:
+						Console.WriteLine ("unexpected event: " + line);
+						break;
+					}
 					break;
-				case "break":
-					OnBreak (new DebuggerEvent (obj));
+				case "response":
+					responses.Enqueue (obj);
+					response_wait_handle.Set ();
 					break;
 				default:
-					Console.WriteLine ("unexpected event: " + line);
+					Console.WriteLine ("unexpected message type: " + line);
 					break;
 				}
 			} catch (JavaScriptException ex) {
-				Console.WriteLine ("Error on parsing : " + line + Environment.NewLine + "Details: " + Environment.NewLine + ex);
+				Console.WriteLine ("Error on parsing event: " + line + Environment.NewLine + "Details: " + Environment.NewLine + ex);
+				throw;
 			}
 			if (!string.IsNullOrEmpty (line_remaining)) {
 				line = line_remaining;
@@ -137,17 +150,29 @@ namespace Mono.JavaScript.Node.Debugger
 			}
 		}
 
-		string InternalProcess (string request)
+		Queue<ObjectInstance> responses = new Queue<ObjectInstance> ();
+		AutoResetEvent response_wait_handle = new AutoResetEvent (false);
+		const int responseTimeoutMilliseconds = 10000;
+
+		ObjectInstance InternalProcess (string request)
 		{
+			// FIXME: never worked. even not sure if this length message is needed.
+			writer.WriteLine ("Content-Length: " + request.Length);
 			writer.WriteLine (request);
 
-			return reader.ReadLine ();
+			if (responses.Count > 0 || response_wait_handle.WaitOne (responseTimeoutMilliseconds))
+				return responses.Dequeue ();
+			throw new TimeoutException ();
 		}
+
+		int sequence = 0;
 
 		public DebuggerResponse Process (DebuggerRequest request)
 		{
+			request.Seq = sequence++;
+			request.Type = "request";
 			var res = InternalProcess (JSONObject.Stringify (JavaScriptObject.Engine, request.Instance));
-			return new DebuggerResponse ((ObjectInstance) JSONObject.Parse (JavaScriptObject.Engine, res));
+			return new DebuggerResponse (res);
 		}
 
 		public void Continue (ContinueRequestArguments args)
@@ -160,7 +185,7 @@ namespace Mono.JavaScript.Node.Debugger
 			return Process (new DebuggerRequest () { Arguments = args, Command = "evaluate" }).Body;
 		}
 
-		public object lookup (LookupArguments args)
+		public object Lookup (LookupArguments args)
 		{
 			return Process (new DebuggerRequest () { Arguments = args, Command = "lookup" }).Body;
 		}
@@ -200,7 +225,7 @@ namespace Mono.JavaScript.Node.Debugger
 			return (SetBreakpointResponseBody) Process (new DebuggerRequest () { Arguments = args, Command = "setBreakpoint" }).Body;
 		}
 
-		public void ChangeBreakpointRequestArguments (ChangeBreakpointRequestArguments args)
+		public void ChangeBreakpoint (ChangeBreakpointRequestArguments args)
 		{
 			Process (new DebuggerRequest () { Arguments = args, Command = "changeBreakpoint" });
 		}

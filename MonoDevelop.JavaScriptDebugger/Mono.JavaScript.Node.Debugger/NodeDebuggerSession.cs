@@ -76,7 +76,7 @@ namespace Mono.JavaScript.Node.Debugger
 			proc.StartInfo.RedirectStandardOutput = true;
 			proc.StartInfo.RedirectStandardError = true;
 			proc.StartInfo.EnvironmentVariables ["NODE_DISABLE_COLORS"] = "1";
-			proc.OutputDataReceived += (sender, e) => ProcessOutput (e.Data);
+			//proc.OutputDataReceived += (sender, e) => ProcessOutput (e.Data);
 			proc.ErrorDataReceived += (sender, e) => ProcessError (e.Data);
 
 			lock (nodeLock) {
@@ -100,12 +100,22 @@ namespace Mono.JavaScript.Node.Debugger
 
 		void HandleUncaughtException (DebuggerEvent obj)
 		{
-			throw new NotSupportedException ();
+			// FIXME: incomplete, not really reached here.
+			var uce = (ExceptionEventBody) obj.Body;
+			var e = new TargetEventArgs (TargetEventType.ExceptionThrown) {
+				Backtrace = this.ActiveThread.Backtrace,
+				IsStopEvent = true };
+			this.OnTargetEvent (e);
 		}
 
 		void HandleBreak (DebuggerEvent obj)
 		{
-			throw new NotSupportedException ();
+			// FIXME: incomplete, not really reached here.
+			var jsbe = (BreakEventBody) obj.Body;
+			var e = new TargetEventArgs (TargetEventType.TargetHitBreakpoint) {
+				BreakEvent = this.ActiveThread.Backtrace,
+				IsStopEvent = true };
+			this.OnTargetEvent (e);
 		}
 
 		public event Action Disposing;
@@ -148,40 +158,32 @@ namespace Mono.JavaScript.Node.Debugger
 		protected override void OnStepLine ()
 		{
 			SelectThread (activeThread);
-			RunCommand ("next");
+			debugger.Continue (new ContinueRequestArguments () { Stepaction = "next" });
 		}
 		
 		protected override void OnNextLine ()
 		{
 			// can't differentiate from next on node.
 			SelectThread (activeThread);
-			RunCommand ("next");
+			debugger.Continue (new ContinueRequestArguments () { Stepaction = "next" });
 		}
 		
 		protected override void OnStepInstruction ()
 		{
 			SelectThread (activeThread);
-			RunCommand ("step");
+			debugger.Continue (new ContinueRequestArguments () { Stepaction = "in" });
 		}
 		
 		protected override void OnNextInstruction ()
 		{
 			SelectThread (activeThread);
-			RunCommand ("-exec-next-instruction");
+			debugger.Continue (new ContinueRequestArguments () { Stepaction = "in" });
 		}
 		
 		protected override void OnFinish ()
 		{
 			SelectThread (activeThread);
-			/*
-			NodeCommandResult res = RunCommand ("-stack-info-depth", "2");
-			if (res.GetValue ("depth") == "1") {
-				RunCommand ("-exec-continue");
-			} else {
-				RunCommand ("-stack-select-frame", "0");
-				RunCommand ("-exec-finish");
-			}		
-			*/
+			debugger.Continue (new ContinueRequestArguments () { Stepaction = "out" });
 		}
 		
 		protected override BreakEventInfo OnInsertBreakEvent (BreakEvent be)
@@ -316,7 +318,7 @@ namespace Mono.JavaScript.Node.Debugger
 				breakpointsWithHitCount.Remove (binfo);
 				breakpoints.Remove ((string) binfo.Handle);
 				try {
-					RunCommand ("clearBreakpoint", binfo.Handle.ToString ());
+					debugger.ClearBreakpoint (new ClearBreakpointRequestArguments () { Breakpoint = (double) binfo.Handle });
 				} finally {
 					InternalResume (dres);
 				}
@@ -330,10 +332,7 @@ namespace Mono.JavaScript.Node.Debugger
 					return;
 				bool dres = InternalStop ();
 				try {
-					if (enable)
-						RunCommand ("setBreakpoint", binfo.Handle.ToString ());
-					else
-						RunCommand ("clearBreakpoint", binfo.Handle.ToString ());
+					debugger.ChangeBreakpoint (new ChangeBreakpointRequestArguments () { Breakpoint = (double) binfo.Handle, Enabled = enable });
 				} finally {
 					InternalResume (dres);
 				}
@@ -400,8 +399,8 @@ namespace Mono.JavaScript.Node.Debugger
 		protected override Backtrace OnGetThreadBacktrace (long processId, long threadId)
 		{
 			ResultData data = SelectThread (threadId);
-			NodeCommandResult res = RunCommand ("backtrace");
-			int fcount = int.Parse (res.GetValue ("depth"));
+			var res = debugger.Backtrace (new BackTraceRequestArguments ());
+			int fcount = res.Frames.Length;
 			NodeBacktrace bt = new NodeBacktrace (this, threadId, fcount, data != null ? data.GetObject ("frame") : null);
 			return new Backtrace (bt);
 		}
@@ -428,9 +427,11 @@ namespace Mono.JavaScript.Node.Debugger
 			else
 				return str;
 		}
-		
+
 		public NodeCommandResult RunCommand (string command, params string[] args)
 		{
+			throw new NotImplementedException ();
+			/*
 			lock (nodeLock) {
 				lock (syncLock) {
 					lastResult = null;
@@ -452,6 +453,7 @@ namespace Mono.JavaScript.Node.Debugger
 					return lastResult;
 				}
 			}
+			*/
 		}
 		
 		bool InternalStop ()
@@ -473,9 +475,12 @@ namespace Mono.JavaScript.Node.Debugger
 		void InternalResume (bool resume)
 		{
 			if (resume)
-				RunCommand ("cont");
+				debugger.Continue (new ContinueRequestArguments ());
 		}
 		
+		int bootstrap_step;
+		string input_contd;
+
 		void ProcessError (string line)
 		{
 			if (line == null)
@@ -488,14 +493,6 @@ namespace Mono.JavaScript.Node.Debugger
 					bootstrap_lock.Set ();
 					return;
 				}
-				/*
-				if (bootstrap_step < 2 && line == "connecting... ok") {
-					bootstrap_step++;
-					input_contd = null;
-					bootstrap_lock.Set ();
-					return;
-				}
-				*/
 				input_contd += line;
 				return;
 			}
@@ -503,6 +500,7 @@ namespace Mono.JavaScript.Node.Debugger
 			throw new InvalidOperationException (line);
 		}
 
+		/*
 		bool output_contd = false;
 		string stored_output = null;
 		void ProcessOutput (string line)
@@ -514,9 +512,6 @@ namespace Mono.JavaScript.Node.Debugger
 					LogWriter (false, ex.ToString ());
 			}
 		}
-
-		int bootstrap_step;
-		string input_contd;
 
 		void DoProcessOutput (string line)
 		{
@@ -575,7 +570,7 @@ namespace Mono.JavaScript.Node.Debugger
 				});
 			}
 		}
-		
+
 		void HandleEvent (NodeEvent ev)
 		{
 			if (ev.Name != "stopped") {
@@ -613,7 +608,7 @@ namespace Mono.JavaScript.Node.Debugger
 			ResultData curFrame = ev.GetObject ("frame");
 			FireTargetEvent (type, curFrame);
 		}
-		
+
 		void FireTargetEvent (TargetEventType type, ResultData curFrame)
 		{
 			UpdateHitCountData ();
@@ -630,7 +625,8 @@ namespace Mono.JavaScript.Node.Debugger
 			}
 			OnTargetEvent (args);
 		}
-		
+		*/
+
 		internal void RegisterTempVariableObject (string var)
 		{
 			tempVariableObjects.Add (var);
