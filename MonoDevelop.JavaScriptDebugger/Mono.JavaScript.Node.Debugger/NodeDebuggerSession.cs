@@ -113,7 +113,7 @@ namespace Mono.JavaScript.Node.Debugger
 			// FIXME: incomplete, not really reached here.
 			var jsbe = (BreakEventBody) obj.Body;
 			var e = new TargetEventArgs (TargetEventType.TargetHitBreakpoint) {
-				BreakEvent = this.ActiveThread.Backtrace,
+				Backtrace = this.ActiveThread.Backtrace,
 				IsStopEvent = true };
 			this.OnTargetEvent (e);
 		}

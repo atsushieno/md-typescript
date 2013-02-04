@@ -28,6 +28,7 @@
     <EnvironmentVariables>
       <EnvironmentVariables>
         <Variable name="PATH" value="/devel/bin" />
+        <Variable name="MONODEVELOP_CONSOLE_LOG_LEVEL" value="All" />
       </EnvironmentVariables>
     </EnvironmentVariables>
   </PropertyGroup>
