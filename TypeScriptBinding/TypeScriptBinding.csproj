@@ -22,7 +22,7 @@
     <ConsolePause>False</ConsolePause>
     <CustomCommands>
       <CustomCommands>
-        <Command type="Execute" command="../../monodevelop-master/main/build/bin/MonoDevelop.exe" />
+        <Command type="Execute" command="../../monodevelop-master/main/build/bin/MonoDevelop.exe --no-redirect" />
       </CustomCommands>
     </CustomCommands>
     <EnvironmentVariables>

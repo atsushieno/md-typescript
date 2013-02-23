@@ -165,7 +165,7 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 			return InternalHandleCodeCompletion (completionContext, ch, true, ref triggerWordLength);
 		}
 
-		public override IParameterDataProvider HandleParameterCompletion (CodeCompletionContext completionContext, char completionChar)
+		public override ParameterDataProvider HandleParameterCompletion (CodeCompletionContext completionContext, char completionChar)
 		{
 			LoggingService.LogDebug ("HandleParameterCompletion: ({0},{1}) {2}",
 			                   completionContext.TriggerLine, completionContext.TriggerLineOffset, completionContext.TriggerOffset);

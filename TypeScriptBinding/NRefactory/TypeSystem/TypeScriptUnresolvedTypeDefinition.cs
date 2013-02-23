@@ -92,6 +92,12 @@ namespace MonoDevelop.TypeScriptBinding.NRefactory.TypeSystem
 			}
 		}
 
+		public FullTypeName FullTypeName {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
+
 		#endregion
 
 		#region ITypeReference implementation

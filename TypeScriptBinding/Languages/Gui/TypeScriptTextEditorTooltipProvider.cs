@@ -46,7 +46,7 @@ using TypeScriptServiceBridge.Services;
 
 namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 {
-	public class TypeScriptTextEditorTooltipProvider : ITooltipProvider
+	public class TypeScriptTextEditorTooltipProvider : TooltipProvider
 	{
 
 		public TypeScriptTextEditorTooltipProvider ()
@@ -62,7 +62,7 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 		
 		#region ITooltipProvider implementation 
 		
-		public TooltipItem GetItem (Mono.TextEditor.TextEditor editor, int offset)
+		public override TooltipItem GetItem (Mono.TextEditor.TextEditor editor, int offset)
 		{
 			var service = GetService (((ExtensibleTextEditor) editor).Project);
 			if (service != null) {

@@ -115,6 +115,28 @@ namespace MonoDevelop.TypeScriptBinding.NRefactory.TypeSystem
 			}
 		}
 
+		public TypeParameterSubstitution GetSubstitution ()
+		{
+			throw new NotImplementedException ();
+		}
+
+		public TypeParameterSubstitution GetSubstitution (System.Collections.Generic.IList<IType> methodTypeArguments)
+		{
+			throw new NotImplementedException ();
+		}
+
+		public System.Collections.Generic.IList<IType> TypeArguments {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
+
+		public bool IsParameterized {
+			get {
+				throw new NotImplementedException ();
+			}
+		}
+
 		#endregion
 
 		#region IEquatable implementation
