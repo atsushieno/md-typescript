@@ -1,11 +1,11 @@
 <Addin  id            = "TypeScriptBinding"  
         namespace     = "MonoDevelop"  
         name          = "TypeScript Language Binding"  
-        author        = "Atsushi Enomoto"  
+        author        = "Atsushi Enomoto, Carlos Alberto Cortez"  
         copyright     = "MIT X11"
         description   = "TypeScript Language Binding"  
         category      = "Language bindings"  
-        version       = "0.1.2" >
+        version       = "0.1.3" >
 	
 	
 	<!-- Dependencies -->
@@ -21,6 +21,7 @@
 		<Addin id="Core" version="4.0" />
 		<Addin id="Ide" version="4.0" />
 		<Addin id="SourceEditor2" version="4.0" />
+		<Addin id="Refactoring" version="4.0" />
 		<Addin id="Debugger" version="4.0" />
 	</Dependencies>
 	
@@ -48,6 +49,9 @@
 		<Templates resource="TypeScriptSyntaxMode.xml" />
 	</Extension>	
 	
+    <Extension path = "/MonoDevelop/ProjectModel/PolicySets/Default" >
+        <Policies resource="DefaultTypeScriptPolicy.xml" />
+    </Extension>
 	
 	<!-- Templates -->
 	
@@ -105,8 +109,11 @@
 	<Extension path="/MonoDevelop/ProjectModel/MSBuildItemTypes">
 		<SolutionItem type="MonoDevelop.TypeScriptBinding.Projects.TypeScriptProject" extension="tsproj" guid="{73443E56-3503-11DE-B03D-001DBA02A2FC}"/>
 	</Extension>
-	
-	<Extension path="/MonoDevelop/Ide/TextEditorExtensions">
+    <Extension path="/MonoDevelop/Ide/TextEditorExtensions">
+        <!-- Based on what I saw in other bindings, we need to have the indentation one
+             before *everything* else.
+             -->
+        <Class fileExtensions=".ts" class="MonoDevelop.TypeScriptBinding.Formatting.TypeScriptTextEditorIndentation" />
 		<Class fileExtensions=".ts" class="MonoDevelop.TypeScriptBinding.Languages.Gui.TypeScriptCompletionTextEditorExtension" />
 	</Extension>
 	
@@ -117,6 +124,10 @@
 	<Extension path = "/MonoDevelop/TypeSystem/Parser">
 		<Parser class="MonoDevelop.TypeScriptBinding.NRefactory.TypeSystem.TypeScriptTypeSystemParser" mimeType = "text/x-typescript" />
 	</Extension>
+
+    <Extension path = "/MonoDevelop/Ide/CodeFormatters">
+        <Formatter mimeType="text/x-typescript" class="TypeScriptBinding.Formatting.TypeScriptFormatter" />
+    </Extension>
 
 	<Extension path = "/MonoDevelop/TypeSystem/Ambiences">
 		<Ambience mimeType="text/x-typescript" class = "MonoDevelop.TypeScriptBinding.TypeScriptAmbience" />
