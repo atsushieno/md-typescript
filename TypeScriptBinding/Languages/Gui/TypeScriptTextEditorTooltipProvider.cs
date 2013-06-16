@@ -76,7 +76,7 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 		DefinitionInfo lastResult = null;
 		TypeScriptLanguageItemWindow lastWindow = null;
 		
-		public Gtk.Window CreateTooltipWindow (Mono.TextEditor.TextEditor editor, int offset, Gdk.ModifierType modifierState, TooltipItem item)
+		protected override Gtk.Window CreateTooltipWindow (Mono.TextEditor.TextEditor editor, int offset, Gdk.ModifierType modifierState, TooltipItem item)
 		{
 			var resolveResult = (DefinitionInfo)item.Item;
 			var result = new TypeScriptLanguageItemWindow (editor, modifierState, resolveResult);
