@@ -9,7 +9,7 @@ using TypeScriptServiceBridge.Harness;
 
 namespace MonoDevelop.TypeScriptBinding.NRefactory.TypeSystem
 {
-	public class TypeScriptTypeSystemParser : ITypeSystemParser
+	public class TypeScriptTypeSystemParser : TypeSystemParser
 	{
 		public TypeScriptTypeSystemParser ()
 		{
@@ -23,7 +23,7 @@ namespace MonoDevelop.TypeScriptBinding.NRefactory.TypeSystem
 
 		#region ITypeSystemParser implementation
 
-		public ParsedDocument Parse (bool storeAst, string fileName, TextReader content, Project project = null)
+		public override ParsedDocument Parse (bool storeAst, string fileName, TextReader content, Project project = null)
 		{
 			var service = GetService (project);
 			if (service == null)

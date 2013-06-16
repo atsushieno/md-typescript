@@ -35,6 +35,19 @@
   <ItemGroup>
     <Compile Include="Mono.JavaScript.Debugger\SourceMap.cs" />
     <Compile Include="Mono.JavaScript.Node.Debugger\V8DebuggerProtocolClient.cs" />
+    <Compile Include="Mono.JavaScript.Node.Debugger\V8DebuggerProtocolClientExtensions.cs" />
+    <Compile Include="..\..\..\home\atsushi\svn\md-typescript\external\ts2cs\src\V8DebuggerClientBridge.cs">
+      <Link>V8DebuggerClientBridge\V8DebuggerClientBridge.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\home\atsushi\svn\md-typescript\external\ts2cs\src\Runtime\IJavaScriptObject.cs">
+      <Link>V8DebuggerClientBridge\IJavaScriptObject.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\home\atsushi\svn\md-typescript\external\ts2cs\src\Runtime\JavaScriptArray.cs">
+      <Link>V8DebuggerClientBridge\JavaScriptArray.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\home\atsushi\svn\md-typescript\external\ts2cs\src\Runtime\JavaScriptObject.cs">
+      <Link>V8DebuggerClientBridge\JavaScriptObject.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

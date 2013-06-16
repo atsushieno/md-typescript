@@ -33,18 +33,18 @@
 	</Span>
 	
 	
-	<Match color = "constant.digit">CSharpNumber</Match>
+    <Match color="Number">CSharpNumber</Match>
 	
-	<Keywords color = "keyword.access">
+	<Keywords color = "Keyword(Access)">
 		<Word>this</Word>
 		<Word>super</Word>
 	</Keywords>
 	
-	<Keywords color = "keyword.operator">
+	<Keywords color = "Keyword(Operator)">
 		<Word>new</Word>
 	</Keywords>
 	
-	<Keywords color = "keyword.selection">
+	<Keywords color = "Keyword(Selection)">
 		<Word>else</Word>
 		<Word>if</Word>
 		<Word>switch</Word>
@@ -52,100 +52,75 @@
 		<Word>default</Word>
 	</Keywords>
 	
-	<Keywords color = "keyword.iteration">
+	<Keywords color = "Keyword(Iteration)">
 		<Word>do</Word>
 		<Word>for</Word>
 		<Word>in</Word>
 		<Word>while</Word>
 	</Keywords>
 	
-	<Keywords color = "keyword.jump">
+	<Keywords color = "Keyword(Jump)">
+		<Word>true</Word>
+		<Word>false</Word>
+		<Word>null</Word>
+		
 		<Word>break</Word>
 		<Word>continue</Word>
 		<Word>return</Word>
 	</Keywords>
 	
-	<Keywords color = "keyword.exceptions">
+	<Keywords color = "Keyword(Exceptions)">
 		<Word>try</Word>
 		<Word>throw</Word>
 		<Word>catch</Word>
 	</Keywords>
-	
-	<Keywords color = "constant.language">
-		<Word>true</Word>
-		<Word>false</Word>
-		<Word>null</Word>
-	</Keywords>
 
-	<Keywords color = "constant.language.void">
+	<Keywords color = "Keyword(Void)">
 		<Word>void</Word>
 	</Keywords>
 		
-	<Keywords color = "keyword.type">
+	<Keywords color = "Keyword(Type)">
 		<Word>any</Word>
 		<Word>number</Word>
 		<Word>bool</Word>
 		<Word>string</Word>
 	</Keywords>
 	
-	<Keywords color = "keyword.declaration">
+	<Keywords color = "Keyword(Declaration)">
 		<Word>function</Word>
+		<Word>constructor</Word>
 		<Word>class</Word>
 		<Word>enum</Word>
 		<Word>interface</Word>
 		<Word>var</Word>
 	</Keywords>
 
-	<Keywords color = "keyword.modifier">
+	<Keywords color = "Keyword(Modifier)">
 		<Word>export</Word>
 		<Word>extends</Word>
 		<Word>implements</Word>
 		<Word>public</Word>
 		<Word>private</Word>
+		<Word>static</Word>
 	</Keywords>
 
-	<Keywords color = "keyword.namespace">
+	<Keywords color = "Keyword(Namespace)">
 		<Word>module</Word>
 	</Keywords>
 	
 	<Rule name = "text.preprocessor">
-		<Keywords color="text.preprocessor.keyword">
+		<Keywords color="Preprocessor">
 			<Word>if</Word>
 			<Word>else</Word>
 		</Keywords>
 	</Rule>
 	
 	<Rule name = "Comment">
-		<Keywords color="comment.keyword.todo" ignorecase="True">
+		<Keywords color="Comment Tag" ignorecase="True">
 			<Word>TODO</Word>
 			<Word>FIXME</Word>
 			<Word>BUG</Word>
 			<Word>HACK</Word>
-		</Keywords>
-	</Rule>
-	
-	<Rule name = "Documentation">
-		<Keywords color="comment.keyword" ignorecase="True">
-			<!---
-			<Word>@author</Word>
-			<Word>@deprecated</Word>
-			<Word>@version</Word>
-			<Word>@copy</Word>
-			<Word>@default</Word>
-			<Word>@eventType</Word>
-			<Word>@example</Word>
-			<Word>@exampleText</Word>
-			<Word>@includeExample</Word>
-			<Word>@inheritDoc</Word>
-			<Word>@internal</Word>
-			<Word>@param</Word>
-			<Word>@private</Word>
-			<Word>@return</Word>
-			<Word>@see</Word>
-			<Word>@since</Word>
-			<Word>@throws</Word>
-			<Word>@usage</Word>
-			-->
 		</Keywords>
 	</Rule>
 	

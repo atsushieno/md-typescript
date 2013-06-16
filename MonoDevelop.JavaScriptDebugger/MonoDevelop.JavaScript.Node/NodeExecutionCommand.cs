@@ -35,7 +35,7 @@ namespace MonoDevelop.JavaScript.Node
 
 		void UpdateArguments ()
 		{
-			Arguments = Debug ? "debug " : "";
+			Arguments = Debug ? "--debug-brk " : "";
 			Arguments += ScriptPath + " " + AdditionalArguments;
 		}
 	}

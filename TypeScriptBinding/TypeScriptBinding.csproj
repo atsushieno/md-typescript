@@ -15,26 +15,27 @@
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>..\..\monodevelop-master\main\build\AddIns\TypeScriptBinding</OutputPath>
+    <OutputPath>..\..\monodevelop\main\build\AddIns\TypeScriptBinding</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
     <CustomCommands>
       <CustomCommands>
-        <Command type="Execute" command="../../monodevelop-master/main/build/bin/MonoDevelop.exe" />
+        <Command type="Execute" command="../../monodevelop/main/build/bin/MonoDevelop.exe --no-redirect" />
       </CustomCommands>
     </CustomCommands>
     <EnvironmentVariables>
       <EnvironmentVariables>
         <Variable name="PATH" value="/devel/bin" />
+        <Variable name="MONODEVELOP_CONSOLE_LOG_LEVEL" value="All" />
       </EnvironmentVariables>
     </EnvironmentVariables>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>..\..\monodevelop-master\main\build\AddIns\TypeScriptBinding</OutputPath>
+    <OutputPath>..\..\monodevelop\main\build\AddIns\TypeScriptBinding</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
@@ -65,9 +66,6 @@
     <Reference Include="MonoDevelop.Ide">
       <HintPath>..\..\monodevelop-master\main\build\bin\MonoDevelop.Ide.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.NRefactory">
-      <HintPath>..\..\monodevelop-master\main\build\bin\ICSharpCode.NRefactory.dll</HintPath>
-    </Reference>
     <Reference Include="Mono.TextEditor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\monodevelop-master\main\build\bin\Mono.TextEditor.dll</HintPath>
     </Reference>
@@ -82,6 +80,14 @@
     </Reference>
     <Reference Include="MonoDevelop.Debugger, Version=2.6.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\monodevelop-master\main\build\AddIns\MonoDevelop.Debugger\MonoDevelop.Debugger.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49">
+      <Private>False</Private>
+      <Package>monodevelop</Package>
+    </Reference>
+    <Reference Include="Mono.Addins, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
+      <Private>False</Private>
+      <Package>mono-addins</Package>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +121,14 @@
     <Compile Include="NRefactory\TypeSystem\TypeScriptUnresolvedTypeDefinition.cs" />
     <Compile Include="NRefactory\TypeSystem\TypeScriptUnresolvedFile.cs" />
     <Compile Include="Languages\Gui\TypeScriptTextEditorTooltipProvider.cs" />
+    <Compile Include="Formatting\TypeScriptAmbience.cs" />
+    <Compile Include="Formatting\TypeScriptFormatter.cs" />
+    <Compile Include="Formatting\TypeScriptFormattingOptions.cs" />
+    <Compile Include="Formatting\TypeScriptFormattingOptionsFactory.cs" />
+    <Compile Include="Formatting\TypeScriptFormattingPolicy.cs" />
+    <Compile Include="Formatting\TypeScriptIndentEngine.cs" />
+    <Compile Include="Formatting\TypeScriptIndentEngineStack.cs" />
+    <Compile Include="Formatting\TypeScriptTextEditorIndentation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -146,6 +160,9 @@
     <EmbeddedResource Include="Resources\Icons\typescript-overlay-32.png">
       <LogicalName>typescript-overlay-32.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formatting\policies\DefaultTypeScriptPolicy.xml">
+      <LogicalName>DefaultTypeScriptPolicy.xml</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Projects\" />
@@ -160,6 +177,7 @@
     <Folder Include="NRefactory\" />
     <Folder Include="NRefactory\TypeSystem\" />
     <Folder Include="Debugging\" />
+    <Folder Include="Formatting\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TypeScriptServiceBridge\TypeScriptServiceBridge.csproj">
