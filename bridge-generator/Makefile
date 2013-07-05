@@ -1,8 +1,21 @@
 
-all: ts2cs_stub.dll
+
+JURASSIC_DLL = ../external/jurassic/Jurassic/bin/Debug/Jurassic.dll
+
+all: TypeScriptBridge.dll
+
+TypeScriptBridge.dll: TypeScriptBridge.cs TS2CSImplementor.exe ts2cs_stub.dll
+	mcs -debug -t:library TypeScriptBridge.cs Runtime/*.cs Hosting/*.cs -r:$(JURASSIC_DLL) -o:TypeScriptBridge.dll
+
+TypeScriptBridge.cs: TS2CSImplementor.exe ts2cs_stub.dll
+	mono --debug -O=-all TS2CSImplementor.exe ts2cs_stub.dll > TypeScriptBridge.cs
+
+TS2CSImplementor.exe: TS2CSImplementor.cs
+	mcs -debug TS2CSImplementor.cs
 
 clean:
-	rm -rf ts2cs_stub.dll* ts2cs_stub.cs ts2cs-generator.js
+	rm -rf ts2cs_stub.dll* ts2cs_stub.cs ts2cs-generator.js \
+		TS2CSImplementor.exe* TypeScriptBridge.dll* TypeScriptBridge.cs
 
 ts2cs_stub.dll: ts2cs_stub.cs
 	mcs -debug -t:library ts2cs_stub.cs
