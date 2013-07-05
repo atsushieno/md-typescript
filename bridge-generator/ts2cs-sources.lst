@@ -90,14 +90,12 @@
 ../external/typescript/src/compiler/symbols/ITypeInfo.ts
 ../external/typescript/src/compiler/symbols/ISemanticModel.ts
 ../external/typescript/src/compiler/symbols/ITypeSymbol.ts
-../external/typescript/src/compiler/symbols/SymbolDisplay.Format.ts
 ../external/typescript/src/compiler/symbols/ICompilation.ts
 ../external/typescript/src/compiler/symbols/ISignatureSymbol.ts
 ../external/typescript/src/compiler/symbols/ISymbol.ts
 ../external/typescript/src/compiler/symbols/ISymbolInfo.ts
 ../external/typescript/src/compiler/symbols/ISymbolVisitor.ts
 ../external/typescript/src/compiler/symbols/MethodKind.ts
-../external/typescript/src/compiler/symbols/SymbolDisplay.ts
 ../external/typescript/src/compiler/symbols/TypeKind.ts
 ../external/typescript/src/compiler/symbols/SymbolKind.ts
 ../external/typescript/src/compiler/symbols/IMemberSymbol.ts
@@ -106,7 +104,6 @@
 ../external/typescript/src/compiler/astPath.ts
 ../external/typescript/src/compiler/syntax/syntaxList.ts
 ../external/typescript/src/compiler/syntax/syntaxIndenter.ts
-../external/typescript/src/compiler/syntax/scanner.ts
 ../external/typescript/src/compiler/syntax/syntaxNodeOrToken.ts
 ../external/typescript/src/compiler/syntax/syntaxInformationMap.ts
 ../external/typescript/src/compiler/syntax/syntaxKind.ts

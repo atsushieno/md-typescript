@@ -34,11 +34,14 @@ module BridgeGenerator {
 			IO.printLine ("public class someanonymoustype {}");
 			IO.printLine ("public class typescriptfunctionargument {}");
 			IO.printLine ("// TypeScript types");
-			IO.printLine ("public interface ILocation {}");
-			IO.printLine ("public interface ITextWriter {}");
-			IO.printLine ("public interface IAstWalkCallback {} // delegate interface not supported yet...");
-			IO.printLine ("public interface IAstWalkChildren {}");
-			IO.printLine ("public class SyntaxNode {}");
+			IO.printLine ("namespace TypeScript {");
+			IO.printLine ("\tpublic interface ILocation {}");
+			IO.printLine ("\tpublic interface ITextWriter {}");
+			IO.printLine ("\tpublic interface IAstWalkCallback {} // delegate interface not supported yet...");
+			IO.printLine ("\tpublic interface IAstWalkChildren {}");
+			IO.printLine ("\tpublic class Scanner {}");
+			IO.printLine ("}");
+			IO.printLine ("namespace SymbolDisplay { public class Format {} }");
 			IO.printLine ("public class MaskBitSize {}");
 			IO.printLine ("// JavaScript standard types");
 			IO.printLine ("public class RegExp {}");
@@ -313,7 +316,7 @@ module BridgeGenerator {
 							if (cparam.getVarFlags () & TypeScript.VariableFlags.Public) {
 								IO.print ("\t\tpublic ");
 								if (cparam.typeExpr == null)
-									IO.print ("unknown");
+									IO.print ("object/*unknown*/");
 								else
 									this.processAST (cparam.typeExpr);
 								IO.print (" ");
@@ -386,7 +389,7 @@ module BridgeGenerator {
 					IO.print ("\t\t" + this.getVariableModifierString (variable.getVarFlags ()));
 					IO.print (" ");
 					if (variable.typeExpr == null)
-						IO.print ("unknown");
+						IO.print ("object/*unknown*/");
 					else
 						this.processAST (variable.typeExpr);
 					IO.print (" @");
@@ -474,7 +477,7 @@ module BridgeGenerator {
 				IO.print (this.getVariableModifierString (param.getVarFlags (), true));
 				IO.print (" ");
 				if (param.typeExpr == null)
-					IO.print ("unknown");
+					IO.print ("object/*unknown*/");
 				else
 					this.processAST (param.typeExpr);
 				IO.print (" @");
