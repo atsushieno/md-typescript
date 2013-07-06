@@ -46,7 +46,7 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 			base.Dispose ();
 		}
 
-		public override bool ExtendsEditor (Document doc, IEditableTextBuffer editor)
+		public override bool ExtendsEditor (MonoDevelop.Ide.Gui.Document doc, IEditableTextBuffer editor)
 		{
 			return doc.FileName.FileName.EndsWith (".ts");
 		}
@@ -63,6 +63,7 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 
 		public override int GetCurrentParameterIndex (int startOffset)
 		{
+#if false
 			var ast = ls.GetScriptAST (service.GetFilePath (Document.FileName));
 			var ap = ls.GetAstPathToPosition (ast, startOffset, GetAstPathOptions.Default);
 			if (/*ap.IsArgumentListOfCall || ap.IsArgumentListOfFunction || ap.IsArgumentListOfNew
@@ -73,6 +74,7 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 				if (idx >= 0)
 					return doc.Substring (idx, startOffset - idx).Count (c => c == ',');
 			}
+#endif
 			return base.GetCurrentParameterIndex (startOffset);
 		}
 		
@@ -93,7 +95,7 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 			get { return service.ShimHost; }
 		}
 
-		ILanguageService ls {
+		LanguageService ls {
 			get { return service.LanguageService; }
 		}
 

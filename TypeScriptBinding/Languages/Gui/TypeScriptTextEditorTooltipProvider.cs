@@ -67,8 +67,9 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 			var service = GetService (((ExtensibleTextEditor) editor).Project);
 			if (service != null) {
 				service.UpdateScripts ();
-				var item = service.LanguageService.GetDefinitionAtPosition (service.GetFilePath (editor.FileName), offset);
-				return new TooltipItem (item, (int)item.MinChar, (int)(item.LimChar - item.MinChar));
+				var item = service.LanguageService.GetDefinitionAtPosition (service.GetFilePath (editor.FileName), offset).FirstOrDefault ();
+				if (item != null)
+					return new TooltipItem (item, (int)item.MinChar, (int)(item.LimChar - item.MinChar));
 			}
 			return null;
 		}

@@ -30,14 +30,9 @@ namespace MonoDevelop.TypeScriptBinding.NRefactory.TypeSystem
 				return null;
 
 			var file = service.GetFilePath (fileName);
-			bool contains = false;
-			foreach (ObjectInstance sinfo in ((ArrayInstance) service.ShimHost.Scripts.Instance).ElementValues)
-				if ((string) sinfo ["name"] == file) {
-					contains = true;
-					break;
-				}
+			bool contains = service.LanguageService.Host.GetScriptFileNames ().Contains (file);
 			if (!contains)
-				service.ShimHost.AddScript (file, content.ReadToEnd (), true);
+				service.ShimHost.AddScript (file, content.ReadToEnd ());
 
 			var doc = new ParsedDocumentDecorator (new TypeScriptUnresolvedFile (service, file));
 

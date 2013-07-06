@@ -16,7 +16,7 @@ namespace TypeScriptServiceBridge.Tests
 		{
 			var shimHost = new TypeScriptLS ();
 			var lsHost = new LanguageServiceShimHostAdapter (shimHost);
-			var ls = new TypeScriptServicesFactory ().CreateLanguageService (lsHost);
+			var ls = new TypeScriptServicesFactory ().CreatePullLanguageService (lsHost);
 			//Assert.AreEqual (lsHost.Instance, ls.Host.Instance, "#1");
 			shimHost.AddScript ("foo.ts", "class Foo { public foo : int = 5; public bar (baz: int) : string { return 'hello #' + baz; } }");
 			
@@ -55,7 +55,7 @@ namespace TypeScriptServiceBridge.Tests
 		{
 			var shimHost = new TypeScriptLS ();
 			var lsHost = new LanguageServiceShimHostAdapter (shimHost);
-			var ls = new TypeScriptServicesFactory ().CreateLanguageService (lsHost);
+			var ls = new TypeScriptServicesFactory ().CreatePullLanguageService (lsHost);
 			//Assert.AreEqual (lsHost.Instance, ls.Host.Instance, "#1");
 			// attempt to get non-existent definition
 			Assert.IsNull (ls.GetDefinitionAtPosition ("nonexistent", 0), "#2");
@@ -87,7 +87,7 @@ document.body.appendChild(button)
 ";
 			var shimHost = new TypeScriptLS ();
 			var lsHost = new LanguageServiceShimHostAdapter (shimHost);
-			var ls = new TypeScriptServicesFactory ().CreateLanguageService (lsHost);
+			var ls = new TypeScriptServicesFactory ().CreatePullLanguageService (lsHost);
 			shimHost.AddScript ("foo.ts", script);
 			for (int i = 72; i < 77; i++) { // his.greeting at line 5
 				var list = ls.GetCompletionsAtPosition ("foo.ts", i, true);
@@ -124,7 +124,7 @@ document.body.appendChild(button)
 		{
 			var shimHost = new TypeScriptLS ();
 			var lsHost = new LanguageServiceShimHostAdapter (shimHost);
-			var ls = new TypeScriptServicesFactory ().CreateLanguageService (lsHost);
+			var ls = new TypeScriptServicesFactory ().CreatePullLanguageService (lsHost);
 			shimHost.AddScript ("languageService.ts", File.ReadAllText (Path.Combine (Path.GetDirectoryName (new Uri (GetType ().Assembly.CodeBase).LocalPath), "TestFiles", "languageService.ts")));
 		}
 	}

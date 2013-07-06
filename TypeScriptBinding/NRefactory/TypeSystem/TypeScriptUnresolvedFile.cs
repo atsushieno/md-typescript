@@ -22,6 +22,7 @@ namespace MonoDevelop.TypeScriptBinding
 
 		#region IUnresolvedFile implementation
 
+		/*
 		AstPath GetAstPath (TextLocation location)
 		{
 			var ast = service.LanguageService.GetScriptAST (file);
@@ -29,14 +30,18 @@ namespace MonoDevelop.TypeScriptBinding
 			var path = service.LanguageService.GetAstPathToPosition (ast, pos, GetAstPathOptions.Default);
 			return path;
 		}
+		*/
 
 		public IUnresolvedTypeDefinition GetInnermostTypeDefinition (ICSharpCode.NRefactory.TextLocation location)
 		{
+			/*
 			var path = GetAstPath (location);
 			foreach (var ap in path.Asts.Reverse ())
 				if (ap.Type != null)
 					return new TypeScriptUnresolvedTypeDefinition (service, ap);
 			return null;
+			*/
+			throw new NotImplementedException ();
 		}
 		
 		public IUnresolvedMember GetMember (TextLocation location)
@@ -46,8 +51,8 @@ namespace MonoDevelop.TypeScriptBinding
 		
 		TextLocation ToTextLocation (double pos)
 		{
-			var lc = service.ShimHost.PositionToLineCol (file, pos);
-			return new TextLocation ((int) lc.Line, (int) lc.Col);
+			var lc = service.ShimHost.PositionToZeroBasedLineCol (file, pos);
+			return new TextLocation ((int) lc.Line + 1, (int) lc.Character);
 		}
 
 		public ITypeResolveContext GetTypeResolveContext (ICompilation compilation, TextLocation loc)
@@ -84,8 +89,8 @@ namespace MonoDevelop.TypeScriptBinding
 			get {
 				return new Error [0];
 
-				var errors = service.LanguageService.GetScriptErrors (file, short.MaxValue);
-				return errors.Select (e => new Error (ErrorType.Unknown, e.Message)).ToArray ();
+				var errors = service.LanguageService.GetSyntacticDiagnostics (file);
+				return errors.Select (e => new Error (ErrorType.Unknown, e.Message ())).ToArray ();
 			}
 		}
 

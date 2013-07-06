@@ -1,17 +1,20 @@
 using System;
 using ICSharpCode.NRefactory.TypeSystem;
 using TypeScriptServiceBridge.Services;
+using TypeScriptServiceBridge;
+
+using ITypeDefinition = ICSharpCode.NRefactory.TypeSystem.ITypeDefinition;
 
 namespace MonoDevelop.TypeScriptBinding.NRefactory.TypeSystem
 {
 	public class TypeScriptType : IType
 	{
-		public TypeScriptType (DefinitionInfo definition)
+		public TypeScriptType (TypeScriptArray<DefinitionInfo> definition)
 		{
 			Definition = definition;
 		}
 
-		public DefinitionInfo Definition { get; private set; }
+		public TypeScriptArray<DefinitionInfo> Definition { get; private set; }
 
 		#region IType implementation
 
@@ -85,7 +88,7 @@ namespace MonoDevelop.TypeScriptBinding.NRefactory.TypeSystem
 			throw new NotImplementedException ();
 		}
 
-		public TypeKind Kind {
+		public ICSharpCode.NRefactory.TypeSystem.TypeKind Kind {
 			get {
 				throw new NotImplementedException ();
 			}

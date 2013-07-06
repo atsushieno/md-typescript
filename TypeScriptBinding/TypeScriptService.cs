@@ -20,12 +20,13 @@ namespace MonoDevelop.TypeScriptBinding
 			NodeLanguageServiceHost.NodeCommandLocator = () => PropertyService.Get<string> ("TypeScriptBinding.NodeLocation");
 			this.project = project;
 			ShimHost = new TypeScriptLS ();
-			LanguageService = new TypeScriptServicesFactory ()
-				.CreateLanguageService (new LanguageServiceShimHostAdapter (ShimHost));
+			var ls = new TypeScriptServicesFactory ()
+				.CreatePullLanguageService (new LanguageServiceShimHostAdapter (ShimHost));
+			LanguageService = new LanguageService (ls.Instance);
 		}
 
 		public TypeScriptLS ShimHost { get; private set; }
-		public ILanguageService LanguageService { get; private set; }
+		public LanguageService LanguageService { get; private set; }
 		
 		public string GetFilePath (ProjectFile file)
 		{

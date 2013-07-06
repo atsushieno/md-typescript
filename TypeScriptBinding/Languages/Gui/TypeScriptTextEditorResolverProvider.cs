@@ -8,6 +8,7 @@ using MonoDevelop.TypeScriptBinding;
 using MonoDevelop.TypeScriptBinding.Projects;
 using MonoDevelop.TypeScriptBinding.NRefactory.TypeSystem;
 using TypeScriptServiceBridge.Services;
+using TypeScriptServiceBridge;
 
 namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 {
@@ -53,8 +54,9 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 			return result;
 		}
 		
-		string GetTooltopString (DefinitionInfo info)
+		string GetTooltopString (TypeScriptArray<DefinitionInfo> infos)
 		{
+			var info = infos [0];
 			return string.Format ("{0} {1} (in {2} {3})",
 			                      info.Kind,
 			                      info.Name,

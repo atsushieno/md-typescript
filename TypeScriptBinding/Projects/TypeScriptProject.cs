@@ -15,10 +15,11 @@ using MonoDevelop.Core.Serialization;
 using MonoDevelop.Ide.Gui;
 using MonoDevelop.Projects;
 using MonoDevelop.TypeScriptBinding;
-using Mono.JavaScript.Debugger;
-using MonoDevelop.JavaScript.Node;
+//using Mono.JavaScript.Debugger;
+//using MonoDevelop.JavaScript.Node;
 using System.Text.RegularExpressions;
 using TypeScriptServiceBridge.Hosting;
+//using MonoDevelop.JavaScript.Node;
 
 namespace MonoDevelop.TypeScriptBinding.Projects
 {
@@ -265,10 +266,13 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 
 		ExecutionCommand CreateExecutionCommand (TypeScriptProjectConfiguration conf)
 		{
+			/*
 			NodeExecutionCommand cmd = new NodeExecutionCommand (GetNodePath (), GetTargetJavascriptFilePath ());
 			cmd.AdditionalArguments = conf.CommandLineParameters;
 			cmd.WorkingDirectory = Path.GetDirectoryName (GetTargetJavascriptFilePath ());
 			return cmd;
+			*/
+			throw new NotImplementedException ();
 		}
 
 		string GetNodePath ()
