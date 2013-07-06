@@ -81,7 +81,6 @@
 ../external/typescript/src/compiler/optionsParser.ts
 ../external/typescript/src/compiler/process.ts
 ../external/typescript/src/compiler/io.ts
-../external/typescript/src/compiler/syntaxTreeToAstVisitor.ts
 ../external/typescript/src/compiler/hashTable.ts
 ../external/typescript/src/compiler/flags.ts
 ../external/typescript/src/compiler/base64.ts
@@ -149,3 +148,5 @@
 ../external/typescript/src/compiler/tsc.ts
 ../external/typescript/src/compiler/identifierWalker.ts
 ../external/typescript/src/compiler/typescript.ts
+harness-modified.ts
+

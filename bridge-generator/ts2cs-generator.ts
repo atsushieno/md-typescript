@@ -36,12 +36,16 @@ module BridgeGenerator {
 			IO.printLine ("// TypeScript types");
 			IO.printLine ("namespace TypeScript {");
 			IO.printLine ("\tpublic interface ILocation {}");
+			IO.printLine ("\tpublic class Location {}");
 			IO.printLine ("\tpublic interface ITextWriter {}");
 			IO.printLine ("\tpublic interface IAstWalkCallback {} // delegate interface not supported yet...");
 			IO.printLine ("\tpublic interface IAstWalkChildren {}");
 			IO.printLine ("\tpublic class Scanner {}");
 			IO.printLine ("}");
-			IO.printLine ("namespace SymbolDisplay { public class Format {} }");
+			IO.printLine ("namespace SymbolDisplay {");
+			IO.printLine ("\tpublic class Format {}");
+			IO.printLine ("\tpublic class Part {}");
+			IO.printLine ("}");
 			IO.printLine ("public class MaskBitSize {}");
 			IO.printLine ("// JavaScript standard types");
 			IO.printLine ("public class RegExp {}");
@@ -70,7 +74,7 @@ module BridgeGenerator {
 		private is_type_name : boolean = false;
 		private current_type_name : string = null;
 		private container_kind : ContainerKind = ContainerKind.None;
-		private in_vardecl : boolean = false;
+		private in_vardecl_or_retval : boolean = false;
 		private constructors = {};
 		
 		private processAST (ast : TypeScript.AST)
@@ -246,7 +250,7 @@ module BridgeGenerator {
 				}
 
 				// in parameters there could be anonymous types, but we can't handle them.
-				if (this.in_vardecl) {
+				if (this.in_vardecl_or_retval) {
 					IO.print ("someanonymoustype");
 					break;
 				}
@@ -308,8 +312,8 @@ module BridgeGenerator {
 					var hasDefaultCtor : boolean = false;
 					var constructor = <TypeScript.FunctionDeclaration>this.constructors [this.current_type_name];
 					if (constructor) {
-						var inVarDeclBakCtor = this.in_vardecl;
-						this.in_vardecl = true;
+						var inVarDeclBakCtor = this.in_vardecl_or_retval;
+						this.in_vardecl_or_retval = true;
 						hasDefaultCtor = hasDefaultCtor || constructor.arguments.members.length == 0;
 						for (var i = 0; i < constructor.arguments.members.length; i++) {
 							var cparam = <TypeScript.Parameter>constructor.arguments.members [i];
@@ -324,7 +328,7 @@ module BridgeGenerator {
 								IO.printLine (" { get; set; }");
 							}
 						}
-						this.in_vardecl = inVarDeclBakCtor;
+						this.in_vardecl_or_retval = inVarDeclBakCtor;
 					}
 					if (decl.nodeType () == TypeScript.NodeType.ClassDeclaration && !hasDefaultCtor) {
 						// create dummy constructor to not error out inheritance without default ctor.
@@ -373,8 +377,8 @@ module BridgeGenerator {
 				break;
 
 			case TypeScript.NodeType.VariableDeclarator:
-				var inVarDeclBak = this.in_vardecl;
-				this.in_vardecl = true;
+				var inVarDeclBak = this.in_vardecl_or_retval;
+				this.in_vardecl_or_retval = true;
 				var variable = <TypeScript.VariableDeclarator> ast;
 				
 				if (this.container_kind == ContainerKind.Enum) {
@@ -404,7 +408,7 @@ module BridgeGenerator {
 					IO.printLine (" { get; set; }");
 
 				}
-				this.in_vardecl = inVarDeclBak;
+				this.in_vardecl_or_retval = inVarDeclBak;
 				break;
 
 			case TypeScript.NodeType.FunctionDeclaration:
@@ -413,7 +417,7 @@ module BridgeGenerator {
 					break; // skip global functions
 				}
 				
-				if (this.in_vardecl) {
+				if (this.in_vardecl_or_retval) {
 					// can't really output this yet.
 					IO.printLine ("typescriptfunctionargument");
 					break;
@@ -439,12 +443,13 @@ module BridgeGenerator {
 					IO.print ("internal " + this.current_type_name);
 					this.constructors [this.current_type_name] = func;
 				} else {
-					if (func.returnStatementsWithExpressions == null)
-						IO.print ("void");
-					else if (func.returnTypeAnnotation != null)
+					var inVarDeclOrRetValBak = this.in_vardecl_or_retval;
+					this.in_vardecl_or_retval = true;
+					if (func.returnTypeAnnotation != null)
 						this.processAST (func.returnTypeAnnotation);
 					else
-						IO.print ("dynamic");
+						IO.print ("object"); // could be void or untyped object
+					this.in_vardecl_or_retval = inVarDeclOrRetValBak;
 					IO.print (" @");
 					this.processAST (func.name);
 					this.processTypeParameters (func.typeArguments);
@@ -470,8 +475,8 @@ module BridgeGenerator {
 				break;
 
 			case TypeScript.NodeType.Parameter:
-				var inVarDeclBak = this.in_vardecl;
-				this.in_vardecl = true;
+				var inVarDeclBak = this.in_vardecl_or_retval;
+				this.in_vardecl_or_retval = true;
 
 				var param = <TypeScript.Parameter> ast;
 				IO.print (this.getVariableModifierString (param.getVarFlags (), true));
@@ -495,7 +500,7 @@ module BridgeGenerator {
 					}
 				}
 
-				this.in_vardecl = inVarDeclBak;
+				this.in_vardecl_or_retval = inVarDeclBak;
 
 				break;
 

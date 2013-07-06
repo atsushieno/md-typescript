@@ -409,10 +409,13 @@ foreach (var t in types.SelectMany (p => p.Value)) Console.WriteLine (t.FullName
 			var args = new List<string> ();
 			for (int i = 0; i < mParams.Length; i++)
 				args.Add ("(" + GetImplementedType (cParams [i].ParameterType) + ") " + EscapeIdentifier (mParams [i].Name));
+			bool needsExtraReturn = m.ReturnType != typeof (void) && cm.ReturnType == typeof (void);
 			output.WriteLine ("\t\t\t{0} {1} ({2});",
-					cm.ReturnType == typeof (void) ? "" : "return (" + GetImplementedType (m.ReturnType) + ")",
+					needsExtraReturn || m.ReturnType == typeof (void) ? "" : "return (" + GetImplementedType (m.ReturnType) + ")",
 					name,
 					string.Join (", ", args.ToArray ()));
+			if (needsExtraReturn)
+				output.WriteLine ("\t\t\treturn null; // dummy");
 			output.WriteLine ("\t\t}");
 		}
 	}
