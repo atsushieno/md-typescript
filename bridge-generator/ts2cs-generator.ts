@@ -440,7 +440,7 @@ module BridgeGenerator {
 				IO.print (" ");
 				if (func.getNameText () == null) {
 					// constructor
-					IO.print ("internal " + this.current_type_name);
+					IO.print ("public " + this.current_type_name);
 					this.constructors [this.current_type_name] = func;
 				} else {
 					var inVarDeclOrRetValBak = this.in_vardecl_or_retval;
