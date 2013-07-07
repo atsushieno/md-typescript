@@ -11,9 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jurassic", "external\jurass
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeScriptServiceBridge.Tests", "TypeScriptServiceBridge.Tests\TypeScriptServiceBridge.Tests.csproj", "{79ABA548-0764-4A71-B93B-8F027C039DC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mono.JavaScriptDebugger", "..\..\..\..\svn\md-typescript\Mono.JavaScriptDebugger\Mono.JavaScriptDebugger.csproj", "{033F1267-FE01-4974-8473-16E28841F048}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mono.JavaScriptDebugger", "Mono.JavaScriptDebugger\Mono.JavaScriptDebugger.csproj", "{033F1267-FE01-4974-8473-16E28841F048}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDevelop.JavaScriptDebugger", "..\..\..\..\svn\md-typescript\MonoDevelop.JavaScriptDebugger\MonoDevelop.JavaScriptDebugger.csproj", "{C3C01664-18E0-437D-A8B5-C4DDD42D7876}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDevelop.JavaScriptDebugger", "MonoDevelop.JavaScriptDebugger\MonoDevelop.JavaScriptDebugger.csproj", "{C3C01664-18E0-437D-A8B5-C4DDD42D7876}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -37,28 +37,28 @@
     <Compile Include="..\bridge-generator\TypeScriptBridge.cs">
       <Link>src\TypeScriptBridge.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\..\svn\md-typescript\bridge-generator\Hosting\JurassicLanguageServiceHost.cs">
+    <Compile Include="..\TypeScriptBinding\..\..\..\..\..\svn\md-typescript\bridge-generator\Hosting\JurassicLanguageServiceHost.cs">
       <Link>src\Hosting\JurassicLanguageServiceHost.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\..\svn\md-typescript\bridge-generator\Hosting\JurassicTypeHosting.cs">
+    <Compile Include="..\TypeScriptBinding\..\..\..\..\..\svn\md-typescript\bridge-generator\Hosting\JurassicTypeHosting.cs">
       <Link>src\Hosting\JurassicTypeHosting.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\..\svn\md-typescript\bridge-generator\Hosting\LanguageServiceHost.cs">
+    <Compile Include="..\TypeScriptBinding\..\..\..\..\..\svn\md-typescript\bridge-generator\Hosting\LanguageServiceHost.cs">
       <Link>src\Hosting\LanguageServiceHost.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\..\svn\md-typescript\bridge-generator\Hosting\NodeLanguageServiceHost.cs">
+    <Compile Include="..\TypeScriptBinding\..\..\..\..\..\svn\md-typescript\bridge-generator\Hosting\NodeLanguageServiceHost.cs">
       <Link>src\Hosting\NodeLanguageServiceHost.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\..\svn\md-typescript\bridge-generator\Runtime\DangerousDefaultValueAttribute.cs">
+    <Compile Include="..\TypeScriptBinding\..\..\..\..\..\svn\md-typescript\bridge-generator\Runtime\DangerousDefaultValueAttribute.cs">
       <Link>src\Runtime\DangerousDefaultValueAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\..\svn\md-typescript\bridge-generator\Runtime\ITypeScriptObject.cs">
+    <Compile Include="..\TypeScriptBinding\..\..\..\..\..\svn\md-typescript\bridge-generator\Runtime\ITypeScriptObject.cs">
       <Link>src\Runtime\ITypeScriptObject.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\..\svn\md-typescript\bridge-generator\Runtime\TypeScriptArray.cs">
+    <Compile Include="..\TypeScriptBinding\..\..\..\..\..\svn\md-typescript\bridge-generator\Runtime\TypeScriptArray.cs">
       <Link>src\Runtime\TypeScriptArray.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\..\svn\md-typescript\bridge-generator\Runtime\TypeScriptObject.cs">
+    <Compile Include="..\TypeScriptBinding\..\..\..\..\..\svn\md-typescript\bridge-generator\Runtime\TypeScriptObject.cs">
       <Link>src\Runtime\TypeScriptObject.cs</Link>
     </Compile>
   </ItemGroup>

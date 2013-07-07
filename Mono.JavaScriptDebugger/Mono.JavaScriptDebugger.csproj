@@ -45,11 +45,11 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\..\..\home\atsushi\svn\md-typescript\external\jurassic\Jurassic\Jurassic.csproj">
+    <ProjectReference Include="..\external\jurassic\Jurassic\Jurassic.csproj">
       <Project>{2CE5502D-8710-4BE3-9D90-201D526904B3}</Project>
       <Name>Jurassic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\home\atsushi\svn\md-typescript\TypeScriptServiceBridge\TypeScriptServiceBridge.csproj">
+    <ProjectReference Include="..\TypeScriptServiceBridge\TypeScriptServiceBridge.csproj">
       <Project>{17F48D22-DFF8-48FB-935B-BBF17F63B39C}</Project>
       <Name>TypeScriptServiceBridge</Name>
     </ProjectReference>

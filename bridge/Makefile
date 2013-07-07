@@ -49,7 +49,7 @@ v8dbg_stub.cs: ts2cs-generator.js v8dbg-sources.lst
 
 
 clean:
-	rm -rf
+	rm -rf \
 		ts2cs-generator.js node-ts-server.js TS2CSImplementor.exe* \
 		ts2cs_stub.dll* ts2cs_stub.cs \
 		TypeScriptBridge.dll* TypeScriptBridge.cs \

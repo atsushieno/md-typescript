@@ -1,10 +1,10 @@
 
-all: external/jurassic bridge-generator/TypeScriptBridge.cs
+all: external/jurassic bridge/TypeScriptBridge.cs
 
 clean: clean-bridge clean-here
 
 clean-bridge:
-	make -C bridge-generator clean
+	make -C bridge clean
 
 clean-here:
 	xbuild /t:Clean
@@ -21,8 +21,8 @@ checkout-jurassic:
 	cd ..
 	touch jurassic.timestamp
 
-bridge-generator/TypeScriptBridge.cs:
-	make -C bridge-generator
+bridge/TypeScriptBridge.cs:
+	make -C bridge
 
 pack:
 	mdtool setup pack ../monodevelop-master/main/build/AddIns/TypeScriptBinding/MonoDevelop.TypeScriptBinding.dll
