@@ -70,18 +70,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ls-bridge.js">
-      <LogicalName>ls-bridge.js</LogicalName>
-    </EmbeddedResource>
+    <Folder Include="src\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ls-bridge.ts" />
-    <None Include="node-ts-server.js">
+    <None Include="..\bridge-generator\node-ts-server.js">
+      <Link>node-ts-server.js</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="node-ts-server.ts" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\" />
+    <None Include="..\bridge-generator\node-ts-server.ts">
+      <Link>node-ts-server.ts</Link>
+    </None>
   </ItemGroup>
 </Project>

@@ -1,8 +1,16 @@
 
-all: external/jurassic external/ts2cs/src/TypeScriptBridge.cs
+all: external/jurassic bridge-generator/TypeScriptBridge.cs
+
+clean: clean-bridge clean-here
+
+clean-bridge:
+	make -C bridge-generator clean
+
+clean-here:
+	xbuild /t:Clean
 
 external/jurassic:
-	make -C checkout-jurassic
+	make checkout-jurassic
 
 checkout-jurassic:
 	cd external
@@ -11,10 +19,10 @@ checkout-jurassic:
 	hg checkout 362:7f18d6625a84
 	patch -i ../../jurassic-mono.patch -p1
 	cd ..
+	touch jurassic.timestamp
 
-external/ts2cs/src/TypeScriptBridge.cs:
-	make -C external/ts2cs
-	make -C external/ts2cs/src
+bridge-generator/TypeScriptBridge.cs:
+	make -C bridge-generator
 
 pack:
 	mdtool setup pack ../monodevelop-master/main/build/AddIns/TypeScriptBinding/MonoDevelop.TypeScriptBinding.dll

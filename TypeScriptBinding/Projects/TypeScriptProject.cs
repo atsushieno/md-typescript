@@ -281,7 +281,7 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 			return string.IsNullOrEmpty (exe) ? FindToolPath ("node") : exe;
 		}
 		
-		public void ExecuteWithNode (TypeScriptProject project, TypeScriptProjectConfiguration conf, IProgressMonitor monitor, ExecutionContext context)
+		void ExecuteWithNode (TypeScriptProject project, TypeScriptProjectConfiguration conf, IProgressMonitor monitor, ExecutionContext context)
 		{
 			if (console != null)
 				console.Dispose ();

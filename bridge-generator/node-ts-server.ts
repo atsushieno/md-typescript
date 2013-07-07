@@ -1,3 +1,4 @@
+
 function evaluateFromRequest (cmd : string) {
   return eval (cmd);
 }

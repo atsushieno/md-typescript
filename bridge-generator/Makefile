@@ -2,7 +2,7 @@
 
 JURASSIC_DLL = ../external/jurassic/Jurassic/bin/Debug/Jurassic.dll
 
-all: TypeScriptBridge.dll
+all: TypeScriptBridge.dll node-ts-server.js
 
 TypeScriptBridge.dll: TypeScriptBridge.cs TS2CSImplementor.exe ts2cs_stub.dll
 	mcs -debug -t:library TypeScriptBridge.cs Runtime/*.cs Hosting/*.cs -r:$(JURASSIC_DLL) -o:TypeScriptBridge.dll
@@ -14,7 +14,8 @@ TS2CSImplementor.exe: TS2CSImplementor.cs
 	mcs -debug TS2CSImplementor.cs
 
 clean:
-	rm -rf ts2cs_stub.dll* ts2cs_stub.cs ts2cs-generator.js \
+	rm -rf ts2cs_stub.dll* ts2cs_stub.cs \
+		ts2cs-generator.js node-ts-server.js \
 		TS2CSImplementor.exe* TypeScriptBridge.dll* TypeScriptBridge.cs
 
 ts2cs_stub.dll: ts2cs_stub.cs
@@ -23,13 +24,16 @@ ts2cs_stub.dll: ts2cs_stub.cs
 ts2cs_stub.cs: ts2cs-generator.js ts2cs-sources.lst
 	node ts2cs-generator.js ts2cs-sources.lst > ts2cs_stub.cs
 
-ts2cs-generator.js: ts2cs-generator-sources.lst harness-modified.ts ts2cs-generator.ts
-	tsc @ts2cs-generator-sources.lst -out ts2cs-generator.js
+ts2cs-generator.js: service-binding-sources.lst harness-modified.ts ts2cs-generator.ts
+	tsc @service-binding-sources.lst ts2cs-generator.ts -out ts2cs-generator.js
+
+node-ts-server.js: node-ts-server.ts harness-modified.ts
+	tsc @service-binding-sources.lst node-ts-server.ts -out node-ts-server.js
 
 # ts2cs-generator.ts needs to come after harness-modified.ts, but it is "ls" implementation dependent which comes first. So, do it manually.
-#ts2cs-generator-sources.lst:
-#	ls ../external/typescript/src/compiler/io.ts ../external/typescript/src/services/*.ts harness-modified.ts ts2cs-generator.ts | grep -v diagnosticsParser > ts2cs-generator-sources.lst
+#service-binding-sources.lst:
+#	ls ../external/typescript/src/compiler/io.ts ../external/typescript/src/services/*.ts harness-modified.ts ts2cs-generator.ts | grep -v diagnosticsParser > service-binding-sources.lst
 
-# ts2cs-generator-sources.lst:
-# find ../external/typescript/src/ | grep -v /harness | grep \\.ts | grep -v \\.d\\.ts > ts2cs-generator-sources.lst
+# service-binding-sources.lst:
+# find ../external/typescript/src/ | grep -v /harness | grep \\.ts | grep -v \\.d\\.ts > service-binding-sources.lst
 

@@ -18,4 +18,3 @@
 ../external/typescript/src/services/signatureInfoHelpers.ts
 ../external/typescript/src/services/typescriptServices.ts
 harness-modified.ts
-ts2cs-generator.ts
