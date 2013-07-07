@@ -47,6 +47,9 @@ module BridgeGenerator {
 			IO.printLine ("\tpublic class Part {}");
 			IO.printLine ("}");
 			IO.printLine ("public class MaskBitSize {}");
+			IO.printLine ("// Language service types");
+			IO.printLine ("namespace Services {");
+			IO.printLine ("}");
 			IO.printLine ("// JavaScript standard types");
 			IO.printLine ("public class RegExp {}");
 			IO.printLine ("public class Error {}");

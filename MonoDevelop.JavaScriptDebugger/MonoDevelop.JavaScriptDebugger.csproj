@@ -61,13 +61,13 @@
       <Project>{2CE5502D-8710-4BE3-9D90-201D526904B3}</Project>
       <Name>Jurassic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Mono.JavaScriptDebugger\Mono.JavaScriptDebugger.csproj">
-      <Project>{033F1267-FE01-4974-8473-16E28841F048}</Project>
-      <Name>Mono.JavaScriptDebugger</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\home\atsushi\svn\md-typescript\TypeScriptServiceBridge\TypeScriptServiceBridge.csproj">
       <Project>{17F48D22-DFF8-48FB-935B-BBF17F63B39C}</Project>
       <Name>TypeScriptServiceBridge</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mono.JavaScriptDebugger\Mono.JavaScriptDebugger.csproj">
+      <Project>{033F1267-FE01-4974-8473-16E28841F048}</Project>
+      <Name>Mono.JavaScriptDebugger</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

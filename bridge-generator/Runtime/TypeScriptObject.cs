@@ -78,6 +78,11 @@ namespace TypeScriptServiceBridge
 		{
 			return LanguageServiceHost.Instance.Cached (this);
 		}
+		
+		public T CreateLocalCache<T> () where T : ITypeScriptObject
+		{
+			return (T) LanguageServiceHost.Instance.Cached (this);
+		}
 
 		public override string ToString ()
 		{

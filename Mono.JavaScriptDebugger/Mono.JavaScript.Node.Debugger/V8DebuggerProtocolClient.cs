@@ -2,7 +2,7 @@
 // Anyways using ServiceBridge is totally wrong, it's not running on top of other host.
 using System;
 using V8DebuggerClientBridge.V8Debugger;
-using V8DebuggerClientBridge;
+using TypeScriptServiceBridge;
 using Jurassic.Library;
 using System.Net.Sockets;
 using System.IO;
@@ -116,7 +116,7 @@ namespace Mono.JavaScript.Node.Debugger
 			if (string.IsNullOrEmpty (line))
 			    return;
 			try {
-				var obj = (ObjectInstance) JSONObject.Parse (JavaScriptObject.Engine, line);
+				var obj = (ObjectInstance) JSONObject.Parse (ScriptEngine.DeserializationEnvironment, line);
 				switch ((string) obj ["type"]) {
 				case "event":
 					switch ((string) obj ["event"]) {
@@ -171,7 +171,7 @@ namespace Mono.JavaScript.Node.Debugger
 		{
 			request.Seq = sequence++;
 			request.Type = "request";
-			var res = InternalProcess (JSONObject.Stringify (JavaScriptObject.Engine, request.Instance));
+			var res = InternalProcess (JSONObject.Stringify (ScriptEngine.DeserializationEnvironment, request.Instance));
 			return new DebuggerResponse (res);
 		}
 

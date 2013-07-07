@@ -20,6 +20,7 @@ using MonoDevelop.TypeScriptBinding;
 using System.Text.RegularExpressions;
 using TypeScriptServiceBridge.Hosting;
 //using MonoDevelop.JavaScript.Node;
+using MonoDevelop.JavaScript.Node;
 
 namespace MonoDevelop.TypeScriptBinding.Projects
 {
@@ -266,13 +267,10 @@ namespace MonoDevelop.TypeScriptBinding.Projects
 
 		ExecutionCommand CreateExecutionCommand (TypeScriptProjectConfiguration conf)
 		{
-			/*
 			NodeExecutionCommand cmd = new NodeExecutionCommand (GetNodePath (), GetTargetJavascriptFilePath ());
 			cmd.AdditionalArguments = conf.CommandLineParameters;
 			cmd.WorkingDirectory = Path.GetDirectoryName (GetTargetJavascriptFilePath ());
 			return cmd;
-			*/
-			throw new NotImplementedException ();
 		}
 
 		string GetNodePath ()

@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3C7F1392-5192-4505-A605-F49EB4EBB95C}</ProjectGuid>
+    <TargetJavaScriptFile>bin/typescript.js</TargetJavaScriptFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>.</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>.</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="src\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\external\typescript\src\compiler\ast.ts">
+      <Link>src\compiler\ast.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\astPath.ts">
+      <Link>src\compiler\astPath.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\astWalker.ts">
+      <Link>src\compiler\astWalker.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\base64.ts">
+      <Link>src\compiler\base64.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\bloomFilter.ts">
+      <Link>src\compiler\bloomFilter.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\declarationEmitter.ts">
+      <Link>src\compiler\declarationEmitter.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\diagnostics.ts">
+      <Link>src\compiler\diagnostics.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\emitter.ts">
+      <Link>src\compiler\emitter.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\enumerator.ts">
+      <Link>src\compiler\enumerator.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\flags.ts">
+      <Link>src\compiler\flags.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\hashTable.ts">
+      <Link>src\compiler\hashTable.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\identifierWalker.ts">
+      <Link>src\compiler\identifierWalker.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\io.ts">
+      <Link>src\compiler\io.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\nodeTypes.ts">
+      <Link>src\compiler\nodeTypes.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\optionsParser.ts">
+      <Link>src\compiler\optionsParser.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\pathUtils.ts">
+      <Link>src\compiler\pathUtils.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\precompile.ts">
+      <Link>src\compiler\precompile.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\process.ts">
+      <Link>src\compiler\process.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\referenceResolution.ts">
+      <Link>src\compiler\referenceResolution.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\referenceResolver.ts">
+      <Link>src\compiler\referenceResolver.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\sourceMapping.ts">
+      <Link>src\compiler\sourceMapping.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntaxTreeToAstVisitor.ts">
+      <Link>src\compiler\syntaxTreeToAstVisitor.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\tsc.ts">
+      <Link>src\compiler\tsc.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\types.ts">
+      <Link>src\compiler\types.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\typescript.ts">
+      <Link>src\compiler\typescript.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\walkContext.ts">
+      <Link>src\compiler\walkContext.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\JSON3.ts">
+      <Link>src\compiler\core\JSON3.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\arrayUtilities.ts">
+      <Link>src\compiler\core\arrayUtilities.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\cancellationToken.ts">
+      <Link>src\compiler\core\cancellationToken.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\cancellationTokenSource.ts">
+      <Link>src\compiler\core\cancellationTokenSource.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\constants.ts">
+      <Link>src\compiler\core\constants.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\debug.ts">
+      <Link>src\compiler\core\debug.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\diagnostic.ts">
+      <Link>src\compiler\core\diagnostic.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\diagnosticCategory.ts">
+      <Link>src\compiler\core\diagnosticCategory.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\diagnosticInfo.ts">
+      <Link>src\compiler\core\diagnosticInfo.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\environment.ts">
+      <Link>src\compiler\core\environment.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\errors.ts">
+      <Link>src\compiler\core\errors.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\hash.ts">
+      <Link>src\compiler\core\hash.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\hashTable.ts">
+      <Link>src\compiler\core\hashTable.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\integerUtilities.ts">
+      <Link>src\compiler\core\integerUtilities.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\mathPrototype.ts">
+      <Link>src\compiler\core\mathPrototype.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\references.ts">
+      <Link>src\compiler\core\references.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\require.ts">
+      <Link>src\compiler\core\require.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\stringTable.ts">
+      <Link>src\compiler\core\stringTable.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\stringUtilities.ts">
+      <Link>src\compiler\core\stringUtilities.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\timer.ts">
+      <Link>src\compiler\core\timer.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\resources\diagnosticCode.generated.ts">
+      <Link>src\compiler\resources\diagnosticCode.generated.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\resources\diagnosticInformationMap.generated.ts">
+      <Link>src\compiler\resources\diagnosticInformationMap.generated.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\resources\diagnosticMessages.json">
+      <Link>src\compiler\resources\diagnosticMessages.json</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\resources\references.ts">
+      <Link>src\compiler\resources\references.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\resources\cs\diagnosticMessages.generated.json">
+      <Link>src\compiler\resources\cs\diagnosticMessages.generated.json</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\resources\cs\cz\diagnosticMessages.generated.json">
+      <Link>src\compiler\resources\cs\cz\diagnosticMessages.generated.json</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\resources\de\diagnosticMessages.generated.json">
+      <Link>src\compiler\resources\de\diagnosticMessages.generated.json</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\resources\en\diagnosticMessages.generated.json">
+      <Link>src\compiler\resources\en\diagnosticMessages.generated.json</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\resources\en\us\diagnosticMessages.generated.json">
+      <Link>src\compiler\resources\en\us\diagnosticMessages.generated.json</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\resources\es\diagnosticMessages.generated.json">
+      <Link>src\compiler\resources\es\diagnosticMessages.generated.json</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\resources\fr\diagnosticMessages.generated.json">
+      <Link>src\compiler\resources\fr\diagnosticMessages.generated.json</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\resources\it\diagnosticMessages.generated.json">
+      <Link>src\compiler\resources\it\diagnosticMessages.generated.json</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\resources\ja\diagnosticMessages.generated.json">
+      <Link>src\compiler\resources\ja\diagnosticMessages.generated.json</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\resources\ja\jp\diagnosticMessages.generated.json">
+      <Link>src\compiler\resources\ja\jp\diagnosticMessages.generated.json</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\resources\ko\diagnosticMessages.generated.json">
+      <Link>src\compiler\resources\ko\diagnosticMessages.generated.json</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\resources\ko\kr\diagnosticMessages.generated.json">
+      <Link>src\compiler\resources\ko\kr\diagnosticMessages.generated.json</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\resources\pl\diagnosticMessages.generated.json">
+      <Link>src\compiler\resources\pl\diagnosticMessages.generated.json</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\resources\pt\diagnosticMessages.generated.json">
+      <Link>src\compiler\resources\pt\diagnosticMessages.generated.json</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\resources\pt\br\diagnosticMessages.generated.json">
+      <Link>src\compiler\resources\pt\br\diagnosticMessages.generated.json</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\resources\ru\diagnosticMessages.generated.json">
+      <Link>src\compiler\resources\ru\diagnosticMessages.generated.json</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\resources\tr\diagnosticMessages.generated.json">
+      <Link>src\compiler\resources\tr\diagnosticMessages.generated.json</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\resources\zh\cn\diagnosticMessages.generated.json">
+      <Link>src\compiler\resources\zh\cn\diagnosticMessages.generated.json</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\resources\zh\tw\diagnosticMessages.generated.json">
+      <Link>src\compiler\resources\zh\tw\diagnosticMessages.generated.json</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\symbols\Accessibility.ts">
+      <Link>src\compiler\symbols\Accessibility.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\symbols\ICompilation.ts">
+      <Link>src\compiler\symbols\ICompilation.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\symbols\IMemberSymbol.ts">
+      <Link>src\compiler\symbols\IMemberSymbol.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\symbols\ISemanticModel.ts">
+      <Link>src\compiler\symbols\ISemanticModel.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\symbols\ISignatureSymbol.ts">
+      <Link>src\compiler\symbols\ISignatureSymbol.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\symbols\ISymbol.ts">
+      <Link>src\compiler\symbols\ISymbol.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\symbols\ISymbolInfo.ts">
+      <Link>src\compiler\symbols\ISymbolInfo.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\symbols\ISymbolVisitor.ts">
+      <Link>src\compiler\symbols\ISymbolVisitor.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\symbols\ITypeInfo.ts">
+      <Link>src\compiler\symbols\ITypeInfo.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\symbols\ITypeSymbol.ts">
+      <Link>src\compiler\symbols\ITypeSymbol.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\symbols\MethodKind.ts">
+      <Link>src\compiler\symbols\MethodKind.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\symbols\SymbolDisplay.Format.ts">
+      <Link>src\compiler\symbols\SymbolDisplay.Format.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\symbols\SymbolDisplay.ts">
+      <Link>src\compiler\symbols\SymbolDisplay.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\symbols\SymbolKind.ts">
+      <Link>src\compiler\symbols\SymbolKind.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\symbols\TypeKind.ts">
+      <Link>src\compiler\symbols\TypeKind.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\SyntaxGenerator.d.ts">
+      <Link>src\compiler\syntax\SyntaxGenerator.d.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\SyntaxGenerator.js">
+      <Link>src\compiler\syntax\SyntaxGenerator.js</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\characterInfo.ts">
+      <Link>src\compiler\syntax\characterInfo.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\constants.ts">
+      <Link>src\compiler\syntax\constants.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\depthLimitedWalker.ts">
+      <Link>src\compiler\syntax\depthLimitedWalker.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\emitter.ts">
+      <Link>src\compiler\syntax\emitter.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\formattingOptions.ts">
+      <Link>src\compiler\syntax\formattingOptions.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\indentation.ts">
+      <Link>src\compiler\syntax\indentation.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\languageVersion.ts">
+      <Link>src\compiler\syntax\languageVersion.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\parseOptions.ts">
+      <Link>src\compiler\syntax\parseOptions.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\parser.ts">
+      <Link>src\compiler\syntax\parser.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\positionTrackingWalker.ts">
+      <Link>src\compiler\syntax\positionTrackingWalker.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\positionedElement.ts">
+      <Link>src\compiler\syntax\positionedElement.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\prettyPrinter.ts">
+      <Link>src\compiler\syntax\prettyPrinter.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\references.ts">
+      <Link>src\compiler\syntax\references.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\scanner.ts">
+      <Link>src\compiler\syntax\scanner.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\scannerUtilities.generated.ts">
+      <Link>src\compiler\syntax\scannerUtilities.generated.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\separatedSyntaxList.ts">
+      <Link>src\compiler\syntax\separatedSyntaxList.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\slidingWindow.ts">
+      <Link>src\compiler\syntax\slidingWindow.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\strings.ts">
+      <Link>src\compiler\syntax\strings.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\syntax.ts">
+      <Link>src\compiler\syntax\syntax.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\syntaxDedenter.ts">
+      <Link>src\compiler\syntax\syntaxDedenter.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\syntaxElement.ts">
+      <Link>src\compiler\syntax\syntaxElement.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\syntaxFactory.generated.ts">
+      <Link>src\compiler\syntax\syntaxFactory.generated.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\syntaxFacts.ts">
+      <Link>src\compiler\syntax\syntaxFacts.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\syntaxFacts2.ts">
+      <Link>src\compiler\syntax\syntaxFacts2.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\syntaxGenerator.ts">
+      <Link>src\compiler\syntax\syntaxGenerator.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\syntaxIndenter.ts">
+      <Link>src\compiler\syntax\syntaxIndenter.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\syntaxInformationMap.ts">
+      <Link>src\compiler\syntax\syntaxInformationMap.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\syntaxKind.ts">
+      <Link>src\compiler\syntax\syntaxKind.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\syntaxList.ts">
+      <Link>src\compiler\syntax\syntaxList.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\syntaxNode.ts">
+      <Link>src\compiler\syntax\syntaxNode.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\syntaxNodeInvariantsChecker.ts">
+      <Link>src\compiler\syntax\syntaxNodeInvariantsChecker.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\syntaxNodeOrToken.ts">
+      <Link>src\compiler\syntax\syntaxNodeOrToken.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\syntaxNodes.generated.ts">
+      <Link>src\compiler\syntax\syntaxNodes.generated.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\syntaxRewriter.generated.ts">
+      <Link>src\compiler\syntax\syntaxRewriter.generated.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\syntaxToken.generated.ts">
+      <Link>src\compiler\syntax\syntaxToken.generated.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\syntaxToken.ts">
+      <Link>src\compiler\syntax\syntaxToken.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\syntaxTokenReplacer.ts">
+      <Link>src\compiler\syntax\syntaxTokenReplacer.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\syntaxTree.ts">
+      <Link>src\compiler\syntax\syntaxTree.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\syntaxTrivia.ts">
+      <Link>src\compiler\syntax\syntaxTrivia.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\syntaxTriviaList.ts">
+      <Link>src\compiler\syntax\syntaxTriviaList.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\syntaxUtilities.ts">
+      <Link>src\compiler\syntax\syntaxUtilities.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\syntaxVisitor.generated.ts">
+      <Link>src\compiler\syntax\syntaxVisitor.generated.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\syntaxWalker.generated.ts">
+      <Link>src\compiler\syntax\syntaxWalker.generated.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\textSpanWalker.ts">
+      <Link>src\compiler\syntax\textSpanWalker.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\syntax\unicode.ts">
+      <Link>src\compiler\syntax\unicode.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\text\characterCodes.ts">
+      <Link>src\compiler\text\characterCodes.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\text\lineAndCharacter.ts">
+      <Link>src\compiler\text\lineAndCharacter.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\text\lineMap.ts">
+      <Link>src\compiler\text\lineMap.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\text\linePosition.ts">
+      <Link>src\compiler\text\linePosition.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\text\references.ts">
+      <Link>src\compiler\text\references.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\text\scriptSnapshot.ts">
+      <Link>src\compiler\text\scriptSnapshot.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\text\text.ts">
+      <Link>src\compiler\text\text.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\text\textChangeRange.ts">
+      <Link>src\compiler\text\textChangeRange.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\text\textFactory.ts">
+      <Link>src\compiler\text\textFactory.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\text\textLine.ts">
+      <Link>src\compiler\text\textLine.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\text\textSpan.ts">
+      <Link>src\compiler\text\textSpan.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\text\textUtilities.ts">
+      <Link>src\compiler\text\textUtilities.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\typecheck\SemanticDiagnostic.ts">
+      <Link>src\compiler\typecheck\SemanticDiagnostic.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\typecheck\dataMap.ts">
+      <Link>src\compiler\typecheck\dataMap.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\typecheck\pullDeclCollection.ts">
+      <Link>src\compiler\typecheck\pullDeclCollection.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\typecheck\pullDeclDiffer.ts">
+      <Link>src\compiler\typecheck\pullDeclDiffer.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\typecheck\pullDecls.ts">
+      <Link>src\compiler\typecheck\pullDecls.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\typecheck\pullFlags.ts">
+      <Link>src\compiler\typecheck\pullFlags.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\typecheck\pullHelpers.ts">
+      <Link>src\compiler\typecheck\pullHelpers.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\typecheck\pullSemanticInfo.ts">
+      <Link>src\compiler\typecheck\pullSemanticInfo.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\typecheck\pullSymbolBinder.ts">
+      <Link>src\compiler\typecheck\pullSymbolBinder.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\typecheck\pullSymbolBindingContext.ts">
+      <Link>src\compiler\typecheck\pullSymbolBindingContext.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\typecheck\pullSymbolGraph.ts">
+      <Link>src\compiler\typecheck\pullSymbolGraph.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\typecheck\pullSymbols.ts">
+      <Link>src\compiler\typecheck\pullSymbols.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\typecheck\pullTypeChecker.ts">
+      <Link>src\compiler\typecheck\pullTypeChecker.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\typecheck\pullTypeResolution.ts">
+      <Link>src\compiler\typecheck\pullTypeResolution.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\typecheck\pullTypeResolutionContext.ts">
+      <Link>src\compiler\typecheck\pullTypeResolutionContext.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\harness\baselining.ts">
+      <Link>src\harness\baselining.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\harness\diff.ts">
+      <Link>src\harness\diff.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\harness\dumpAST-baselining.ts">
+      <Link>src\harness\dumpAST-baselining.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\harness\exec.ts">
+      <Link>src\harness\exec.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\harness\fourslash.ts">
+      <Link>src\harness\fourslash.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\harness\fourslashRun.ts">
+      <Link>src\harness\fourslashRun.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\harness\generate.ts">
+      <Link>src\harness\generate.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\harness\harness.ts">
+      <Link>src\harness\harness.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\harness\project.ts">
+      <Link>src\harness\project.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\harness\runner.ts">
+      <Link>src\harness\runner.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\braceMatcher.ts">
+      <Link>src\services\braceMatcher.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\breakpoints.ts">
+      <Link>src\services\breakpoints.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\classifier.ts">
+      <Link>src\services\classifier.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\compilerState.ts">
+      <Link>src\services\compilerState.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\completionHelpers.ts">
+      <Link>src\services\completionHelpers.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\completionSession.ts">
+      <Link>src\services\completionSession.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\coreServices.ts">
+      <Link>src\services\coreServices.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\diagnosticServices.ts">
+      <Link>src\services\diagnosticServices.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\diagnosticsParser.ts">
+      <Link>src\services\diagnosticsParser.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\es5compat.ts">
+      <Link>src\services\es5compat.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\findReferenceHelpers.ts">
+      <Link>src\services\findReferenceHelpers.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\indenter.ts">
+      <Link>src\services\indenter.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\keywordCompletions.ts">
+      <Link>src\services\keywordCompletions.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\languageService.ts">
+      <Link>src\services\languageService.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\outliningElementsCollector.ts">
+      <Link>src\services\outliningElementsCollector.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\pullLanguageService.ts">
+      <Link>src\services\pullLanguageService.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\shims.ts">
+      <Link>src\services\shims.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\signatureInfoHelpers.ts">
+      <Link>src\services\signatureInfoHelpers.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\typescriptServices.ts">
+      <Link>src\services\typescriptServices.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\formatting\formatter.ts">
+      <Link>src\services\formatting\formatter.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\formatting\formatting.ts">
+      <Link>src\services\formatting\formatting.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\formatting\formattingContext.ts">
+      <Link>src\services\formatting\formattingContext.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\formatting\formattingManager.ts">
+      <Link>src\services\formatting\formattingManager.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\formatting\formattingRequestKind.ts">
+      <Link>src\services\formatting\formattingRequestKind.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\formatting\indentationNodeContext.ts">
+      <Link>src\services\formatting\indentationNodeContext.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\formatting\indentationNodeContextPool.ts">
+      <Link>src\services\formatting\indentationNodeContextPool.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\formatting\indentationTrackingWalker.ts">
+      <Link>src\services\formatting\indentationTrackingWalker.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\formatting\multipleTokenIndenter.ts">
+      <Link>src\services\formatting\multipleTokenIndenter.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\formatting\rule.ts">
+      <Link>src\services\formatting\rule.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\formatting\ruleAction.ts">
+      <Link>src\services\formatting\ruleAction.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\formatting\ruleDescriptor.ts">
+      <Link>src\services\formatting\ruleDescriptor.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\formatting\ruleFlag.ts">
+      <Link>src\services\formatting\ruleFlag.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\formatting\ruleOperation.ts">
+      <Link>src\services\formatting\ruleOperation.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\formatting\ruleOperationContext.ts">
+      <Link>src\services\formatting\ruleOperationContext.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\formatting\rules.ts">
+      <Link>src\services\formatting\rules.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\formatting\rulesMap.ts">
+      <Link>src\services\formatting\rulesMap.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\formatting\rulesProvider.ts">
+      <Link>src\services\formatting\rulesProvider.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\formatting\singleTokenIndenter.ts">
+      <Link>src\services\formatting\singleTokenIndenter.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\formatting\snapshotPoint.ts">
+      <Link>src\services\formatting\snapshotPoint.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\formatting\textEditInfo.ts">
+      <Link>src\services\formatting\textEditInfo.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\formatting\textSnapshot.ts">
+      <Link>src\services\formatting\textSnapshot.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\formatting\textSnapshotLine.ts">
+      <Link>src\services\formatting\textSnapshotLine.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\formatting\tokenRange.ts">
+      <Link>src\services\formatting\tokenRange.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\services\formatting\tokenSpan.ts">
+      <Link>src\services\formatting\tokenSpan.ts</Link>
+    </Compile>
+  </ItemGroup>
+</Project>

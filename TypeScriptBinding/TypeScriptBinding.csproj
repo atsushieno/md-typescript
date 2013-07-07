@@ -188,5 +188,13 @@
       <Project>{2CE5502D-8710-4BE3-9D90-201D526904B3}</Project>
       <Name>Jurassic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\svn\md-typescript\Mono.JavaScriptDebugger\Mono.JavaScriptDebugger.csproj">
+      <Project>{033F1267-FE01-4974-8473-16E28841F048}</Project>
+      <Name>Mono.JavaScriptDebugger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\svn\md-typescript\MonoDevelop.JavaScriptDebugger\MonoDevelop.JavaScriptDebugger.csproj">
+      <Project>{C3C01664-18E0-437D-A8B5-C4DDD42D7876}</Project>
+      <Name>MonoDevelop.JavaScriptDebugger</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
