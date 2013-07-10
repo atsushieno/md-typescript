@@ -1,5 +1,5 @@
 using System;
-using V8DebuggerClientBridge.V8Debugger;
+using TypeScriptServiceBridge.V8Debugger;
 
 namespace Mono.JavaScript.Node.Debugger
 {

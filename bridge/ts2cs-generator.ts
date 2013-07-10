@@ -53,6 +53,7 @@ module BridgeGenerator {
 			IO.printLine ("// JavaScript standard types");
 			IO.printLine ("public class RegExp {}");
 			IO.printLine ("public class Error {}");
+			IO.printLine ("[AttributeUsage (AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = true)] public class BaseTypeAttribute : Attribute { public BaseTypeAttribute (string interfaceType) { Type = interfaceType; } public string Type { get; set; } }");
 			IO.printLine ("[AttributeUsage (AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = true)] public class ImplementsAttribute : Attribute { public ImplementsAttribute (string interfaceType) { Type = interfaceType; } public string Type { get; set; } }");
 
 			//var files : string[] = IO.dir ("../external/typescript/src", null, { recursive: true });
@@ -282,6 +283,13 @@ module BridgeGenerator {
 						for (var i in decl.implementsList.members) {
 							IO.print ("[Implements (\"");
 							this.processAST (decl.implementsList.members [i]);
+							IO.printLine ("\")]");
+						}
+					}
+					if (decl.extendsList != null && decl.extendsList.members.length > 0) {
+						for (var i in decl.extendsList.members) {
+							IO.print ("[BaseType (\"");
+							this.processAST (decl.extendsList.members [i]);
 							IO.printLine ("\")]");
 						}
 					}

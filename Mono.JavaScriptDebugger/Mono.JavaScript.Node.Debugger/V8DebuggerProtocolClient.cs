@@ -1,14 +1,13 @@
 // Not likely to work with nodejs.
 // Anyways using ServiceBridge is totally wrong, it's not running on top of other host.
 using System;
-using V8DebuggerClientBridge.V8Debugger;
-using TypeScriptServiceBridge;
 using Jurassic.Library;
 using System.Net.Sockets;
 using System.IO;
 using Jurassic;
 using System.Threading;
 using System.Collections.Generic;
+using TypeScriptServiceBridge.V8Debugger;
 
 namespace Mono.JavaScript.Node.Debugger
 {

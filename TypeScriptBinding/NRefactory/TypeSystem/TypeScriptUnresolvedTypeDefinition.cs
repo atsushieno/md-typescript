@@ -31,6 +31,10 @@ namespace MonoDevelop.TypeScriptBinding.NRefactory.TypeSystem
 				throw new NotImplementedException ();
 			}
 		}
+		
+		public SymbolKind SymbolKind {
+			get { throw new NotImplementedException (); }
+		}
 
 		public System.Collections.Generic.IList<ITypeReference> BaseTypes {
 			get {

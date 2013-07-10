@@ -35,13 +35,10 @@
   <ItemGroup>
     <Compile Include="Mono.JavaScript.Debugger\SourceMap.cs" />
     <Compile Include="Mono.JavaScript.Node.Debugger\V8DebuggerProtocolClientExtensions.cs" />
-    <Compile Include="..\..\..\home\atsushi\svn\md-typescript\external\ts2cs\src\V8DebuggerClientBridge.cs">
+    <Compile Include="Mono.JavaScript.Node.Debugger\V8DebuggerProtocolClient.cs" />
+    <Compile Include="..\bridge\V8DebuggerClientBridge.cs">
       <Link>V8DebuggerClientBridge\V8DebuggerClientBridge.cs</Link>
     </Compile>
-    <Compile Include="..\bridge-generator\V8DebuggerClientBridge.cs">
-      <Link>Mono.JavaScript.Node.Debugger\V8DebuggerClientBridge.cs</Link>
-    </Compile>
-    <Compile Include="Mono.JavaScript.Node.Debugger\V8DebuggerProtocolClient.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -57,5 +54,11 @@
   <ItemGroup>
     <Folder Include="Mono.JavaScript.Debugger\" />
     <Folder Include="Mono.JavaScript.Node.Debugger\" />
+    <Folder Include="V8DebuggerClientBridge\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\bridge\V8DebuggerClient.ts">
+      <Link>V8DebuggerClientBridge\V8DebuggerClient.ts</Link>
+    </None>
   </ItemGroup>
 </Project>

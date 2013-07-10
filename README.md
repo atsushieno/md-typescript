@@ -17,3 +17,13 @@ information and so on.
 It used to be based on md-haxebinding:
 https://github.com/jgranick/md-haxebinding
 Now it's rather based on other bindings such as CSharpBinding).
+
+BUILD
+=====
+
+You are supposed to be able to run unixy make (I never tried on Windows, but
+it may work on cygwin. Not definitely with nmake).
+
+Run git submodule init / update and then run make.
+
+
