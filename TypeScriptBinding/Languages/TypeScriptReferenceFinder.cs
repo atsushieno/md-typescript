@@ -50,14 +50,10 @@ namespace MonoDevelop.TypeScriptBinding.Languages
 			return tp != null ? tp.TypeScriptService : null;
 		}
 
-		#region implemented abstract members of ReferenceFinder
-
-		public override IEnumerable<MemberReference> FindReferences (Project project, IProjectContent content, IEnumerable<FilePath> files, IEnumerable<object> searchedMembers)
+		public override IEnumerable<MemberReference> FindReferences (Project project, IProjectContent content, IEnumerable<FilePath> files, IProgressMonitor monitor, IEnumerable<object> searchedMembers)
 		{
 			// This "searchedMembers" depends on NRefactory TypeSystem.
 			throw new NotImplementedException ();
 		}
-
-		#endregion
 	}
 }

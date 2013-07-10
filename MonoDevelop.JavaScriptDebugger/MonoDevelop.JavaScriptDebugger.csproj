@@ -30,17 +30,21 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="MonoDevelop.Core">
-      <HintPath>..\..\monodevelop-master\main\build\bin\MonoDevelop.Core.dll</HintPath>
+    <Reference Include="MonoDevelop.Debugger, Version=2.6.0.0, Culture=neutral">
+      <Private>False</Private>
+      <Package>monodevelop-core-addins</Package>
     </Reference>
-    <Reference Include="MonoDevelop.Ide">
-      <HintPath>..\..\monodevelop-master\main\build\bin\MonoDevelop.Ide.dll</HintPath>
+    <Reference Include="MonoDevelop.Ide, Version=2.6.0.0, Culture=neutral">
+      <Private>False</Private>
+      <Package>monodevelop</Package>
     </Reference>
-    <Reference Include="Mono.Debugging">
-      <HintPath>..\..\monodevelop-master\main\build\bin\Mono.Debugging.dll</HintPath>
+    <Reference Include="MonoDevelop.Core, Version=2.6.0.0, Culture=neutral">
+      <Private>False</Private>
+      <Package>monodevelop</Package>
     </Reference>
-    <Reference Include="MonoDevelop.Debugger, Version=2.6.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\monodevelop-master\main\build\AddIns\MonoDevelop.Debugger\MonoDevelop.Debugger.dll</HintPath>
+    <Reference Include="Mono.Debugging, Version=0.0.0.0, Culture=neutral, PublicKeyToken=5e9ce85b0923c84f">
+      <Private>False</Private>
+      <Package>monodevelop</Package>
     </Reference>
   </ItemGroup>
   <ItemGroup>
