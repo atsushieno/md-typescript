@@ -25,4 +25,4 @@ bridge/TypeScriptBridge.cs:
 	make -C bridge
 
 pack:
-	mdtool setup pack ../monodevelop-master/main/build/AddIns/TypeScriptBinding/MonoDevelop.TypeScriptBinding.dll
+	mdtool setup pack ../monodevelop/main/build/AddIns/TypeScriptBinding/MonoDevelop.TypeScriptBinding.dll
