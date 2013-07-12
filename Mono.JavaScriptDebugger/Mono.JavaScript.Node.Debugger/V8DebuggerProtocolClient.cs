@@ -13,6 +13,12 @@ namespace Mono.JavaScript.Node.Debugger
 {
 	public class V8DebuggerProtocolClient : IDisposable
 	{
+		static V8DebuggerProtocolClient ()
+		{
+			if (ScriptEngine.DeserializationEnvironment == null)
+				ScriptEngine.DeserializationEnvironment = new ScriptEngine ();
+		}
+
 		public const int DefaultNodeDebuggerPort = 5858;
 
 		public V8DebuggerProtocolClient ()
