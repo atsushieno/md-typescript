@@ -206,5 +206,89 @@
     <Compile Include="..\external\typescript\src\compiler\tsc.ts">
       <Link>src\compiler\tsc.ts</Link>
     </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\references.ts">
+      <Link>src\compiler\core\references.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\require.ts">
+      <Link>src\compiler\core\require.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\JSON3.ts">
+      <Link>src\compiler\core\JSON3.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\arrayUtilities.ts">
+      <Link>src\compiler\core\arrayUtilities.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\constants.ts">
+      <Link>src\compiler\core\constants.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\debug.ts">
+      <Link>src\compiler\core\debug.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\diagnosticCategory.ts">
+      <Link>src\compiler\core\diagnosticCategory.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\diagnosticInfo.ts">
+      <Link>src\compiler\core\diagnosticInfo.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\errors.ts">
+      <Link>src\compiler\core\errors.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\hash.ts">
+      <Link>src\compiler\core\hash.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\hashTable.ts">
+      <Link>src\compiler\core\hashTable.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\integerUtilities.ts">
+      <Link>src\compiler\core\integerUtilities.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\mathPrototype.ts">
+      <Link>src\compiler\core\mathPrototype.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\stringTable.ts">
+      <Link>src\compiler\core\stringTable.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\stringUtilities.ts">
+      <Link>src\compiler\core\stringUtilities.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\core\timer.ts">
+      <Link>src\compiler\core\timer.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\text\references.ts">
+      <Link>src\compiler\syntax\references.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\text\characterCodes.ts">
+      <Link>src\compiler\syntax\characterCodes.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\text\lineAndCharacter.ts">
+      <Link>src\compiler\syntax\lineAndCharacter.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\text\lineMap.ts">
+      <Link>src\compiler\syntax\lineMap.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\text\linePosition.ts">
+      <Link>src\compiler\syntax\linePosition.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\text\scriptSnapshot.ts">
+      <Link>src\compiler\syntax\scriptSnapshot.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\text\text.ts">
+      <Link>src\compiler\syntax\text.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\text\textChangeRange.ts">
+      <Link>src\compiler\syntax\textChangeRange.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\text\textFactory.ts">
+      <Link>src\compiler\syntax\textFactory.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\text\textLine.ts">
+      <Link>src\compiler\syntax\textLine.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\text\textSpan.ts">
+      <Link>src\compiler\syntax\textSpan.ts</Link>
+    </Compile>
+    <Compile Include="..\external\typescript\src\compiler\text\textUtilities.ts">
+      <Link>src\compiler\syntax\textUtilities.ts</Link>
+    </Compile>
   </ItemGroup>
 </Project>
