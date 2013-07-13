@@ -18,12 +18,17 @@ It used to be based on md-haxebinding:
 https://github.com/jgranick/md-haxebinding
 Now it's rather based on other bindings such as CSharpBinding).
 
-BUILD
-=====
+Build and run
+=============
+
+The source tree assumes you have monodevelop source tree and this md-typescript
+source tree side by side. As in TypeScriptBinding.csproj, this addin project
+runs ../monodevelop/main/build/bin/MonoDevelop.exe --no-redirect (F5 to run).
+
+The build output directory is also under the monodevelop tree, which is:
+(monodevelop)/main/build/AddIns/TypeScript
 
 You are supposed to be able to run unixy make (I never tried on Windows, but
 it may work on cygwin. Not definitely with nmake).
 
-Run git submodule init / update and then run make.
-
-
+To build it, run git submodule init / update and then run make.
