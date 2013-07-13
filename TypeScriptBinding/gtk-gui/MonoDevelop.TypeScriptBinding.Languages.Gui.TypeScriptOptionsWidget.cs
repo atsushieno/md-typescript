@@ -15,7 +15,7 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 		private global::Gtk.Button TscLocationFileChooser;
 		private global::Gtk.Label TscLocationLabel;
 		private global::Gtk.Label GtkLabel2;
-		
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);
