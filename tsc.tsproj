@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A9AA0163-A12B-4668-B467-A6F631FA1868}</ProjectGuid>
+    <TargetJavaScriptFile>bin/tsc.js</TargetJavaScriptFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>.</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>.</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="external\typescript\src\compiler\ast.ts" />
+    <Compile Include="external\typescript\src\compiler\astPath.ts" />
+    <Compile Include="external\typescript\src\compiler\astWalker.ts" />
+    <Compile Include="external\typescript\src\compiler\base64.ts" />
+    <Compile Include="external\typescript\src\compiler\declarationEmitter.ts" />
+    <Compile Include="external\typescript\src\compiler\diagnostics.ts" />
+    <Compile Include="external\typescript\src\compiler\emitter.ts" />
+    <Compile Include="external\typescript\src\compiler\flags.ts" />
+    <Compile Include="external\typescript\src\compiler\hashTable.ts" />
+    <Compile Include="external\typescript\src\compiler\nodeTypes.ts" />
+    <Compile Include="external\typescript\src\compiler\pathUtils.ts" />
+    <Compile Include="external\typescript\src\compiler\precompile.ts" />
+    <Compile Include="external\typescript\src\compiler\referenceResolution.ts" />
+    <Compile Include="external\typescript\src\compiler\referenceResolver.ts" />
+    <Compile Include="external\typescript\src\compiler\sourceMapping.ts" />
+    <Compile Include="external\typescript\src\compiler\syntaxTreeToAstVisitor.ts" />
+    <Compile Include="external\typescript\src\compiler\types.ts" />
+    <Compile Include="external\typescript\src\compiler\typescript.ts" />
+    <Compile Include="external\typescript\src\compiler\resources\diagnosticCode.generated.ts" />
+    <Compile Include="external\typescript\src\compiler\resources\diagnosticInformationMap.generated.ts" />
+    <None Include="external\typescript\src\compiler\resources\diagnosticMessages.json" />
+    <Compile Include="external\typescript\src\compiler\resources\references.ts" />
+    <None Include="external\typescript\src\compiler\resources\cs\diagnosticMessages.generated.json" />
+    <None Include="external\typescript\src\compiler\resources\cs\cz\diagnosticMessages.generated.json" />
+    <None Include="external\typescript\src\compiler\resources\de\diagnosticMessages.generated.json" />
+    <None Include="external\typescript\src\compiler\resources\en\diagnosticMessages.generated.json" />
+    <None Include="external\typescript\src\compiler\resources\en\us\diagnosticMessages.generated.json" />
+    <None Include="external\typescript\src\compiler\resources\es\diagnosticMessages.generated.json" />
+    <None Include="external\typescript\src\compiler\resources\fr\diagnosticMessages.generated.json" />
+    <None Include="external\typescript\src\compiler\resources\it\diagnosticMessages.generated.json" />
+    <None Include="external\typescript\src\compiler\resources\ja\diagnosticMessages.generated.json" />
+    <None Include="external\typescript\src\compiler\resources\ja\jp\diagnosticMessages.generated.json" />
+    <None Include="external\typescript\src\compiler\resources\ko\diagnosticMessages.generated.json" />
+    <None Include="external\typescript\src\compiler\resources\ko\kr\diagnosticMessages.generated.json" />
+    <None Include="external\typescript\src\compiler\resources\pl\diagnosticMessages.generated.json" />
+    <None Include="external\typescript\src\compiler\resources\pt\diagnosticMessages.generated.json" />
+    <None Include="external\typescript\src\compiler\resources\pt\br\diagnosticMessages.generated.json" />
+    <None Include="external\typescript\src\compiler\resources\ru\diagnosticMessages.generated.json" />
+    <None Include="external\typescript\src\compiler\resources\tr\diagnosticMessages.generated.json" />
+    <None Include="external\typescript\src\compiler\resources\zh\cn\diagnosticMessages.generated.json" />
+    <None Include="external\typescript\src\compiler\resources\zh\tw\diagnosticMessages.generated.json" />
+    <Compile Include="external\typescript\src\compiler\syntax\parser.ts" />
+    <Compile Include="external\typescript\src\compiler\syntax\syntaxTree.ts" />
+    <Compile Include="external\typescript\src\compiler\typecheck\SemanticDiagnostic.ts" />
+    <Compile Include="external\typescript\src\compiler\typecheck\dataMap.ts" />
+    <Compile Include="external\typescript\src\compiler\typecheck\pullDeclCollection.ts" />
+    <Compile Include="external\typescript\src\compiler\typecheck\pullDeclDiffer.ts" />
+    <Compile Include="external\typescript\src\compiler\typecheck\pullDecls.ts" />
+    <Compile Include="external\typescript\src\compiler\typecheck\pullFlags.ts" />
+    <Compile Include="external\typescript\src\compiler\typecheck\pullHelpers.ts" />
+    <Compile Include="external\typescript\src\compiler\typecheck\pullSemanticInfo.ts" />
+    <Compile Include="external\typescript\src\compiler\typecheck\pullSymbolBinder.ts" />
+    <Compile Include="external\typescript\src\compiler\typecheck\pullSymbolBindingContext.ts" />
+    <Compile Include="external\typescript\src\compiler\typecheck\pullSymbolGraph.ts" />
+    <Compile Include="external\typescript\src\compiler\typecheck\pullSymbols.ts" />
+    <Compile Include="external\typescript\src\compiler\typecheck\pullTypeChecker.ts" />
+    <Compile Include="external\typescript\src\compiler\typecheck\pullTypeResolution.ts" />
+    <Compile Include="external\typescript\src\compiler\typecheck\pullTypeResolutionContext.ts" />
+    <Compile Include="external\typescript\src\compiler\core\environment.ts" />
+    <Compile Include="external\typescript\src\compiler\io.ts" />
+    <Compile Include="external\typescript\src\compiler\optionsParser.ts" />
+    <Compile Include="external\typescript\src\compiler\tsc.ts" />
+    <Compile Include="external\typescript\src\compiler\core\references.ts" />
+    <Compile Include="external\typescript\src\compiler\core\require.ts" />
+    <Compile Include="external\typescript\src\compiler\core\JSON3.ts" />
+    <Compile Include="external\typescript\src\compiler\core\arrayUtilities.ts" />
+    <Compile Include="external\typescript\src\compiler\core\constants.ts" />
+    <Compile Include="external\typescript\src\compiler\core\debug.ts" />
+    <Compile Include="external\typescript\src\compiler\core\diagnosticCategory.ts" />
+    <Compile Include="external\typescript\src\compiler\core\diagnosticInfo.ts" />
+    <Compile Include="external\typescript\src\compiler\core\errors.ts" />
+    <Compile Include="external\typescript\src\compiler\core\hash.ts" />
+    <Compile Include="external\typescript\src\compiler\core\hashTable.ts" />
+    <Compile Include="external\typescript\src\compiler\core\integerUtilities.ts" />
+    <Compile Include="external\typescript\src\compiler\core\mathPrototype.ts" />
+    <Compile Include="external\typescript\src\compiler\core\stringTable.ts" />
+    <Compile Include="external\typescript\src\compiler\core\stringUtilities.ts" />
+    <Compile Include="external\typescript\src\compiler\core\timer.ts" />
+    <Compile Include="external\typescript\src\compiler\text\references.ts" />
+    <Compile Include="external\typescript\src\compiler\text\characterCodes.ts" />
+    <Compile Include="external\typescript\src\compiler\text\lineAndCharacter.ts" />
+    <Compile Include="external\typescript\src\compiler\text\lineMap.ts" />
+    <Compile Include="external\typescript\src\compiler\text\linePosition.ts" />
+    <Compile Include="external\typescript\src\compiler\text\scriptSnapshot.ts" />
+    <Compile Include="external\typescript\src\compiler\text\text.ts" />
+    <Compile Include="external\typescript\src\compiler\text\textChangeRange.ts" />
+    <Compile Include="external\typescript\src\compiler\text\textFactory.ts" />
+    <Compile Include="external\typescript\src\compiler\text\textLine.ts" />
+    <Compile Include="external\typescript\src\compiler\text\textSpan.ts" />
+    <Compile Include="external\typescript\src\compiler\text\textUtilities.ts" />
+  </ItemGroup>
+</Project>

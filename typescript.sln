@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{73443E56-3503-11DE-B03D-001DBA02A2FC}") = "typescript", "typescript.tsproj", "{3C7F1392-5192-4505-A605-F49EB4EBB95C}"
-EndProject
 Project("{73443E56-3503-11DE-B03D-001DBA02A2FC}") = "tsc", "tsc.tsproj", "{A9AA0163-A12B-4668-B467-A6F631FA1868}"
+EndProject
+Project("{73443E56-3503-11DE-B03D-001DBA02A2FC}") = "typescript", "typescript.tsproj", "{55BE49C6-985E-4368-989F-7E2451B8910A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,14 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3C7F1392-5192-4505-A605-F49EB4EBB95C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3C7F1392-5192-4505-A605-F49EB4EBB95C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3C7F1392-5192-4505-A605-F49EB4EBB95C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3C7F1392-5192-4505-A605-F49EB4EBB95C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A9AA0163-A12B-4668-B467-A6F631FA1868}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A9AA0163-A12B-4668-B467-A6F631FA1868}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A9AA0163-A12B-4668-B467-A6F631FA1868}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A9AA0163-A12B-4668-B467-A6F631FA1868}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55BE49C6-985E-4368-989F-7E2451B8910A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55BE49C6-985E-4368-989F-7E2451B8910A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55BE49C6-985E-4368-989F-7E2451B8910A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55BE49C6-985E-4368-989F-7E2451B8910A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A9AA0163-A12B-4668-B467-A6F631FA1868}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A9AA0163-A12B-4668-B467-A6F631FA1868}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9AA0163-A12B-4668-B467-A6F631FA1868}.Release|Any CPU.ActiveCfg = Release|Any CPU
