@@ -31,7 +31,7 @@ namespace TypeScriptServiceBridge.Tests
 		public void InitializeTS ()
 		{
 			host.Eval<string> (@"
-new Services.TypeScriptServicesFactory ().createLanguageService (
+new Services.TypeScriptServicesFactory ().createPullLanguageService (
         new Services.LanguageServiceShimHostAdapter (
                 new Harness.TypeScriptLS ()))"
 			                   );
@@ -55,16 +55,14 @@ new Services.TypeScriptServicesFactory ().createLanguageService (
 			shimHost = new Harness.TypeScriptLS ();
 			lsHost = new Services.LanguageServiceShimHostAdapter (shimHost);
 			factory = new Services.TypeScriptServicesFactory ();
-			ls = factory.createLanguageService (lsHost);
+			ls = factory.createPullLanguageService (lsHost);
 			shimHost.addScript (""foo.ts"", ""class Foo { public foo : int = 5; public bar (baz: int) : string { return 'hello #' + baz; } }"");
-			search = ls.getNavigateToItems (""foo"");
+			completionEntries = ls.getCompletionsAtPosition (""foo.ts"", 58, true).entries;
 			");
-			var searchRaw = host.Eval ("search");
+			var searchRaw = host.Eval ("completionEntries");
 			Console.WriteLine (searchRaw);
 			var search = new TypeScriptArray<TypeScriptObject> (searchRaw as ArrayInstance);
 			Assert.IsNotNull (search, "#3");
-			Assert.AreEqual (3, search.Length, "#4");
-			Assert.AreEqual (94, ((TypeScriptObject) search [0]).GetPropertyValue ("limChar"), "#5");
 		}
 	}
 }

@@ -25,13 +25,11 @@ namespace TypeScriptServiceBridge.Tests
 
 		void TestBasicInstance (TypeScriptLS ls)
 		{
-			/*
 			string testts1 = "alert('OK');";
 			ls.AddScript ("test.ts", testts1);
-			Assert.AreEqual (1, ls.Scripts.Length, "#4");
-			var sshot = ls.GetScriptSnapshot ("tests.ts");
+			Assert.AreEqual ("[\"test.ts\"]", ls.GetScriptFileNames (), "#4");
+			var sshot = ls.GetScriptSnapshot ("test.ts");
 			Assert.AreEqual (testts1, sshot.GetText (0, sshot.GetLength ()), "#5");
-			*/
 		}
 	}
 }
