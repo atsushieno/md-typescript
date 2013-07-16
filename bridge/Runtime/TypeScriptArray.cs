@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Jurassic;
 using Jurassic.Library;
 using TypeScriptServiceBridge.Hosting;
 
@@ -9,6 +10,11 @@ namespace TypeScriptServiceBridge
 {
 	public class TypeScriptArray<T> : TypeScriptObject, ICollection<T>
 	{
+		public static TypeScriptArray<T> Create (object obj)
+		{
+			return obj == null || obj is Null ? null : new TypeScriptArray<T> ((ObjectInstance) obj);
+		}
+
 		public TypeScriptArray (ObjectInstance instance)
 			: base (instance)
 		{

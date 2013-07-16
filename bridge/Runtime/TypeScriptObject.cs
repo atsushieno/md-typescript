@@ -9,9 +9,9 @@ namespace TypeScriptServiceBridge
 {
 	public class TypeScriptObject : ITypeScriptObject, IDisposable
 	{
-		public static T Create<T> (ObjectInstance instance) where T : ITypeScriptObject
+		public static T Create<T> (object instance) where T : ITypeScriptObject
 		{
-			return instance == null ? default (T) : (T) Activator.CreateInstance (typeof (T), instance);
+			return instance == null || instance is Null ? default (T) : (T) Activator.CreateInstance (typeof (T), (ObjectInstance) instance);
 		}
 
 		public static ObjectInstance CallConstructor (string module, string className, params object[] args)
@@ -57,7 +57,7 @@ namespace TypeScriptServiceBridge
 			if (native is T)
 				return (T) native;
 			if (typeof (ITypeScriptObject).IsAssignableFrom (typeof (T)))
-				return (T) Activator.CreateInstance (typeof (T), native);
+				return (T) Activator.CreateInstance (typeof (T).IsInterface ? typeof (T).Assembly.GetType (typeof (T).FullName + "_Impl") : typeof (T), native);
 			return (T) native;
 		}
 

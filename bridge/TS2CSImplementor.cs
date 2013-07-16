@@ -320,10 +320,10 @@ namespace TypeScriptServiceBridge {
 			output.WriteLine ("");
 			output.WriteLine ("\t\t{");
 			if (IsStronglyTypedArray (m.ReturnType))
-				output.WriteLine (@"			var ret = ((ArrayInstance) CallMemberFunction (""{1}""{2}));
-			return ret != null ? new {0} (ret) : null;", GetImplementedType (m.ReturnType), m.Name, GetMarshaledCallArguments (m));
+				output.WriteLine ("\t\t\treturn {0}.Create (CallMemberFunction (\"{1}\"{2}));",
+					GetImplementedType (m.ReturnType), m.Name, GetMarshaledCallArguments (m));
 			else if (IsObjectInstance (m.ReturnType))
-				output.WriteLine ("\t\t\treturn TypeScriptObject.Create<{0}>  ((ObjectInstance) CallMemberFunction (\"{1}\"{2}));",
+				output.WriteLine ("\t\t\treturn TypeScriptObject.Create<{0}>  (CallMemberFunction (\"{1}\"{2}));",
 					GetImplementedType (m.ReturnType, true), m.Name, GetMarshaledCallArguments (m));
 			else if (m.ReturnType == typeof (void))
 				output.WriteLine ("\t\t\tCallMemberFunction (\"{0}\"{1});", m.Name, GetMarshaledCallArguments (m));
