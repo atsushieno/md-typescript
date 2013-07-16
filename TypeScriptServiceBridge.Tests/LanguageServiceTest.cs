@@ -90,6 +90,21 @@ document.body.appendChild(button)
 			var lsHost = new LanguageServiceShimHostAdapter (shimHost);
 			var ls = new TypeScriptServicesFactory ().CreatePullLanguageService (lsHost);
 			shimHost.AddScript ("foo.ts", script);
+			for (int i = 0; i < 37; i++) {
+				var lisst = ls.GetCompletionsAtPosition ("foo.ts", i, true);
+				if (lisst == null)
+					continue; // fine.
+				if ((bool) lisst.MaybeInaccurate)
+					continue; // fine
+				// the number in general doesn't matter, only meaning that there are completions.
+				Assert.AreEqual (54, lisst.Entries.Length, "#2." + i);
+			}
+			for (int i = 37; i < 76; i++) {
+				var lisst = ls.GetCompletionsAtPosition ("foo.ts", i, true);
+				if (lisst == null)
+					continue; // fine.
+				Assert.AreEqual (55, lisst.Entries.Length, "#2x2." + i);
+			}
 			var list = ls.GetCompletionsAtPosition ("foo.ts", 76, true);
 			Assert.AreEqual (2, list.Entries.Length, "#1");
 			/*

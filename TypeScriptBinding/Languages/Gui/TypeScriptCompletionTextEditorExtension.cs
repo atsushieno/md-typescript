@@ -129,11 +129,8 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 				service.UpdateScripts ();
 				string file = service.GetFilePath (Document.FileName);
 				var ret = new CompletionDataList ();
-				var list = (CompletionInfo) ls.GetCompletionsAtPosition (file, (int) completionContext.TriggerOffset, true);
-				var arr = (ArrayInstance) list.Entries.Instance;
-				var len = arr.Length;
-				for (int i = 0; i < len; i++) {
-					var entry = (ObjectInstance) arr [i];
+				var list = service.GetMemberCompletionsAt (file, (int) completionContext.TriggerOffset);
+				foreach (var entry in list) {
 					IconId icon = IconId.Null;
 					// FIXME: fill icons
 					/*
@@ -144,7 +141,7 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 					    || entry.Kind == ScriptElementKind.VariableElement)
 						icon = fieldIcon;
 					*/
-					ret.Add (new CompletionData ((string) entry ["name"], icon, string.Format ("({0}) {1} : {2}", entry ["kind"], entry ["name"], entry ["type"])));
+					ret.Add (new CompletionData ((string) entry.Name, icon, string.Format ("({0}) {1}", entry.Kind, entry.Name)));
 				}
 				return ret;
 			}

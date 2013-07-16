@@ -64,6 +64,16 @@ namespace MonoDevelop.TypeScriptBinding
 		{
 			last_updated_time_for_docs [GetFilePath (file)] = DateTimeOffset.UtcNow;
 		}
+
+		public IEnumerable<CompletionEntry> GetMemberCompletionsAt (string filename, int position)
+		{
+			var ret = LanguageService.GetCompletionsAtPosition (filename, position, true);
+			if (ret != null) {
+				foreach (var e in ret.Entries)
+					if (e.Kind != "Keyword")
+						yield return e;
+			}
+		}
 	}
 }
 
