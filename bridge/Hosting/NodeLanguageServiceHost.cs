@@ -71,8 +71,9 @@ namespace TypeScriptServiceBridge.Hosting
 		{
 			this.port = port;
 			var nodeServer = Path.Combine (Path.GetDirectoryName (new Uri (GetType ().Assembly.CodeBase).LocalPath), NodeServerAppFullPath);
-			string nodeCommand = NodeCommandLocator != null ? NodeCommandLocator () : null;
-			nodeCommand = string.IsNullOrEmpty (nodeCommand) ? FindFromPath ("node") : nodeCommand;
+			string nodeCommand = NodeCommandLocator != null ? NodeCommandLocator () : FindFromPath ("node");
+			if (nodeCommand == null)
+				throw new InvalidOperationException ("node was not found as an executable. Make sure to configure settings or PATH environment variable.");
 			if (!externalServer) {
 				node = new Process ();
 				var psi = node.StartInfo;
