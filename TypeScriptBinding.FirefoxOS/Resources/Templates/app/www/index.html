@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head manifest="offline.appcache">
+    <meta charset="utf-8">
+
+    <title>My App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body>
+    <!-- Use this installation button to install locally without going
+         through the marketpace (see app.js) -->
+    <button id="install-btn">Install</button>    
+
+    <!-- Write your application here -->
+
+    <!-- Battery indicator -->
+    <div id="indicator">
+      <span id="indicator-percentage"></span>
+    </div>
+
+    <!-- Example: multiple columns when screen is enough, one column when too small -->
+    <div class="container">
+      <div id="items" class="items">
+        <h2>ToDo List</h2>
+        <p>There are no items.</p>
+        <ul id="item-list"></ul>
+      </div>
+      <div class="controls">
+        <form id="item-form">
+          <input id="item" value=""><button type="submit" class="add-button">Add</button>
+        </form>
+      </div>
+      <div style="clear:both;"></div>
+    </div>
+
+    <!-- Using require.js, a module system for javascript, include the
+         js files. This loads "main.js", which in turn can load other
+         files, all handled by require.js:
+         http://requirejs.org/docs/api.html#jsfiles -->
+    <script type="text/javascript" data-main="js/init.js" src="js/lib/require.js"></script>
+  </body>
+</html>

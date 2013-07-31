@@ -1,0 +1,165 @@
+
+/* Tip: Use "@import" to add styles instead of adding <link>'s in your
+   HTML, and volo will inline it when building for production */
+
+/* Styles for the installation button */
+@import "install-button.css";
+
+/* Your styles here */
+
+html {
+  background:
+    url(.<Import src="img/pattern.png) repeat left top,
+    url(.<Import src="img/gradient.png) no-repeat left top / 100% 100%;
+    min-height: 100%;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* battery indicator */
+#indicator {
+  border: 2px solid #999;
+  text-align: center;
+  font-weight: bold;
+  margin: 20px 0;
+  color: #fff;
+}
+#indicator span {
+  padding: 20px 0;
+  background: red;
+  display: block;
+
+  transition-property: all;
+  transition-duration: 2s;
+}
+
+#indicator.charging {
+  border-color: gold;
+}
+#indicator.charging span {
+  background: green;
+}
+
+.container:before, .container:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    overflow: hidden;
+}
+.container:after {
+    clear: both;
+}
+
+/* functional list builder */
+.items, .controls {
+    width: 46%;
+    float: left;
+    padding: 1%;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+  }
+  .items {
+    margin-right: 2%;
+  }
+  .items ul {
+    display: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  .items.has-items ul {
+    display: block;
+  }
+  .items li {
+    position: relative;
+    padding: 10px 100px 10px 10px;
+    border-bottom: 1px dotted #666;
+  }
+
+  .items p {
+    padding: 10px 0;
+  }
+  .items h2, .items p {
+    margin: 0;
+  }
+
+  .items.has-items p {
+    display: none;
+  }
+  .controls {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+  }
+  .controls input {
+    width: 76%;
+    display: inline-block;
+    margin-right: 1%;
+    padding: 2%;
+    font-size: 1em;
+  }
+  .add-button {
+    background: url(.<Import src="img/recommend.png) 0 bottom repeat-x #00caf2;
+    text-align: center;
+    display: inline-block;
+    padding: 2%;
+    color: white;
+    border: 0;
+    cursor: pointer;
+    width: 15%;
+    display: inline-block;
+    font-size: 1em;
+  }
+
+  .delete {
+    color: #f34f00;
+    display: block; 
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.8em;
+  }
+
+ /* adjust to smaller devices */
+ @media only screen and (max-width : 500px) {
+
+  #indicator {
+    width: auto;
+    margin: 0;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 20px;
+    height: 10px;
+    border-width: 2px;
+    overflow: hidden;
+    text-indent: -9999px;
+    padding: 0;
+  }
+
+  .container {
+    margin-top: 30px;
+  }
+
+  .items, .controls {
+    width: auto;
+    float: none;
+    margin: 0;
+    padding: 3%;
+  }
+
+  .items {
+    margin: 0 0 20px 0;
+  }
+
+  .controls input, .controls button {
+    display: block;
+    margin-bottom: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    font-size: 1.3em;
+  }
+ }

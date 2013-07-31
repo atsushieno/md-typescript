@@ -11,8 +11,8 @@
     <widget-library name="MonoDevelop.Refactoring, Version=2.6.0.0, Culture=neutral" />
     <widget-library name="MonoDevelop.SourceEditor2, Version=2.6.0.0, Culture=neutral" />
     <widget-library name="MonoDevelop.Debugger, Version=2.6.0.0, Culture=neutral" />
-    <widget-library name="../../MonoDevelop.JavaScriptDebugger/bin/Debug/MonoDevelop.JavaScriptDebugger.dll" />
-    <widget-library name="../../../monodevelop/main/build/AddIns/TypeScriptBinding/MonoDevelop.TypeScriptBinding.dll" internal="true" />
+    <widget-library name=".<Import src=".<Import src="MonoDevelop.JavaScriptDebugger/bin/Debug/MonoDevelop.JavaScriptDebugger.dll" />
+    <widget-library name=".<Import src=".<Import src=".<Import src="monodevelop/main/build/AddIns/TypeScriptBinding/MonoDevelop.TypeScriptBinding.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="MonoDevelop.TypeScriptBinding.Projects.Gui.TypeScriptProjectOptionsWidget" design-size="427 300">
     <property name="MemberName" />

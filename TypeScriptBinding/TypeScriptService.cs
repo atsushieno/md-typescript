@@ -69,9 +69,14 @@ namespace MonoDevelop.TypeScriptBinding
 		{
 			var ret = LanguageService.GetCompletionsAtPosition (filename, position, true);
 			if (ret != null) {
-				foreach (var e in ret.Entries)
-					if (e.Kind != "Keyword")
-						yield return e;
+				Console.WriteLine (Jurassic.Library.JSONObject.Stringify (ret.Instance.Engine, ret.Instance));
+				//ret = (CompletionInfo) ret.CreateLocalCache ();
+				Console.WriteLine (Jurassic.Library.JSONObject.Stringify (ret.Instance.Engine, ret.Instance));
+				foreach (var e in ret.Entries) {
+					var c = e.CreateLocalCache<CompletionEntry> ();
+					if (c.Kind != "Keyword")
+						yield return c;
+				}
 			}
 		}
 	}

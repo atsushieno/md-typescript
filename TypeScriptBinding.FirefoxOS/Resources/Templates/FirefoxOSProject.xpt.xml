@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<Template Originator="Atsushi Eno">
+        
+    <TemplateConfiguration>
+        <_Name>Typescript FirefoxOS Project</_Name>
+        <_Category>TypeScript</_Category>
+        <Icon>ts-project</Icon>
+        <LanguageName>TypeScript</LanguageName>
+        <_Description>Creates a FirefoxOS project</_Description>
+    </TemplateConfiguration>
+
+    <Combine name="${ProjectName}" directory=".">
+        <Project name="${ProjectName}" directory="." type="TypeScript">
+            <Options TargetJavaScriptFile="bin/${ProjectName}.js" />
+            <Files>
+            	<Directory name="app">
+            		<Directory name="www">
+            			<Directory name="css">
+			            	<File name="app.css" src="app.css" />
+			            	<File name="install-button.css" src="install-button.css" />
+            			</Directory>
+            			<Directory name="img">
+	            			<Directory name="icons">
+				            	<File name="mortar-128.png" src="mortar-128.png" />
+				            	<File name="mortar-16.png" src="mortar-16.png" />
+				            	<File name="mortar-48.png" src="mortar-48.png" />
+	            			</Directory>
+			            	<File name="glyphicons-halflings.png" src="glyphicons-halflings.png" />
+			            	<File name="glyphicons-halflings-white.png" src="glyphicons-halflings-white.png" />
+			            	<File name="gradient.png" src="gradient.png" />
+			            	<File name="offline.png" src="offline.png" />
+			            	<File name="online.png" src="online.png" />
+			            	<File name="pattern.png" src="pattern.png" />
+			            	<File name="recommend.png" src="recommend.png" />
+            			</Directory>
+            			<Directory name="js">
+	            			<Directory name="lib">
+				            	<File name="install.js" src=".js" />
+				            	<File name="receiptverifier.js" src="receiptverifier.js" />
+				            	<File name="require.js" src="require.js" />
+				            	<File name="zepto.js" src="zepto.js" />
+	            			</Directory>
+			            	<File name="app.js" src="app.js" />
+			            	<File name="init.js" src="init.js" />
+			            	<File name="install-button.js" src="install-button.js" />
+            			</Directory>
+		            	<File name=".htaccess" src=".htaccess" />
+		            	<File name="favicon.ico" src="favicon.ico" />
+		            	<File name="manifest.webapp" src="manifest.webapp" />
+		            	<File name="offline.appcache" src="offline.appcache" />
+            		</Directory>
+	            	<File name="package.json" src="package.json" />
+	            	<File name="README.md" src="README.md" />
+            	</Directory>
+            	<File name="README.md" src="README.md" />
+            	<File name="guide.md" src="guide.md" />
+            </Files>
+        </Project>
+    </Combine>
+</Template>

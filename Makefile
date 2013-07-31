@@ -7,7 +7,7 @@ clean-bridge:
 	make -C bridge clean
 
 clean-here:
-	xbuild /t:Clean
+	xbuild /t:Clean md-typescript.sln
 
 external/jurassic:
 	make checkout-jurassic

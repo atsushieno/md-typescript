@@ -5,24 +5,25 @@
         copyright     = "MIT X11"
         description   = "TypeScript Language Binding"  
         category      = "Language bindings"  
-        version       = "0.2.2" >
+        version       = "0.2.3" >
 	
 	
 	<!-- Dependencies -->
 	
 	<Runtime>
     	<Import assembly="Jurassic.dll" />
+    	<Import assembly="TypeScriptServiceBridge.dll" />
     	<Import assembly="Mono.JavaScriptDebugger.dll" />
     	<Import assembly="MonoDevelop.JavaScriptDebugger.dll" />
     	<Import file="node-ts-server.js" />
     </Runtime>
 	
 	<Dependencies>
-		<Addin id="Core" version="4.0" />
-		<Addin id="Ide" version="4.0" />
-		<Addin id="SourceEditor2" version="4.0" />
-		<Addin id="Refactoring" version="4.0" />
-		<Addin id="Debugger" version="4.0" />
+		<Addin id="Core" version="4.1" />
+		<Addin id="Ide" version="4.1" />
+		<Addin id="SourceEditor2" version="4.1" />
+		<Addin id="Refactoring" version="4.1" />
+		<Addin id="Debugger" version="4.1" />
 	</Dependencies>
 	
 	

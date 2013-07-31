@@ -125,12 +125,15 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 
 		ICompletionDataList InternalHandleCodeCompletion (CodeCompletionContext completionContext, char completionChar, bool ctrlSpace, ref int triggerWordLength)
 		{
+			LoggingService.LogInfo (string.Format ("!!!!!! {0:HH:mm:ss.fff}", DateTime.Now));
+			try {
 			if (completionContext != null) {
 				service.UpdateScripts ();
 				string file = service.GetFilePath (Document.FileName);
 				var ret = new CompletionDataList ();
 				var list = service.GetMemberCompletionsAt (file, (int) completionContext.TriggerOffset);
 				foreach (var entry in list) {
+						LoggingService.LogInfo (string.Format ("!!!!!!4 {0:HH:mm:ss.fff}", DateTime.Now));
 					IconId icon = IconId.Null;
 					// FIXME: fill icons
 					/*
@@ -142,10 +145,14 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 						icon = fieldIcon;
 					*/
 					ret.Add (new CompletionData ((string) entry.Name, icon, string.Format ("({0}) {1}", entry.Kind, entry.Name)));
+						LoggingService.LogInfo (string.Format ("!!!!!!5 {0:HH:mm:ss.fff}", DateTime.Now));
 				}
 				return ret;
 			}
 			return base.HandleCodeCompletion (completionContext, completionChar, ref triggerWordLength);
+			} finally {
+				LoggingService.LogInfo (string.Format ("!!!!!! {0:HH:mm:ss.fff}", DateTime.Now));
+			}
 		}
 		
 		internal Mono.TextEditor.TextEditorData TextEditorData {

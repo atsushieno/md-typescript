@@ -1,0 +1,61 @@
+
+<Addin  id            = "TypeScriptBinding.FireFoxOS"  
+        namespace     = "MonoDevelop"  
+        name          = "TypeScript FirefoxOS project template binding"  
+        author        = "Atsushi Enomoto"
+        copyright     = "MIT X11"
+        description   = "TypeScript FirefoxOS project template binding"  
+        category      = "Mobile"
+        version       = "0.1" >
+	
+	<!-- Dependencies -->
+	
+	<Dependencies>
+		<Addin id="Core" version="4.1" />
+		<Addin id="Ide" version="4.1" />
+		<Addin id="TypeScriptBinding" version="0.2.3" />
+	</Dependencies>
+	
+	<Runtime>
+		<Import src="Resources/Templates/app/package.json" />
+		<Import src="Resources/Templates/app/README.md" />
+		<Import src="Resources/Templates/app/www/.htaccess" />
+		<Import src="Resources/Templates/app/www/offline.appcache" />
+		<Import src="Resources/Templates/app/www/favicon.ico" />
+		<Import src="Resources/Templates/app/www/index.html" />
+		<Import src="Resources/Templates/app/www/css/install-button.css" />
+		<Import src="Resources/Templates/app/www/css/app.css" />
+		<Import src="Resources/Templates/app/www/img/glyphicons-halflings-white.png" />
+		<Import src="Resources/Templates/app/www/img/gradient.png" />
+		<Import src="Resources/Templates/app/www/img/glyphicons-halflings.png" />
+		<Import src="Resources/Templates/app/www/img/recommend.png" />
+		<Import src="Resources/Templates/app/www/img/.gitignore" />
+		<Import src="Resources/Templates/app/www/img/pattern.png" />
+		<Import src="Resources/Templates/app/www/img/online.png" />
+		<Import src="Resources/Templates/app/www/img/icons" />
+		<Import src="Resources/Templates/app/www/img/icons/mortar-16.png" />
+		<Import src="Resources/Templates/app/www/img/icons/mortar-48.png" />
+		<Import src="Resources/Templates/app/www/img/icons/mortar-128.png" />
+		<Import src="Resources/Templates/app/www/img/offline.png" />
+		<Import src="Resources/Templates/app/www/js/app.js" />
+		<Import src="Resources/Templates/app/www/js/init.js" />
+		<Import src="Resources/Templates/app/www/js/lib/receiptverifier.js" />
+		<Import src="Resources/Templates/app/www/js/lib/install.js" />
+		<Import src="Resources/Templates/app/www/js/lib/zepto.js" />
+		<Import src="Resources/Templates/app/www/js/lib/require.js" />
+		<Import src="Resources/Templates/app/www/js/install-button.js" />
+		<Import src="Resources/Templates/app/www/manifest.webapp" />
+		<Import src="Resources/Templates/README.md" />
+		<Import src="Resources/Templates/guide.md" />
+	</Runtime>
+	
+	<!-- Templates -->
+	
+	<Extension path="/MonoDevelop/Ide/FileTemplates">
+		<FileTemplate id="EmptyTypeScriptSourceFile" resource="EmptyTypeScriptSourceFile.xft.xml" />
+	</Extension>
+	
+	<Extension path="/MonoDevelop/Ide/ProjectTemplates">
+		<ProjectTemplate id="FirefoxOSProject" resource="FirefoxOSProject.xpt.xml" />
+	</Extension>
+</Addin>

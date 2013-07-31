@@ -183,8 +183,15 @@ namespace TypeScriptServiceBridge.Hosting
 		public override object GetPropertyValue (ITypeScriptObject instance, string propertyName)
 		{
 			string jinst = GetInstanceRepresentation (instance, false);
-			if (jinst == local_cache_id_string)
-				return instance.Instance.GetPropertyValue (propertyName);
+			if (jinst == local_cache_id_string) {
+				var val = instance.Instance.GetPropertyValue (propertyName);
+				var obj = val as ObjectInstance;
+				if (js_refs.Contains (obj))
+					return val;
+				else
+					js_refs.Add (obj);
+				return val;
+			}
 			else
 				return Eval (string.Format ("{0}.{1}", jinst, propertyName));
 		}
@@ -192,7 +199,10 @@ namespace TypeScriptServiceBridge.Hosting
 		public override void SetPropertyValue (ITypeScriptObject instance, string propertyName, object value)
 		{
 			string jinst = GetInstanceRepresentation (instance, true);
-			Execute (string.Format ("{0}.{1} = {2}", jinst, propertyName, AnyToString (value)));
+			if (jinst == local_cache_id_string)
+				instance.Instance.SetPropertyValue (propertyName, value, true);
+			else
+				Execute (string.Format ("{0}.{1} = {2}", jinst, propertyName, AnyToString (value)));
 		}
 
 		public override object GetStaticPropertyValue (Type typeScriptObjectType, string propertyName)
@@ -208,8 +218,15 @@ namespace TypeScriptServiceBridge.Hosting
 		public override object GetArrayItem (ITypeScriptObject instance, int index)
 		{
 			string jinst = GetInstanceRepresentation (instance, false);
-			if (jinst == local_cache_id_string)
-				return ((ArrayInstance) instance.Instance) [index];
+			if (jinst == local_cache_id_string) {
+				var val = ((ArrayInstance)instance.Instance) [index];
+				var obj = val as ObjectInstance;
+				if (js_refs.Contains (obj))
+					return val;
+				else
+					js_refs.Add (obj);
+				return val;
+			}
 			return Eval (string.Format ("{0} [{1}]", jinst, index));
 		}
 		
@@ -222,23 +239,29 @@ namespace TypeScriptServiceBridge.Hosting
 		object lock_obj = new object ();
 		int serial = 0;
 		Dictionary<ITypeScriptObject,Identifier> refs = new Dictionary<ITypeScriptObject,Identifier> ();
-		
+		List<ObjectInstance> js_refs = new List<ObjectInstance> ();
+
 		public override void AddReference (ITypeScriptObject instance)
 		{
 			lock (lock_obj) {
-				var id = new Identifier ("__proxy_" + serial);
+				var id =
+					js_refs.Contains (instance.Instance) ?
+					local_cache_id : new Identifier ("__proxy_" + serial);
 				//instance.Instance = id;
 				refs [instance] = id;
-				Execute (id.Value + " = ret;");
-				serial++;
+				if (id != local_cache_id) {
+					Execute (id.Value + " = ret;");
+					serial++;
+				}
 			}
 		}
 		
 		public override void Release (ITypeScriptObject instance)
 		{
 			Identifier id;
+			js_refs.Remove (instance.Instance);
 			refs.TryGetValue (instance, out id);
-			if (id != null) {
+			if (id != null && id != local_cache_id) {
 				refs [instance] = null;
 				Execute (id.Value + " = undefined;");
 			}
