@@ -46,6 +46,7 @@ using TypeScriptServiceBridge.Services;
 
 namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 {
+	/*
 	public class TypeScriptTextEditorTooltipProvider : TooltipProvider
 	{
 
@@ -103,5 +104,6 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 		#endregion 
 		
 	}
+	*/
 }
 

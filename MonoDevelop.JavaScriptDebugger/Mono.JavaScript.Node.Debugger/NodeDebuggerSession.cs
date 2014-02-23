@@ -204,8 +204,8 @@ namespace Mono.JavaScript.Node.Debugger
 							handle = "function " + bf.FunctionName;
 							var ret = debugger.SetBreakpoint ("function", bf.FunctionName, be.Enabled, -1, -1, bp.ConditionExpression, bp.HitCount);
 						} else {
-							handle = string.Format ("{0} ({1},{2})", bp.FileName, bp.Line, bp.Column);
-							var ret = debugger.SetBreakpoint ("script", bp.FileName, be.Enabled, bp.Line, bp.Column, bp.ConditionExpression, bp.HitCount);
+							handle = string.Format ("{0} ({1},1)", bp.FileName, bp.Line);
+							var ret = debugger.SetBreakpoint ("script", bp.FileName, be.Enabled, bp.Line, 1, bp.ConditionExpression, bp.HitCount);
 						}
 					} catch (Exception ex) {
 						bi.SetStatus (BreakEventStatus.Invalid, ex.Message);

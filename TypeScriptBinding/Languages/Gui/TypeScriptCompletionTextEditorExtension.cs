@@ -45,7 +45,7 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 		{
 			base.Dispose ();
 		}
-
+		
 		public override bool ExtendsEditor (MonoDevelop.Ide.Gui.Document doc, IEditableTextBuffer editor)
 		{
 			return doc.FileName.FileName.EndsWith (".ts");
@@ -61,9 +61,9 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 			return service != null;
 		}
 
+#if false
 		public override int GetCurrentParameterIndex (int startOffset)
 		{
-#if false
 			var ast = ls.GetScriptAST (service.GetFilePath (Document.FileName));
 			var ap = ls.GetAstPathToPosition (ast, startOffset, GetAstPathOptions.Default);
 			if (/*ap.IsArgumentListOfCall || ap.IsArgumentListOfFunction || ap.IsArgumentListOfNew
@@ -74,10 +74,11 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 				if (idx >= 0)
 					return doc.Substring (idx, startOffset - idx).Count (c => c == ',');
 			}
-#endif
 			return base.GetCurrentParameterIndex (startOffset);
 		}
+#endif
 		
+#if false
 		public override bool KeyPress (Gdk.Key key, char keyChar, Gdk.ModifierType modifier)
 		{
 			bool result = base.KeyPress (key, keyChar, modifier);
@@ -90,6 +91,7 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 
 			return result;
 		}
+#endif
 
 		TypeScriptLS shimHost {
 			get { return service.ShimHost; }
@@ -101,8 +103,8 @@ namespace MonoDevelop.TypeScriptBinding.Languages.Gui
 
 		public override ICompletionDataList HandleCodeCompletion (CodeCompletionContext completionContext, char completionChar, ref int triggerWordLength)
 		{
-			if (!EnableCodeCompletion)
-				return null;
+			//if (!EnableCodeCompletion)
+			//	return null;
 			if (!EnableAutoCodeCompletion && char.IsLetter (completionChar))
 				return null;
 			

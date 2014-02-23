@@ -126,7 +126,7 @@ namespace Mono.JavaScript.Node.Debugger
 						CompletionData data = new CompletionData ();
 						foreach (ObjectValue cv in val.GetAllChildren ())
 							data.Items.Add (new CompletionItem (cv.Name, cv.Flags));
-						data.ExpressionLength = 0;
+						data.ExpressionLenght = 0;
 						return data;
 					}
 					i++;
@@ -147,7 +147,7 @@ namespace Mono.JavaScript.Node.Debugger
 				string partialWord = exp.Substring (i+1);
 				
 				CompletionData cdata = new CompletionData ();
-				cdata.ExpressionLength = partialWord.Length;
+				cdata.ExpressionLenght = partialWord.Length;
 				
 				// Local variables
 				

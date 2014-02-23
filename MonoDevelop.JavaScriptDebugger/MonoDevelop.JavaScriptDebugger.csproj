@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{C3C01664-18E0-437D-A8B5-C4DDD42D7876}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -31,19 +31,15 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="MonoDevelop.Debugger, Version=2.6.0.0, Culture=neutral">
-      <Private>False</Private>
       <Package>monodevelop-core-addins</Package>
     </Reference>
     <Reference Include="MonoDevelop.Ide, Version=2.6.0.0, Culture=neutral">
-      <Private>False</Private>
       <Package>monodevelop</Package>
     </Reference>
     <Reference Include="MonoDevelop.Core, Version=2.6.0.0, Culture=neutral">
-      <Private>False</Private>
       <Package>monodevelop</Package>
     </Reference>
     <Reference Include="Mono.Debugging, Version=0.0.0.0, Culture=neutral, PublicKeyToken=5e9ce85b0923c84f">
-      <Private>False</Private>
       <Package>monodevelop</Package>
     </Reference>
   </ItemGroup>

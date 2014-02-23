@@ -4,3 +4,6 @@
 [submodule "external/typescript"]
 	path = external/typescript
 	url = https://git01.codeplex.com/typescript
+[submodule "external/jurassic"]
+	path = external/jurassic
+	url = https://github.com/mono/jurassic.git

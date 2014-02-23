@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeScriptBinding", "TypeScriptBinding\TypeScriptBinding.csproj", "{3B95464D-3CFC-44A3-8FF1-A5BD85E7A8B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDevelop.TypeScriptBinding", "TypeScriptBinding\MonoDevelop.TypeScriptBinding.csproj", "{3B95464D-3CFC-44A3-8FF1-A5BD85E7A8B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeScriptServiceBridge", "TypeScriptServiceBridge\TypeScriptServiceBridge.csproj", "{17F48D22-DFF8-48FB-935B-BBF17F63B39C}"
 EndProject
@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mono.JavaScriptDebugger", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDevelop.JavaScriptDebugger", "MonoDevelop.JavaScriptDebugger\MonoDevelop.JavaScriptDebugger.csproj", "{C3C01664-18E0-437D-A8B5-C4DDD42D7876}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeScriptBinding.FirefoxOS", "..\..\..\..\svn\md-typescript\TypeScriptBinding.FirefoxOS\TypeScriptBinding.FirefoxOS.csproj", "{DFCBFA68-D270-4065-B5A8-A9943D7E7D6E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeScriptBinding.FirefoxOS", "TypeScriptBinding.FirefoxOS\TypeScriptBinding.FirefoxOS.csproj", "{DFCBFA68-D270-4065-B5A8-A9943D7E7D6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +79,6 @@ Global
 		{2CE5502D-8710-4BE3-9D90-201D526904B3} = {10276CC6-E3E7-4F26-ADBE-DE290668BF7A}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = TypeScriptBinding\TypeScriptBinding.csproj
+		StartupItem = TypeScriptBinding\MonoDevelop.TypeScriptBinding.csproj
 	EndGlobalSection
 EndGlobal
